@@ -1,52 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<link rel="stylesheet" type="text/css" href="/css/mystyles.css">
-	<link rel="stylesheet" href="/css/leaflet/leaflet.css" />
-	<link rel="stylesheet" type="text/css" href="/css/L.Control.MousePosition.css">
-	<link rel="stylesheet" type="text/css" href="/Semantic/semantic.min.css">
-	
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-	<script src="/css/leaflet/leaflet.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/1.3.0/satellite.min.js"></script>
-	<script type="text/javascript" src="/satellite-js-master/dist/satellite.min.js"></script>
-	<script src="/satellite-js-master/dist/satellite.min.js"></script>
-	<script src="/satellite-js-master/sgp4_verification/lib/angular/angular.js"> </script>
-	<script type="text/javascript" src="/css/L.Control.MousePosition.js"></script>
-	<script type="text/javascript" src="/Semantic/semantic.min.js"></script>
+@extends('layout')
 
-	<title>Project</title>
-</head>
-<body>
+@section('content')
 
 
-	<div class="ui inverted menu">
-		<!-- <div class="navbar-header test">
-			<a href="{{ route('Project.dashboard') }}" class="brand item">
-			<img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo"> 
-			</a>     
-		</div> -->
-
-		<a href="{{ route('Project.dashboard') }}" >
-            <div class="navbar-header">
-              <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
-            </div>
-          </a>
-
-		<div class="right menu">
-			<a class="item" href="{{ route('Project.login') }}">
-				<i class="large inverted blue user circle outline icon"></i>เข้าสู่ระบบ
-			</a>
-
-		</div>
-	</div>
-	
-
-	<br>
+<div class="sixteen wide column ">
 	<div class="ui two column centered grid ">
 		<div class=" ui segment column ">
 			<div class="ui form ">  
@@ -114,6 +71,4 @@
 	});
 </script>
 
-</body>
-
-</html>
+@stop 
