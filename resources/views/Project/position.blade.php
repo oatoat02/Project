@@ -73,10 +73,6 @@
   /*----------------------------------*/
 
 // Sample TLE 
-
-
-//console.log(tleFrist)
-
 var nameSatellite = '<?php echo $tleFrist->name ?>';
 var tleLine1 = '<?php echo $tleFrist->line1 ?>';
 tleLine2 = '<?php echo $tleFrist->line2 ?>';
@@ -291,12 +287,6 @@ function updateSatellite(){
   });*/
 
   /*---------------*/
-
-  $(document).on('click', '.meneRes', function() {
-    console.log('ssss');
-    $('.ui.labeled.icon.sidebar').sidebar('toggle');
-
-  });
 
 </script>
 		@stop

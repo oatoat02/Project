@@ -339,13 +339,7 @@ function updateSatellite(){
     setInterval(updateSatellite, 1000);
   });*/
 
-  /*---------------*/
 
-  $(document).on('click', '.meneRes', function() {
-    console.log('ssss');
-    $('.ui.labeled.icon.sidebar').sidebar('toggle');
-
-  });
 
 </script>
 

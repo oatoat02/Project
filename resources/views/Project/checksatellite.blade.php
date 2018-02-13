@@ -369,7 +369,7 @@
 
 
 				}
-				//console.log(mymap);	
+				
 
 			});
 
