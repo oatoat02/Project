@@ -3,12 +3,11 @@
 @section('content')
 
 <div class="eight wide computer eight wide tablet sixteen wide mobile column  ">
-
-	<div class="ui segment" style="height: 100%">
-		<div class="field box2 checkSolution" >
+	<div class="ui segment" >
+		
 			<div  class="" id="mapid" >
 			</div>
-		</div>
+	
 	</div>
 </div>
 
@@ -131,7 +130,6 @@
 		});
 	</script>
 	<script type="text/javascript" >
-		
 		var mymap = L.map('mapid',{
 			worldCopyJump: true,
 			inertia:false,
@@ -153,7 +151,6 @@
 		}).addTo(mymap);
 		L.control.scale().addTo(mymap);
 		L.control.mousePosition().addTo(mymap);
-		/*console.log(cicle)*/
 
 		// define rectangle geographical bounds
 		var Rectangle = [[31.10, 82.4331], [-5,119.4]];
@@ -175,140 +172,172 @@
 		latlngsNight = new Array(),
 		PolygonArr  = [];
 		timeArr = new Array();
-		var countClick=0;
 		var DateSecond;
 		var polygon;
 		var layerGroup = new L.LayerGroup();
 		var layerGroup2 = new L.LayerGroup();
 		/* L.polyline([latitudeStrArr[1],longitudeStrArr[1]]).addTo(mymap);*/
 		$(document).on('click', '.SubmitCal', function(){
-			console.log(Date.parse($('#StartDate').val()));
-			console.log(Date.parse($('#EndDate').val()));
-			
-			if( ($('#selectSatellite')[0].innerHTML != 'ดาวเทียม') && ( Date.parse($('#StartDate').val()) < Date.parse($('#EndDate').val())) ){
-			for( i in mymap._layers) {
-				if(mymap._layers[i]._path != undefined) {
-					try {
-						mymap.removeLayer(mymap._layers[i]);
-					}
-					catch(e) {
-						console.log("problem with " + e + mymap._layers[i]);
+			//console.log(mymap);
+			longitudeStrArr =  Array(),
+			latitudeStrArr  =  Array(),
+			latlngsArr  =  Array(),
+			azimuthArr  =  Array(),
+			elevationArr  =  Array()
+			PolygonArr  = [];
+			timeArr =  Array();
+
+			var DateStartDefault=$('#StartDate').val();
+				var DateStartSet=DateStartDefault.split('/')[0];
+				var MonthStartSet=DateStartDefault.split('/')[1];
+				var YearStartSet=DateStartDefault.split('/')[2];
+				
+				var DateEndDefault=$('#EndDate').val();
+				var DateEndtSet=DateEndDefault.split('/')[0];
+				var MonthEndSet=DateEndDefault.split('/')[1];
+				var YearhEndSet=DateEndDefault.split('/')[2];
+
+				var StartDateMDY = MonthStartSet+'/'+DateStartSet+'/'+YearStartSet;
+				var EndDateMDY = MonthEndSet+'/'+DateEndtSet+'/'+YearhEndSet;
+				var StartDateTemp = Date.parse(StartDateMDY);
+				var EndDateTemp = Date.parse(EndDateMDY);
+
+			if( ($('#selectSatellite')[0].innerHTML != 'ดาวเทียม') && ( StartDateTemp <= EndDateTemp) )
+			{
+
+
+				for(i in mymap._layers) 
+				{
+					if(mymap._layers[i]._path != undefined) 
+					{
+						try {
+							mymap.removeLayer(mymap._layers[i]);
+						}
+						catch(e) {
+							console.log("problem with " + e + mymap._layers[i]);
+						}
 					}
 				}
-				countClick=0;
-			}
-			var StartDateTemp = Date.parse($('#StartDate').val());
-			var EndDateTemp = Date.parse($('#EndDate').val());
-
-			StartDateTemp=StartDateTemp-25200000; //ปรับเวลาเป็นเืี่ยงคืน
-			EndDateTemp=EndDateTemp-25200000;
-
-			var StartDateTime = new Date();
-			StartDateTime.setTime(StartDateTemp);
-			var EndDateTime = new Date();
-			EndDateTime.setTime(EndDateTemp);
-			/*console.log(StartDateTime);
-			console.log(EndDateTime);*/
-			if(StartDateTemp==EndDateTemp){
-				EndDateTime.setDate(EndDateTime.getDate()+1);
-				EndDateTime.setSeconds(EndDateTime.getSeconds()-1);
-			}else if(countClick==0){
-				EndDateTime.setDate(EndDateTime.getDate()+1);
-				EndDateTime.setSeconds(EndDateTime.getSeconds()-1);
-			}
-
-			DateSecond=(EndDateTime.getTime() - StartDateTemp)/1000; //เวลาที่จะพล็อตกี่วิ
-			var satrec = satellite.twoline2satrec(tleLine1, tleLine2);
-			
-			for(var i = 30 ; i < DateSecond; i+=30){
-			 	var date = new Date();
-			 	date.setTime(StartDateTemp);
-			 	date.setSeconds( date.getSeconds() +i );
-
-			 	timeArr[i]=date;
-			 	var positionAndVelocity = satellite.propagate(satrec, date);
-
-
-			 	var positionEci = positionAndVelocity.position,
-			 	velocityEci = positionAndVelocity.velocity;
-
-				// Set the Observer at 122.03 West by 36.96 North, in RADIANS
-				var observerGd = {
-					longitude:100.92974  * (Math.PI/180),
-					latitude: 13.10219	 * (Math.PI/180),
-					height:0
-				};
-				var gmst = satellite.gstimeFromDate(date);
-
-				// You can get ECF, Geodetic, Look Angles, and Doppler Factor.
-				var positionEcf   = satellite.eciToEcf(positionEci, gmst),
-				observerEcf   = satellite.geodeticToEcf(observerGd),
-				positionGd    = satellite.eciToGeodetic(positionEci, gmst),
-				lookAngles    = satellite.ecfToLookAngles(observerGd, positionEcf);
 				
-			  	//  dopplerFactor = satellite.dopplerFactor(observerCoordsEcf, positionEcf, velocityEcf);
+				layerGroup.clearLayers();
+				
+				for(var j in layerGroup._layers )
+				{
+					
+					mymap.removeLayer(layerGroup._layers[j]);
+				}
+				
 
-				// The coordinates are all stored in key-value pairs.
-				// ECI and ECF are accessed by `x`, `y`, `z` properties.
-				var satelliteX = positionEci.x,
-				satelliteY = positionEci.y,
-				satelliteZ = positionEci.z;
 
-				// Look Angles may be accessed by `azimuth`, `elevation`, `range_sat` properties.
-				var azimuth   = lookAngles.azimuth,
-				elevation = lookAngles.elevation,
-				rangeSat  = lookAngles.rangeSat;
+				L.circle([13.12036, 100.91972], 2000000, {
+					color: 'red',
+					fillColor: '#f03',
+					fillOpacity: 0
+				}).addTo(mymap);
 
-				// Geodetic coords are accessed via `longitude`, `latitude`, `height`.
-				var longitude = positionGd.longitude,
-				latitude  = positionGd.latitude,
-				height    = positionGd.height;
+				
 
-				//  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W", etc).
-				var longitudeStr = satellite.degreesLong(longitude),
-				latitudeStr  = satellite.degreesLat(latitude);
-				longitudeStrArr[i] =  longitudeStr;
-				latitudeStrArr[i] =  latitudeStr;
-				timeArr[i] = date;
-				azimuthArr[i] = azimuth*(180/Math.PI);
-				elevationArr[i] = elevation*(180/Math.PI);
-			}
+				StartDateTemp=StartDateTemp; //ปรับเวลาเป็นเืี่ยงคืน
+				EndDateTemp=EndDateTemp;
 
-			if(countClick==0){
-				countClick++;
+				//var subDate=StartDateTemp.substring(1, 4);
+				var StartDateTime = new Date();
+				StartDateTime.setTime(StartDateTemp);
+				var EndDateTime = new Date();
+				EndDateTime.setTime(EndDateTemp);
+
+				EndDateTime.setDate(EndDateTime.getDate()+1);
+				EndDateTime.setSeconds(EndDateTime.getSeconds()-1);
+
+			
+				DateSecond=(EndDateTime.getTime() - StartDateTemp)/1000; //เวลาที่จะพล็อตกี่วิ
+				var satrec = satellite.twoline2satrec(tleLine1, tleLine2);
+				
+				for(var i = 30 ; i < DateSecond; i+=30)
+				{
+					var date = new Date();
+					date.setTime(StartDateTemp);
+					date.setSeconds( date.getSeconds() +i );
+
+					timeArr[i]=date;
+					var positionAndVelocity = satellite.propagate(satrec, date);
+
+
+					var positionEci = positionAndVelocity.position,
+					velocityEci = positionAndVelocity.velocity;
+
+					// Set the Observer at 122.03 West by 36.96 North, in RADIANS
+					var observerGd = {
+						longitude:100.92974  * (Math.PI/180),
+						latitude: 13.10219	 * (Math.PI/180),
+						height:0
+					};
+					var gmst = satellite.gstimeFromDate(date);
+
+					// You can get ECF, Geodetic, Look Angles, and Doppler Factor.
+					var positionEcf   = satellite.eciToEcf(positionEci, gmst),
+					observerEcf   = satellite.geodeticToEcf(observerGd),
+					positionGd    = satellite.eciToGeodetic(positionEci, gmst),
+					lookAngles    = satellite.ecfToLookAngles(observerGd, positionEcf);
+					
+				  	//  dopplerFactor = satellite.dopplerFactor(observerCoordsEcf, positionEcf, velocityEcf);
+
+					// The coordinates are all stored in key-value pairs.
+					// ECI and ECF are accessed by `x`, `y`, `z` properties.
+					var satelliteX = positionEci.x,
+					satelliteY = positionEci.y,
+					satelliteZ = positionEci.z;
+
+					// Look Angles may be accessed by `azimuth`, `elevation`, `range_sat` properties.
+					var azimuth   = lookAngles.azimuth,
+					elevation = lookAngles.elevation,
+					rangeSat  = lookAngles.rangeSat;
+
+					// Geodetic coords are accessed via `longitude`, `latitude`, `height`.
+					var longitude = positionGd.longitude,
+					latitude  = positionGd.latitude,
+					height    = positionGd.height;
+
+					//  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W", etc).
+					var longitudeStr = satellite.degreesLong(longitude),
+					latitudeStr  = satellite.degreesLat(latitude);
+					longitudeStrArr[i] =  longitudeStr;
+					latitudeStrArr[i] =  latitudeStr;
+					timeArr[i] = date;
+					azimuthArr[i] = (azimuth*(180/Math.PI)).toFixed(2);
+					elevationArr[i] = (elevation*(180/Math.PI));
+				}
 				var arrFree  = new Array(2);
-				for(var i = 30 ; i <  DateSecond; i+=30){
-
+				for(var i = 30 ; i <  DateSecond; i+=30)
+				{
 					arrFree  = new Array(2);
-					if(longitudeStrArr[i-30] > 43 && longitudeStrArr[i] < 150 && latitudeStrArr[i-30] > -29 && latitudeStrArr[i] < 45 ){
+					if(longitudeStrArr[i-30] > 43 && longitudeStrArr[i] < 150 && latitudeStrArr[i-30] > -29 && latitudeStrArr[i] < 45 )
+					{
 						arrFree[0]=([ latitudeStrArr[i-30],longitudeStrArr[i-30] ]);
 						arrFree[1]=([ latitudeStrArr[i],longitudeStrArr[i] ]);
 						latlngsArr.push(arrFree);
 
+						var nameSattellite = $('#selectSatellite')[0].innerHTML;
 						PolygonArr =(	[[latitudeStrArr[i], longitudeStrArr[i]-3] , [ latitudeStrArr[i], longitudeStrArr[i]+3],
-							[latitudeStrArr[i]+1.75, longitudeStrArr[i]+3] , [ latitudeStrArr[i]+1.75, longitudeStrArr[i]-3]] );
-						/*console.log(PolygonArr);*/
-						layerGroup = layerGroup.addLayer([PolygonArr,timeArr[i],azimuthArr[i],elevationArr[i]]);
+							[latitudeStrArr[i]+1.75, longitudeStrArr[i]+3] , [ latitudeStrArr[i]+1.75, longitudeStrArr[i]-3]]);
+						layerGroup = layerGroup.addLayer([PolygonArr,timeArr[i],azimuthArr[i],elevationArr[i],nameSattellite]);
 					}
 				}
-				//เพิ่มเส้น
-				L.polyline(latlngsArr, {
-					color: 'green',
-				            weight: 2,//ขนาดของเส้น
-				            opacity: .50, //ความโปร่งแสง
-				            dashArray: '5,15', //ความถี่มากสุดต่ำสุด
-				}).addTo(mymap);
-
+					//เพิ่มเส้น
+					L.polyline(latlngsArr, {
+						color: 'green',
+					            weight: 2,//ขนาดของเส้น
+					            opacity: .50, //ความโปร่งแสง
+					            dashArray: '5,15', //ความถี่มากสุดต่ำสุด
+					        }).addTo(mymap);
 			}
-		}else{
-		
+
 			if( Date.parse($('#StartDate').val()) > Date.parse($('#EndDate').val())){
 				alert("กรุณากรอกเวลาให้ถูกต้อง");
 			}
 			if( ($('#selectSatellite')[0].innerHTML == 'ดาวเทียม')){
 				alert("กรุณาเลือกดาวเทียม");
 			}
-		}
 		});
 
 			//แบบวงกลม
@@ -319,33 +348,34 @@
 
 			//แบบเส้น
 
-		$(document).on('click', '.removeLayerALL', function() {
+			$(document).on('click', '.removeLayerALL', function() {
 
-			
-			for(i in mymap._layers) {
-				if(mymap._layers[i]._path != undefined) {
-					try {
-						mymap.removeLayer(mymap._layers[i]);
+
+				for(i in mymap._layers) {
+					if(mymap._layers[i]._path != undefined) {
+						try {
+							mymap.removeLayer(mymap._layers[i]);
+						}
+						catch(e) {
+							console.log("problem with " + e + mymap._layers[i]);
+						}
 					}
-					catch(e) {
-						console.log("problem with " + e + mymap._layers[i]);
-					}
+				
+					L.circle([13.12036, 100.91972], 2000000, {
+						color: 'red',
+						fillColor: '#f03',
+						fillOpacity: 0
+					}).addTo(mymap);
+
+
 				}
-				countClick=0;
-				L.circle([13.12036, 100.91972], 2000000, {
-					color: 'red',
-					fillColor: '#f03',
-					fillOpacity: 0
-				}).addTo(mymap);
+				//console.log(mymap);	
 
+			});
 
-			}
+			function onMapClick(e) {
 
-		});
-		
-		function onMapClick(e) {
-
-			for(var j in layerGroup2._layers ){
+				for(var j in layerGroup2._layers ){
 					// console.log(layerGroup2._layers);
 					mymap.removeLayer((layerGroup2._layers[j]));
 				}
@@ -363,16 +393,16 @@
 						(layerGroup._layers[i])[0][3][0] > e.latlng.lat &&
 						(layerGroup._layers[i])[0][3][1] < e.latlng.lng )
 					{
-
+						/*console.log((layerGroup._layers[i])[1]);*/
 						layerGroup2 = layerGroup2.addLayer(
-							L.polygon(layerGroup._layers[i],{
-								color : 'green' ,
-							})
-							.addTo(mymap)
-							.bindTooltip(	"Time : " + (layerGroup._layers[i])[1] + 
-								"<br> AZ : " + (layerGroup._layers[i])[2] + 
-								"EL : " + (layerGroup._layers[i])[3] )
-							);
+						L.polygon(layerGroup._layers[i][0],{
+							color : 'green' ,
+						})
+						.addTo(mymap)
+						.bindTooltip((layerGroup._layers[i])[4]+	" Time : " + (layerGroup._layers[i])[1] + 
+							"<br> AZ : " + (layerGroup._layers[i])[2] + 
+							"EL : " + (layerGroup._layers[i])[3] )
+						);
 
 
 
@@ -395,5 +425,5 @@
 					}
 				});
 			});
-	</script>
-@stop
+		</script>
+		@stop

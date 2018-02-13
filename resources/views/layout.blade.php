@@ -50,6 +50,9 @@
            <a class="item" href="{{ route('Project.checksatellite') }}">
             <i class="large send icon"></i>ตรวจสอบการเข้าถึงของดาวเทียม
           </a>
+          <a class="item" href="{{ route('Project.position') }}">
+            <i class="large rocket icon"></i>ตำแหน่งดาวเทียม
+          </a>
           <div class="ui pointing dropdown link item ">
             <i class="large inverted archive icon"></i>คลังข้อมูล<i class="dropdown icon"></i>
             <div class="menu">
@@ -114,11 +117,20 @@
 
     <div class="mobile only row">
       <div class="ui fixed inverted menu navbar menu menu-nav" style="position: fixed;" >
-        <a href="{{ route('Project.dashboard') }}" >
-          <div class="navbar-header">
-            <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo2">
-          </div>
-        </a>
+         @if(Auth::check())
+
+          <a href="{{ route('Project.dashboard') }}" >
+            <div class="navbar-header">
+              <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
+            </div>
+          </a>
+          @else
+          <a href="{{ route('Project.index') }}" >
+            <div class="navbar-header">
+              <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
+            </div>
+          </a>
+          @endif
         <div class="right menu ">
           <a  class="menu item" id="menubar">
             <i class="sidebar icon"></i>
@@ -135,6 +147,10 @@
           </a>
           <a class="ui item" href="{{ route('Project.checksatellite') }}">
             <div class="text "><i class="large send icon"></i>ตรวจสอบการเข้าถึงของดาวเทียม
+            </div>
+          </a>
+          <a class="ui item" href="{{ route('Project.position') }}">
+            <div class="text "><i class="large rocket  icon"></i>ตำแหน่งดาวเทียม
             </div>
           </a>
 
@@ -209,7 +225,7 @@
 
 
     </div>
-    <br><br><br>
+    <br><br>
 
   </div>
 

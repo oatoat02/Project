@@ -41,6 +41,10 @@ Route::get('/tle',['as'=>'Project.tle','uses'=>'TLEController@showtle']);
 Route::post('/addTLE',['as'=>'Project.addTLE','uses'=>'TLEController@addTLE']);
 Route::post('/updateTLE',['as'=>'Project.updateTLE','uses'=>'TLEController@updateTLE']);
 
+
+Route::get('/position',['as'=>'Project.position','uses'=>'PositionController@position']);
+Route::post('/position',['as'=>'Project.positionSelect','uses'=>'PositionController@positionSelect']);
+
 Route::post('/settingPassword',['as'=>'Project.settingPassword','uses'=>'UserController@settingPassword']);
 
 Route::post('/submitEditProfile',['as'=>'Project.submitEditProfile','uses'=>'UserController@submitEditProfile']);
