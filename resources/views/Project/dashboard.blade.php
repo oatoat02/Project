@@ -43,26 +43,50 @@
 			<h2>เช็คเวลารับสัญญาณ</h2>
 		</div>
 		<div class="ui form">
-			<div class="three fields">
+			<div class="two fields">
 				<div class="field" style="display: inline-block;">
 					<label>เวลาเริ่มต้น</label>
 
-					<div class="ui left icon input">
-						<input type="date" name="StartDate" id="StartDate" placeholder="เวลาเริ่มต้น" value="<?php echo date('Y-m-d'); ?>">
-						<i class="calendar icon"></i>
+					<div class="ui calendar" id="Startcalendar">
+						<div class="ui left icon input">
+							<input type="text" name="StartDate" id="StartDate" onchange="onChangeDateStart()" value="<?php echo date('d-m-Y'); ?>">
+							<i class="calendar icon"></i>
+						</div>
 					</div>
 				</div>
 				<div class="field" style="display: inline-block; margin-left: 5px">
 					<label>เวลาสิ้นสุด</label> 
-					<div class="ui left icon input">
-						<input type="date" name="EndDate" id="EndDate" placeholder="เวลาสิ้นสุด" value="<?php echo date('Y-m-d'); ?>">
-						<i class="calendar icon"></i>
+					<div class="ui calendar" id="Endcalendar">
+						<div class="ui left icon input">
+							<input type="text" name="EndDate" id="EndDate" onchange="onChangeDateEnd()" value="<?php echo date('d-m-Y'); ?>">
+							<i class="calendar icon"></i>
+						</div>
 					</div>
 				</div>
-				<div class="field" style="display: inline-block; margin-left: 5px">
-					<label>คำนวณ  </label> 
-					<button class="ui red button">Submit</button>
+			</div>
+			<div class="two fields">
+				<div class="field" style="display: inline-block;">
+					<label>ดาวเทียม</label>
+
+
+					<div class="ui selection dropdown testonchange" style="z-index:10 !important">
+						<i class="dropdown icon"></i>
+						<div class="default text" id="selectSatellite">ดาวเทียม</div>
+						<div class="menu">
+							@foreach($listTLE as $Item)
+							<div class="item" data-line1="{{ $Item->line1 }}" data-line2="{{ $Item->line2 }}" data-_id="{{ $Item->_id }}">{{ $Item->name }}</div>
+
+							@endforeach
+						</div>
+					</div>
 				</div>
+				<div class="field" >
+
+					<label><center>คำนวณ  </center></label> 
+					<button class="ui red button SubmitCal" style="width: 100%">Submit</button>
+					
+				</div>
+
 			</div>
 		</div>
 		<table class="ui celled table ">
@@ -75,32 +99,7 @@
 					<th>Maximum<br> Elevation</th>
 					<th>End time<br>(UTC+7:00)</th>
 				</tr></thead>
-				<tbody>
-					<tr>
-						<td>1/11/2560</td>
-						<td>05:40:23</td>
-						<td>42</td>
-						<td>157</td>
-						<td>16</td>
-						<td>05:52:32</td>
-
-					</tr>
-					<tr>
-						<td>2/11/2560</td>
-						<td>07:22:13</td>
-						<td>10</td>
-						<td>132</td>
-						<td>40</td>
-						<td>07:34:32</td>
-					</tr>
-					<tr>
-						<td>3/11/2560</td>
-						<td>10:02:05</td>
-						<td>123</td>
-						<td>300</td>
-						<td>20</td>
-						<td>05:40:23</td>
-					</tr>
+				<tbody id="tableshow">
 				</tbody>
 
 			</table>
@@ -160,7 +159,7 @@
 			<br>
 			<div class="ui segment">
 				<div class="ui grey inverted segment ">
-					<h2>สถานะของอุปกรณ์</h2>
+					<h2>TLE</h2>
 				</div>
 				
 				<table class="ui celled table" >
@@ -170,41 +169,22 @@
 						<th>ชื่อดาวเทียม</th>
 						<th>วันที่อัพเดทขอมูล</th>
 						<th>อัพเดทข้อมูล</th>
-						<th>ลบข้อมูล</th>
-						
-						
-
-
-
 					</thead>
 					<tbody>
+						@foreach($listTLE as $Item)
 						<tr>
-
-							<td>NOAA-15</td>
-							<td>17/11/2560</td>
-							<td><button class="ui yellow button editpasswordUser" style="width: 100%">อัพเดท TLE</button></td>
-							<td><button class="ui red button editpasswordUser" style="width: 100%">ลบ</button></td>
-
-
+							<td class="center aligned">{{ $Item->name }}</td>
+							<td class="center aligned">
+								<?php 
+								$date = date_create($Item->updated_at);
+								echo date_format($date, 'd/m/Y H:i:s');
+								?>
+							</td>
+							<td class="center aligned"> 
+								<button class="ui yellow button btTLE" data-id="{{$Item->_id }}" data-name="{{ $Item->name }}"  data-line1="{{ $Item->line1 }}" data-line2="{{ $Item->line2 }}">อัพเดท TLE</button>
+							</td>
 						</tr>
-						<tr>
-							<td>NOAA-18</td>
-							<td>18/11/2560</td>
-							<td><button class="ui yellow button editpasswordUser" style="width: 100%">อัพเดท TLE</button></td>
-							<td><button class="ui red button editpasswordUser" style="width: 100%">ลบ</button></td>
-							
-
-
-						</tr>
-						<tr>
-							<td>NOAA-19</td>
-							<td>20/11/2560</td>
-							<td><button class="ui yellow button editpasswordUser" style="width: 100%">อัพเดท TLE</button></td>
-							<td><button class="ui red button editpasswordUser" style="width: 100%">ลบ</button></td>
-							
-
-
-						</tr>
+						@endforeach
 						
 						
 
@@ -216,6 +196,8 @@
 
 			</div>
 		</div>
+		<script type="text/javascript" src="/js/date.js"></script>
+		<script type="text/javascript" src="/js/dashboard.js"></script>
 		<script type="text/javascript">
 			var clock;
 			

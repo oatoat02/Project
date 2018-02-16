@@ -23,9 +23,11 @@
     <script type="text/javascript" src="/css/L.Control.MousePosition.js"></script>
     <script type="text/javascript" src="/Semantic/semantic.min.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/date.js"></script>
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
     <link rel="stylesheet" href="/flipclock/flipclock.css">
     <script src="/flipclock/flipclock.js"></script>
+
     <title>Project</title>
   </head>
   <body>

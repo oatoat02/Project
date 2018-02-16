@@ -12,7 +12,8 @@ class MainController extends Controller
     }
     public function indexdashboard()
     {
-    	return view('Project.dashboard');
+        $listTLE = TLE::get();
+    	return view('Project.dashboard')->with('listTLE',$listTLE);
     }
     public function checksatellite()
     {
