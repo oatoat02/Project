@@ -31,10 +31,7 @@ class MainController extends Controller
         return view('Project.control');
     }
 
-    public function PhotoGallery()
-    {
-        return view('Project.PhotoGallery');
-    }
+   
     public function SoundArchive()
     {
         return view('Project.SoundArchive');

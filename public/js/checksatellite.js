@@ -314,15 +314,24 @@
 						(layerGroup._layers[i])[0][3][0] > e.latlng.lat &&
 						(layerGroup._layers[i])[0][3][1] < e.latlng.lng )
 					{
+						var hours = ((layerGroup._layers[i])[1].getHours());
+						var minutes = ((layerGroup._layers[i])[1].getMinutes());
+						var seconds = ((layerGroup._layers[i])[1].getSeconds());
+						var ampm = hours >= 12 ? 'PM' : 'AM';
+						hours = hours % 12;
+						hours = hours ? hours : 12; // the hour '0' should be '12'
+						minutes = minutes < 10 ? '0'+minutes : minutes;
+						var strTime = hours + ':' + minutes +":"+seconds+ ' ' + ampm;
+						
 						/*console.log((layerGroup._layers[i])[1]);*/
 						layerGroup2 = layerGroup2.addLayer(
 						L.polygon(layerGroup._layers[i][0],{
 							color : 'green' ,
 						})
 						.addTo(mymap)
-						.bindTooltip((layerGroup._layers[i])[4]+	" Time : " + (layerGroup._layers[i])[1] + 
+						.bindTooltip((layerGroup._layers[i])[4]+	" Time : " + strTime + 
 							"<br> AZ : " + (layerGroup._layers[i])[2] + 
-							"EL : " + (layerGroup._layers[i])[3] )
+							"  EL : " + (layerGroup._layers[i])[3] )
 						);
 					}
 

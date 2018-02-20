@@ -22,7 +22,7 @@ Route::get('/member',['as'=>'Project.member','uses'=>'UserController@member']);
 Route::get('/control',['as'=>'Project.control','uses'=>'MainController@control']);
 Route::get('/index',['as'=>'Project.index1','uses'=>'MainController@index1']);
 Route::get('/test',['as'=>'Project.test','uses'=>'MainController@test']);
-Route::get('/PhotoGallery',['as'=>'Project.PhotoGallery','uses'=>'MainController@PhotoGallery']);
+Route::get('/PhotoGallery',['as'=>'Project.PhotoGallery','uses'=>'PhotoController@PhotoGallery']);
 Route::get('/SoundArchive',['as'=>'Project.SoundArchive','uses'=>'MainController@SoundArchive']);
 
 Route::get('/logCollection',['as'=>'Project.logCollection','uses'=>'MainController@logCollection']);
@@ -48,3 +48,7 @@ Route::post('/position',['as'=>'Project.positionSelect','uses'=>'PositionControl
 Route::post('/settingPassword',['as'=>'Project.settingPassword','uses'=>'UserController@settingPassword']);
 
 Route::post('/submitEditProfile',['as'=>'Project.submitEditProfile','uses'=>'UserController@submitEditProfile']);
+
+Route::post('/AddPhoto',['as'=>'Project.AddPhoto','uses'=>'PhotoController@AddPhoto']);
+
+Route::post('/PhotoGallery',['as'=>'Project.findPhoto','uses'=>'PhotoController@findPhoto']);

@@ -13,7 +13,7 @@
 
 <div class="eight wide computer eight wide tablet sixteen wide mobile column " >
 	<div class="ui segment" style="height: 100%">
-		<div class="fields box1"  style="height: 500px;">
+		<div class="fields box1">
 			<div class="ui form">
 				<div class="field" style="display: inline-block;">
 					<label>ดาวเทียม</label>
@@ -35,7 +35,7 @@
 						<label>เวลาเริ่มต้น</label>
 						<div class="ui calendar" id="Startcalendar">
 							<div class="ui left icon input">
-								<input type="text" name="StartDate" id="StartDate" onchange="onChangeDateStart()" value="<?php echo date('d-m-Y'); ?>">
+								<input type="text" name="StartDate" id="StartDate" value="<?php echo date('d/m/Y'); ?>">
 								<i class="calendar icon"></i>
 							</div>
 						</div>
@@ -44,7 +44,7 @@
 						<label>เวลาสิ้นสุด</label> 
 						<div class="ui calendar" id="Endcalendar">
 							<div class="ui left icon input">
-								<input type="text" name="EndDate" id="EndDate" onchange="onChangeDateEnd()" value="<?php echo date('d-m-Y'); ?>">
+								<input type="text" name="EndDate" id="EndDate" value="<?php echo date('d/m/Y'); ?>">
 								<i class="calendar icon"></i>
 							</div>
 						</div>
