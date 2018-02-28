@@ -12,8 +12,8 @@ class PhotoController extends Controller
 {
 	public function AddPhoto(Request $request){ 
 		if($request->hasFile('photo')){
-
-			$store = new Photo;
+			dd($request);
+		/*	$store = new Photo;
 			$store->SatelliteName = $request->SatelliteName;
 			$store->Enhancement =	$request->Enhancement;
 			$store->TimeAcquired = $request->TimeAcquired;
@@ -23,16 +23,16 @@ class PhotoController extends Controller
 			$date = date_create_from_format('d/m/Y:H:i:s', $s);	
 
 			$store->Date = $date->format('m/d/Y');
-
+*/
 			/*------------------save Photo to server---------------------*/
-			$photo = $request->file('photo');
+			/*$photo = $request->file('photo');
 			$originalname='photo/'.($store->SatelliteName).'/'.$photo->getClientOriginalName();
 			$path = 'photo/'.($store->SatelliteName);
 
-			$photo->move($path,$photo->getClientOriginalName());
+			$photo->move($path,$photo->getClientOriginalName());*/
 			/*-----------------------------------------------------------*/
-			$store->path=$originalname;
-			$store->save();
+		/*	$store->path=$originalname;
+			$store->save();*/
 			
 		}
 		
@@ -43,16 +43,14 @@ class PhotoController extends Controller
 	public function PhotoGallery()
 	{
 		$listPhoto = Photo::orderBy('Date', 'desc')->get();
-		$listTLE = TLE::get();
-		$mytime = Carbon\Carbon::now();
-		dd($mytime);	
-		$data = ['All'];
+		$listTLE = TLE::get();	
+		$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
 		
 		return view('Project.PhotoGallery')->with('listPhoto',$listPhoto)->with('listTLE',$listTLE)->with('data',$data);
 	}
 	public function findPhoto(Request $request)
 	{
-		Session::put('selectSatellite',$request->input('SatelliteName'));
+		/*Session::put('selectSatellite',$request->input('SatelliteName'));*/
 		$StartDate = date_create_from_format('d/m/Y', ($request->StartDate));	
 		$StartDateFomat=($StartDate->format('m/d/Y'));
 		$EndDate = date_create_from_format('d/m/Y', ($request->EndDate));	

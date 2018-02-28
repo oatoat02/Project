@@ -66,8 +66,8 @@
 	z-index: 600 !important;
 }
 .photologo2{
-	width: 87.7px;
-	height: 32px;
+	width: 150px;
+	height: 75px;
 
 }
 .photologo{
@@ -80,7 +80,7 @@
 }
 
 .menu-nav{
-	z-index: 99999 !important;
+	z-index: 200 !important;
 	
 }
 .ui.segment {

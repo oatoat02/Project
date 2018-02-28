@@ -27,6 +27,7 @@
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
     <link rel="stylesheet" href="/flipclock/flipclock.css">
     <script src="/flipclock/flipclock.js"></script>
+    <script src="https://cdn.rawgit.com/hayeswise/Leaflet.PointInPolygon/v1.0.0/wise-leaflet-pip.js"></script>
 
     <title>Project</title>
   </head>
@@ -49,90 +50,98 @@
           </a>
           @endif
           <div class="right menu">
-           <a class="item" href="{{ route('Project.checksatellite') }}">
-            <i class="large send icon"></i>ตรวจสอบการเข้าถึงของดาวเทียม
-          </a>
-          <a class="item" href="{{ route('Project.position') }}">
-            <i class="large rocket icon"></i>ตำแหน่งดาวเทียม
-          </a>
-          <div class="ui pointing dropdown link item ">
-            <i class="large inverted archive icon"></i>คลังข้อมูล<i class="dropdown icon"></i>
-            <div class="menu">
-              <a class="item" href="{{ route('Project.PhotoGallery') }}"><i class="photo icon"></i>คลังรูปภาพ</a>
-              <a class="item" href="{{ route('Project.SoundArchive') }}"><i class="signal icon"></i>คลังเสียง</a>
-              @if(Auth::check())
-              @if(Auth::user()->type=='admin' ) 
-              <a class="item" href="{{ route('Project.logCollection') }}"><i class="list layout icon"></i>ประวัติการรับสัญาณ</a>
-              @endif
-              @endif
+
+            <div class="ui pointing dropdown link item ">
+              <i class="large send icon"></i>ดาวเทียม<i class="dropdown icon"></i>
+              <div class="menu">
+                <a class="item" href="{{ route('Project.checksatellite') }}">
+                  <i class="calendar alternate outline icon"></i>ตรวจสอบการเข้าถึงของดาวเทียม
+                </a>
+                <a class="item" href="{{ route('Project.position') }}">
+                  <i class="rocket icon"></i>ตำแหน่งดาวเทียม
+                </a>
+
+              </div>
             </div>
-          </div>
-          @if(Auth::check())
-          @if(Auth::user()->type=='admin' ) 
-          <div class="ui pointing dropdown link item ">
-            <i class="large settings icon"></i>จัดการระบบ<i class="dropdown icon" ></i>
-            <div class="menu">
 
-              <a class="item" href="{{ route('Project.control') }}">
-                <i class="large rss icon"></i>ตั้งค่ามุมเสาอากาศ
-              </a>
-              <a class="item" href="{{ route('Project.tle') }}">
-                <i class="large rocket icon"></i>TLE
-              </a>
-              <a class="item" href="{{ route('Project.member') }}">
-                <i class="large users icon"></i>สมาชิก
-              </a>
-              
-
+            <div class="ui pointing dropdown link item ">
+              <i class="large inverted archive icon"></i>คลังข้อมูล<i class="dropdown icon"></i>
+              <div class="menu">
+                <a class="item" href="{{ route('Project.PhotoGallery') }}"><i class="photo icon"></i>คลังรูปภาพ</a>
+                <a class="item" href="{{ route('Project.SoundArchive') }}"><i class="signal icon"></i>คลังเสียง</a>
+                @if(Auth::check())
+                @if(Auth::user()->type=='admin' ) 
+                <a class="item" href="{{ route('Project.logCollection') }}"><i class="list layout icon"></i>ประวัติการรับสัญาณ</a>
+                @endif
+                @endif
+              </div>
             </div>
-          </div>
-          @endif
-          @endif
+            @if(Auth::check())
+            @if(Auth::user()->type=='admin' ) 
+            <div class="ui pointing dropdown link item ">
+              <i class="large settings icon"></i>จัดการระบบ<i class="dropdown icon" ></i>
+              <div class="menu">
+
+                <a class="item" href="{{ route('Project.control') }}">
+                  <i class="large rss icon"></i>ตั้งค่ามุมเสาอากาศ
+                </a>
+                <a class="item" href="{{ route('Project.tle') }}">
+                  <i class="large rocket icon"></i>TLE
+                </a>
+                <a class="item" href="{{ route('Project.member') }}">
+                  <i class="large users icon"></i>สมาชิก
+                </a>
 
 
-
-          @if(Auth::check())
-
-          <div class="ui pointing dropdown link item ">
-            <i class="large inverted blue user circle outline icon"></i>{{ Auth::user()->name }}<i class="dropdown icon"></i>
-            <div class="menu">
-
-              <a class="item editProfilelogin" data-id="{{ Auth::user()->id }}" data-name="{{ Auth::user()->name }}"  data-email="{{ Auth::user()->email }}"><i class="edit icon"></i>แก้ไขข้อมูลส่วนตัว</a>
-              <a class="item" id="editpassword"><i class="settings icon"></i>เปลี่ยนPassword</a>
-              <a class="item" href="" download='guideadmin.pdf'><i class="warning sign icon"></i>คู่มือแนะนำการใช้เว็ปไซต์</a>
-              <a class="item" href="{{ route('Project.logout') }}"><i class="sign out icon"></i>ออกจากระบบ</a>
+              </div>
             </div>
+            @endif
+            @endif
+
+
+
+            @if(Auth::check())
+
+            <div class="ui pointing dropdown link item ">
+              <i class="large inverted blue user circle outline icon"></i>{{ Auth::user()->name }}<i class="dropdown icon"></i>
+              <div class="menu">
+
+                <a class="item editProfilelogin" data-id="{{ Auth::user()->id }}" data-name="{{ Auth::user()->name }}"  data-email="{{ Auth::user()->email }}"><i class="edit icon"></i>แก้ไขข้อมูลส่วนตัว</a>
+                <a class="item" id="editpassword"><i class="settings icon"></i>เปลี่ยนPassword</a>
+                <a class="item" href="" download='guideadmin.pdf'><i class="warning sign icon"></i>คู่มือแนะนำการใช้เว็ปไซต์</a>
+                <a class="item" href="{{ route('Project.logout') }}"><i class="sign out icon"></i>ออกจากระบบ</a>
+              </div>
+            </div>
+
+
+            @endif
+            @if(Auth::check()==false)
+            <a class="item" href="{{ route('Project.login') }}">
+              <i class="large sign in icon"></i>login
+            </a>
+            @endif
           </div>
 
 
-          @endif
-          @if(Auth::check()==false)
-          <a class="item" href="{{ route('Project.login') }}">
-            <i class="large sign in icon"></i>login
-          </a>
-          @endif
         </div>
-        
-
       </div>
-    </div>
 
-    <div class="mobile only row">
-      <div class="ui fixed inverted menu navbar menu menu-nav" style="position: fixed;" >
+      <div class="mobile only row">
+        <div class="ui fixed inverted menu navbar menu menu-nav" style="position: fixed;" >
          @if(Auth::check())
 
-          <a href="{{ route('Project.dashboard') }}" >
-            <div class="navbar-header">
-              <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
-            </div>
-          </a>
-          @else
-          <a href="{{ route('Project.index') }}" >
-            <div class="navbar-header">
-              <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
-            </div>
-          </a>
-          @endif
+         <a href="{{ route('Project.dashboard') }}" >
+          <div class="navbar-header">
+            <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
+          </div>
+        </a>
+        @else
+        <a href="{{ route('Project.index') }}" >
+          <div class="navbar-header">
+            <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
+          </div>
+        </a>
+        @endif
         <div class="right menu ">
           <a  class="menu item" id="menubar">
             <i class="sidebar icon"></i>
@@ -147,15 +156,21 @@
               <center><img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo2"></center>
             </div>
           </a>
-          <a class="ui item" href="{{ route('Project.checksatellite') }}">
-            <div class="text "><i class="large send icon"></i>ตรวจสอบการเข้าถึงของดาวเทียม
+         
+          <div class="ui item ">
+            <div class="text " id="hideShowSatellite"><i class="large send icon"></i>ดาวเทียม</div>
+            <div class="menu">
+              <div id="hideSatellite" >
+                <a class="item" href="{{ route('Project.checksatellite') }}">
+                  <i class="calendar alternate outline icon"></i>ตรวจสอบการเข้าถึงของดาวเทียม
+                </a>
+                <a class="item" href="{{ route('Project.position') }}">
+                  <i class="rocket icon"></i>ตำแหน่งดาวเทียม
+                </a>
+              </div>
             </div>
-          </a>
-          <a class="ui item" href="{{ route('Project.position') }}">
-            <div class="text "><i class="large rocket  icon"></i>ตำแหน่งดาวเทียม
-            </div>
-          </a>
 
+          </div>
           <div class="ui item ">
             <div class="text " id="hideShowphoto"><i class="large archive icon"></i>คลังข้อมูล</div>
             <div class="menu">
@@ -342,6 +357,10 @@
 <script type="text/javascript">
   $(document).on('click', '#hideShowphoto', function() {
     $("#hidePhoto").toggle('fast');
+
+  });
+  $(document).on('click', '#hideShowSatellite', function() {
+    $("#hideSatellite").toggle('fast');
 
   });
   $(document).on('click', '#hideShowSetting', function() {

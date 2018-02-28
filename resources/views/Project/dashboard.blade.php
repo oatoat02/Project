@@ -24,7 +24,7 @@
 			</div>
 		</center>
 		<br>
-		<div class="clock" id="counter"></div>
+		<div class="clock" id="counter" style="width: 530px"></div>
 
 	</div>
 	<br>
@@ -93,11 +93,11 @@
 			<thead>
 				<tr>
 					<th>Date</th>
-					<th>Start Time<br>(UTC+7:00)</th>
+					<th>Start Time</th>
 					<th>Start<br> Azimuth</th>
 					<th>End <br>Azimuth</th>
 					<th>Maximum<br> Elevation</th>
-					<th>End time<br>(UTC+7:00)</th>
+					<th>End time</th>
 				</tr></thead>
 				<tbody id="tableshow">
 				</tbody>
@@ -205,7 +205,7 @@
 				var date = new Date();
 
 				clock = $('.clock').FlipClock(date, {
-					clockFace: 'TwentyFourHourClock'
+					clockFace: 'TwelveHourClock'
 				});
 			});
 		</script>

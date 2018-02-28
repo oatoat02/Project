@@ -32,10 +32,6 @@ class MainController extends Controller
     }
 
    
-    public function SoundArchive()
-    {
-        return view('Project.SoundArchive');
-    }
     public function settingSystem()
     {
         return view('Project.settingSystem');

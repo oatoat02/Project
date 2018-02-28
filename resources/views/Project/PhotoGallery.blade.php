@@ -37,9 +37,7 @@
 						<div class="Other"></div>
 					</div>
 
-					<script type="text/javascript">
-						$('.selectSatellite').dropdown('set selected','{{$data[0]}}');
-					</script>
+					
 					<!-- <script type="text/javascript">
 						$('.selectSatellite').dropdown('set selected',{!! json_encode(Session::get('selectSatellite')) !!})
 					</script> -->
@@ -47,7 +45,7 @@
 				</div>
 				<div class="inline fields " >
 					<label style="margin-left: 10px">ช่วงเวลา&nbsp;</label>
-					<div class="ui selection dropdown" style="width: 80%">
+					<div class="ui selection dropdown selectDurations" style="width: 80%">
 						<input type="hidden" name="Durations" value="All">
 						<i class="dropdown icon"></i>
 						<div class="default text">All</div>
@@ -85,59 +83,67 @@
 				<div class="inline fields">
 					<button class="ui black button" style="width:100%">ค้นหา</button>
 				</div>
-			
+
 			</div>
-		</div>
-	</form>
+		</form>
+			<script type="text/javascript">
+				$('.selectSatellite').dropdown('set selected','{{$data[0]}}');
+				$('.selectDurations').dropdown('set selected','{{$data[1]}}');
+				document.getElementById("StartDate").value = "{{$data[2]}}";
+				document.getElementById("EndDate").value = "{{$data[3]}}";
+				
+			</script>
+	<br>
+	
+		<div class="ui four stackable link cards ">
+			@foreach($listPhoto as $Item)
+			<div class="card">
 
-<br>
+				<div class="image ShowPhoto" id="photopath" data-PathValue="{{ $Item->path }}">
+					<img src="{{ $Item->path }}" style="  height: 25em; ">
+				</div>
+				<div class="content">
+					<div class="header">{{ $Item->SatelliteName }}</div>
 
-<div class="ui four stackable link cards ">
-	@foreach($listPhoto as $Item)
-	<div class="card">
+					<div class="description">
+						Enhancement : {{ $Item->Enhancement }}
+						<br>
+						Date Acquired:  {{ $Item->DateAcquired }}
+						<br>
+						Time Acquired:{{ $Item->TimeAcquired }} 
+						<br>
+						<a href="{{ $Item->path }}" download><i class="download icon"></i>Download</a>
+					</div>
+				</div>
 
-		<div class="image ShowPhoto" id="photopath" data-PathValue="{{ $Item->path }}">
-			<img src="{{ $Item->path }}" style="  height: 25em; ">
-		</div>
-		<div class="content">
-			<div class="header">{{ $Item->SatelliteName }}</div>
-
-			<div class="description">
-				Enhancement : {{ $Item->Enhancement }}
-				<br>
-				Date Acquired:  {{ $Item->DateAcquired }}
-				<br>
-				Time Acquired:{{ $Item->TimeAcquired }} </p>
-				<a href="{{ $Item->path }}" download><i class="download icon"></i>Download</a>
 			</div>
+			@endforeach
 		</div>
-
 	</div>
-	@endforeach
+
 
 </div>
-</div>
 
 
 
 
-<div class="ui basic modal" id="ShowPhoto">
+<div class="ui basic modal" id="ShowPhoto" style="z-index: 250 !important;">
 	<i class="close icon"></i>
-	<div class="ui icon header">
+	
 
 
-		<img class="image" id='fullImage' style="min-width: 400px;min-height: 400px">
-	</div>
+	<img class="image" id='fullImage' style="min-width: 350px;min-height: 400px">
+	
 
 </div>
 
-<div class="ui modal" id="AddPhoto" >
+<div class="ui modal" id="AddPhoto" style="z-index: 250 !important;" >
 	<i class="close icon"></i>
 	<div class="header">
 		เพิ่มรูปภาพ   
 	</div>
 	<div class="content">
-		<form id="formAddPhoto" action="{{ route('Project.AddPhoto')}}" class="ui form" method="post" enctype="multipart/form-data">
+		<form action="{{ route('Project.AddPhoto')}}" class="ui form" method="post" enctype="multipart/form-data">
 
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="inline fields container">
@@ -145,7 +151,7 @@
 
 					<label>Satellite&nbsp;Name&nbsp;:</label>
 					<div class="ui selection dropdown myDropdown" style="width: 100%">
-						<input type="hidden" name="SatelliteName">
+						<input type="hidden" id="SatelliteNameAdd" name="SatelliteName" value="-">
 						<i class="dropdown icon"></i>
 						<div class="default text">SatelliteName</div>
 						<div class="menu">
@@ -247,8 +253,8 @@
 	$('.actions').on('click', '#SubmitAddPhoto', function() {
 		
 		
-
-		if ( $('#SatelliteName').val() === '' ) {
+		console.log($('#SatelliteNameAdd').val());
+		if ( $('#SatelliteNameAdd').val() == '-' ) {
 			alert('ชื่อดาวเทียม ไม่ถูกต้อง');
 			return false;
 		}
