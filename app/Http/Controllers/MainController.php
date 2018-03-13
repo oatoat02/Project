@@ -52,6 +52,11 @@ class MainController extends Controller
     {
         return view('Project.test');
     }
+    public function testupload(Request $request)
+    {
+       
+        return redirect()->back();
+    }
     
 
 

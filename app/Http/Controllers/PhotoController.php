@@ -12,8 +12,8 @@ class PhotoController extends Controller
 {
 	public function AddPhoto(Request $request){ 
 		if($request->hasFile('photo')){
-			dd($request);
-		/*	$store = new Photo;
+			
+			$store = new Photo;
 			$store->SatelliteName = $request->SatelliteName;
 			$store->Enhancement =	$request->Enhancement;
 			$store->TimeAcquired = $request->TimeAcquired;
@@ -23,16 +23,16 @@ class PhotoController extends Controller
 			$date = date_create_from_format('d/m/Y:H:i:s', $s);	
 
 			$store->Date = $date->format('m/d/Y');
-*/
+
 			/*------------------save Photo to server---------------------*/
-			/*$photo = $request->file('photo');
+			$photo = $request->file('photo');
 			$originalname='photo/'.($store->SatelliteName).'/'.$photo->getClientOriginalName();
 			$path = 'photo/'.($store->SatelliteName);
 
-			$photo->move($path,$photo->getClientOriginalName());*/
+			$photo->move($path,$photo->getClientOriginalName());
 			/*-----------------------------------------------------------*/
-		/*	$store->path=$originalname;
-			$store->save();*/
+			$store->path=$originalname;
+			$store->save();
 			
 		}
 		
@@ -56,9 +56,9 @@ class PhotoController extends Controller
 		$EndDate = date_create_from_format('d/m/Y', ($request->EndDate));	
 		$EndDateFomat=($EndDate->format('m/d/Y'));
 		$listTLE = TLE::get();
-		if($request->Durations=='All'){
-
-			$listPhoto = Photo::orderBy('Date', 'desc')->get();
+		
+		if($request->Durations == 'All'){
+			$listPhoto = Photo::where('SatelliteName',$request->SatelliteName)->orderBy('Date', 'desc')->get();
 			$listTLE = TLE::get();
 			
 		}else{

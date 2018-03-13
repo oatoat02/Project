@@ -55,3 +55,4 @@ Route::post('/settingPassword',['as'=>'Project.settingPassword','uses'=>'UserCon
 
 Route::post('/submitEditProfile',['as'=>'Project.submitEditProfile','uses'=>'UserController@submitEditProfile']);
 
+Route::post('/test',['as'=>'Project.testupload','uses'=>'MainController@testupload']);

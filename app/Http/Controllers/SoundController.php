@@ -44,7 +44,14 @@ class SoundController extends Controller
 			$store->path=$originalname;
 			$store->save();
 		}
-		return redirect()->back();
+		
+		$listSound = Sound::orderBy('Date', 'desc')->get();
+		$listTLE = TLE::get();	
+		
+		$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
+		
+		/*return view('Project.PhotoGallery')->with('listPhoto',$listPhoto)->with('listTLE',$listTLE)->with('data',$data);*/
+		return view('Project.SoundArchive')->with('listSound',$listSound)->with('listTLE',$listTLE)->with('data',$data);
 		
 	}
 }

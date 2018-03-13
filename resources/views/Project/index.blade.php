@@ -111,10 +111,11 @@
   L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
     attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
     minZoom: 1,
-    maxZoom: 5, 
+    maxZoom: 15, 
     worldCopyJump:true,
     /*zoomSnap: 0.25,*/
     id: 'mapbox.streets',
+    subdomains:['mt0','mt1','mt2','mt3'],
     accessToken: 'your.mapbox.access.token'
   }).addTo(mymap);
 

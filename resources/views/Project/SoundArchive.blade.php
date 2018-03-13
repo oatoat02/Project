@@ -132,7 +132,7 @@
 
 					<label>Satellite&nbsp;Name&nbsp;:</label>
 					<div class="ui selection dropdown myDropdown" style="width: 100%">
-						<input type="hidden" name="SatelliteName">
+						<input type="hidden" id="SatelliteNameAdd" name="SatelliteName" value="-">
 						<i class="dropdown icon"></i>
 						<div class="default text">SatelliteName</div>
 						<div class="menu">
@@ -194,8 +194,72 @@
 		</form>
 	</div>
 </div>
-<script type="text/javascript">
+<script src="http://malsup.github.com/jquery.form.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
+<link rel="stylesheet" href="/semantic-ui-calendar/dist/calendar.css" />
+<script type="text/javascript" src="/semantic-ui-calendar/dist/calendar.js"></script>
+<script src="/sweet-alert-develop/css/sweetalert.css"></script>
+<div class="ui basic modal" id="Loading">
+	<div class="ui icon header">
+		<i> 	<div class="ui active centered inline big loader"></div>
 
+		</i>
+		<br>
+		Uploading File
+	</div>
+	<div class="content">
+		<div id="status"></div>
+		<div class="ui indicating progress" id="LoadingBar">
+			<div class="bar"></div>
+			<div class="percent" >0%</div >
+
+		</div>
+		
+	</div>
+	
+</div>
+<!-- <div class="ui basic modal" id="Loading">
+	<div class="ui icon header">
+		<div class="ui active dimmer">
+			<div class="ui text loader">Uploading Files
+			</div>
+		</div>
+	</div>
+		
+	</div>
+
+
+</div> -->
+<script type="text/javascript">
+	$(function() {
+
+		var bar = $('.bar');
+		var percent = $('.percent');
+		var status = $('#status');
+		var percentVal;
+		$('form').ajaxForm({
+			beforeSend: function() {
+				status.empty();
+				var percentVal = '0%';
+				bar.width(percentVal);
+				percent.html(percentVal);
+			},
+			uploadProgress: function(event, position, total, percentComplete) {
+				var percentVal = percentComplete + '%';
+				bar.width(percentVal);
+				percent.html(percentVal);
+				$('#LoadingBar').progress({
+					percent: percentComplete
+				});
+			},
+			complete: function() {
+				location.reload();
+			}
+
+		});
+
+
+	}); 
 
 	$(document).on('click', '.AddSound', function() {
 		$('#AddSound').modal({
@@ -240,6 +304,8 @@
 			alert('โปรดเลือกไฟล์เสียง');
 			return false;
 		}
+		$('#ShowSound').modal('hide');
+		$('#Loading').modal('show');
 	});
 
 
