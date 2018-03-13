@@ -1,7 +1,13 @@
 @extends('layout')
 @section('content')
 
-
+<div class=”links”>
+ <a href=”{{ route(‘alert’,’basic’)}}”>basic</a>
+ <a href=”{{ route(‘alert’,’success’)}}”>success alert</a>
+ <a href=”{{ route(‘alert’,’warning’)}}”>warning alert</a>
+ <a href=”{{ route(‘alert’,’info’)}}”>info alert</a>
+ <a href=”{{ route(‘alert’,’error’)}}”>error</a>
+ </div>
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
 <form action="{{ route('Project.testupload') }}" method="post" enctype="multipart/form-data" id='testform'>

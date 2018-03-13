@@ -82,6 +82,13 @@
 			</div>
 			
 		</form>
+		<script type="text/javascript">
+				$('.selectSatellite').dropdown('set selected','{{$data[0]}}');
+				$('.selectDurations').dropdown('set selected','{{$data[1]}}');
+				document.getElementById("StartDate").value = "{{$data[2]}}";
+				document.getElementById("EndDate").value = "{{$data[3]}}";
+				
+			</script>
 		<table class="ui celled table">
 			<thead>
 				<tr>
@@ -92,26 +99,23 @@
 				</tr>
 			</thead>
 			<tbody>
+				@foreach($listSound as $Item)
+				
 				<tr>
 					<td>
-						1/11/2560 
+						{{ $Item->DateAcquired }}
 					</td>
-					<td>14:02</td>
-					<td>NOAA-15</td>
-					<td><a href="/Sound/08130855.wav" download><i class="download icon"></i>Download</a></td>
+					<td>
+						{{ $Item->TimeAcquired }}
+					</td>
+					<td>{{ $Item->SatelliteName }}</td>
+					<td><a href="{{ $Item->path }}" download><i class="download icon"></i>Download</a>
+					</td>
+
 				</tr>
-				<tr>
-					<td>2/11/2560</td>
-					<td>14:02</td>
-					<td>NOAA-18</td>
-					<td><a href="/Sound/08130855.wav" download><i class="download icon"></i>Download</a></td>
-				</tr>
-				<tr>
-					<td>3/11/2560</td>
-					<td>14:02</td>
-					<td>NOAA-19</td>
-					<td><a href="/Sound/08130855.wav" download><i class="download icon"></i>Download</a></td>
-				</tr>
+
+				@endforeach
+
 			</tbody>
 			
 		</table>
@@ -124,7 +128,7 @@
 		เพิ่มข้อมูลเสียง
 	</div>
 	<div class="content">
-		<form  action="{{ route('Project.AddSound')}}" class="ui form" method="post" enctype="multipart/form-data">
+		<form  action="{{ route('Project.AddSound')}}" class="ui form" method="post" enctype="multipart/form-data" id="form1">
 
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="inline fields container">
@@ -196,9 +200,7 @@
 </div>
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
-<link rel="stylesheet" href="/semantic-ui-calendar/dist/calendar.css" />
-<script type="text/javascript" src="/semantic-ui-calendar/dist/calendar.js"></script>
-<script src="/sweet-alert-develop/css/sweetalert.css"></script>
+<script type="text/javascript" src="/js/date.js"></script>
 <div class="ui basic modal" id="Loading">
 	<div class="ui icon header">
 		<i> 	<div class="ui active centered inline big loader"></div>
@@ -218,18 +220,7 @@
 	</div>
 	
 </div>
-<!-- <div class="ui basic modal" id="Loading">
-	<div class="ui icon header">
-		<div class="ui active dimmer">
-			<div class="ui text loader">Uploading Files
-			</div>
-		</div>
-	</div>
-		
-	</div>
 
-
-</div> -->
 <script type="text/javascript">
 	$(function() {
 
@@ -237,7 +228,7 @@
 		var percent = $('.percent');
 		var status = $('#status');
 		var percentVal;
-		$('form').ajaxForm({
+		$("form[id^='form1']").ajaxForm({
 			beforeSend: function() {
 				status.empty();
 				var percentVal = '0%';

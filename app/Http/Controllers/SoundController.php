@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\TLE;
 use App\Sound;
+
 class SoundController extends Controller
 {
     //
@@ -15,12 +16,13 @@ class SoundController extends Controller
 		$listTLE = TLE::get();	
 		
 		$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
-		
-		/*return view('Project.PhotoGallery')->with('listPhoto',$listPhoto)->with('listTLE',$listTLE)->with('data',$data);*/
+		/*dd($listSound);*/
+		/*return view('Project.SoundGallery')->with('listSound',$listSound)->with('listTLE',$listTLE)->with('data',$data);*/
 		return view('Project.SoundArchive')->with('listSound',$listSound)->with('listTLE',$listTLE)->with('data',$data);
 	}
-	public function AddSound(Request $request){
-	
+	public function AddSound(Request $request)
+	{
+
 		if($request->hasFile('Sound')){
 			$store = new Sound;
 			$store->SatelliteName = $request->SatelliteName;
@@ -33,25 +35,58 @@ class SoundController extends Controller
 			$store->Date = $date->format('m/d/Y');
 
 			/*------------------save Sound to server---------------------*/
-
 			$sound = $request->file('Sound');
+			$fileName = $request->SatelliteName.'_'.uniqid().'.'.$request->file('Sound')->getClientOriginalExtension();
 
-			$originalname='sound/'.($store->SatelliteName).'/'.$sound->getClientOriginalName();
-			$path = 'sound/'.($store->SatelliteName);
-
-			$sound->move($path,$sound->getClientOriginalName());
+			$path =  'sound/'.$request->SatelliteName;
+			$sound->move($path, $fileName);
 			/*-----------------------------------------------------------*/
-			$store->path=$originalname;
+			$store->path=$path.'/'.$fileName;
+			/*	dd($store);*/
 			$store->save();
+
+
+
+
+
 		}
-		
+
 		$listSound = Sound::orderBy('Date', 'desc')->get();
 		$listTLE = TLE::get();	
-		
 		$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
-		
-		/*return view('Project.PhotoGallery')->with('listPhoto',$listPhoto)->with('listTLE',$listTLE)->with('data',$data);*/
+		Alert::success('Success Message', 'Optional Title');
 		return view('Project.SoundArchive')->with('listSound',$listSound)->with('listTLE',$listTLE)->with('data',$data);
 		
+	}
+
+	public function findSound(Request $request)
+	{
+	
+		/*Session::put('selectSatellite',$request->input('SatelliteName'));*/
+		$StartDate = date_create_from_format('d/m/Y', ($request->StartDate));	
+		$StartDateFomat=($StartDate->format('m/d/Y'));
+		$EndDate = date_create_from_format('d/m/Y', ($request->EndDate));	
+		$EndDateFomat=($EndDate->format('m/d/Y'));
+		$listTLE = TLE::get();
+		
+		if($request->Durations == 'All'){
+			$listSound = Sound::where('SatelliteName',$request->SatelliteName)->orderBy('Date', 'desc')->get();
+			$listTLE = TLE::get();
+			
+		}else{
+			if($request->SatelliteName != 'All' ){
+				$listSound = Sound::where('SatelliteName',$request->SatelliteName)
+				->whereBetween('Date', [$StartDateFomat, $EndDateFomat])->get();
+			}else{
+
+				$listSound = Sound::whereBetween('Date', [$StartDateFomat, $EndDateFomat])->get();
+			}
+		}
+		$data = [$request->SatelliteName ,$request->Durations ,$request->StartDate ,$request->EndDate];
+		
+		
+		
+		return view('Project.SoundArchive')->with('listSound',$listSound)->with('listTLE',$listTLE)
+		->with('data',$data);
 	}
 }

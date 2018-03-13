@@ -28,7 +28,7 @@ Route::post('/PhotoGallery',['as'=>'Project.findPhoto','uses'=>'PhotoController@
 Route::post('/AddPhoto',['as'=>'Project.AddPhoto','uses'=>'PhotoController@AddPhoto']);
 
 Route::get('/SoundArchive',['as'=>'Project.SoundArchive','uses'=>'SoundController@SoundArchive']);
-Route::post('/SoundArchive',['as'=>'Project.findSound','uses'=>'SoundController@SoundArchive']);
+Route::post('/SoundArchive',['as'=>'Project.findSound','uses'=>'SoundController@findSound']);
 Route::post('/AddSound',['as'=>'Project.AddSound','uses'=>'SoundController@AddSound']);
 
 Route::get('/logCollection',['as'=>'Project.logCollection','uses'=>'MainController@logCollection']);

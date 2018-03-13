@@ -26,12 +26,13 @@ class PhotoController extends Controller
 
 			/*------------------save Photo to server---------------------*/
 			$photo = $request->file('photo');
-			$originalname='photo/'.($store->SatelliteName).'/'.$photo->getClientOriginalName();
-			$path = 'photo/'.($store->SatelliteName);
-
-			$photo->move($path,$photo->getClientOriginalName());
+			$fileName = $request->SatelliteName.'_'.uniqid().'.'.$request->file('photo')->getClientOriginalExtension();
+		
+			$path =  'photo/'.$request->SatelliteName;
+			$photo->move($path, $fileName);
 			/*-----------------------------------------------------------*/
-			$store->path=$originalname;
+			$store->path=$path.'/'.$fileName;
+		/*	dd($store);*/
 			$store->save();
 			
 		}
