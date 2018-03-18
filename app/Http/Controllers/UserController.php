@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Users;
 use Hash;
-use User;
 use Auth;
 class UserController extends Controller
 {
@@ -31,7 +30,6 @@ class UserController extends Controller
         $store->email = $request->input('email');
         $store->password = Hash::make($request->input('password'));
         $store->type = 'user';
-        $store->status = 'N';
         $store->save();
 
         return redirect('/login')->with('status', '**สมัครสมาชิกสำเร็จ รอผู้ดูแลอนุมัติ**');
@@ -46,8 +44,8 @@ class UserController extends Controller
 
         $data = [
             'username' => $request->input('username'),
-            'password' => $request->input('password'),
-            'status'=> 'Y'
+            'password' => $request->input('password')
+
         ];
         if(Auth::attempt($data)) {
             return redirect('/dashboard'); 
@@ -61,12 +59,20 @@ class UserController extends Controller
         return redirect('/');
     }
     public function member(){
-        return view('Project.member');
+        if(Auth::check()){
+            $listuser = Users::get();
+            /*dd($listuser);*/
+            return view('Project.member')->with('listuser',$listuser);
+        }else{
+            return redirect('/login');
+        }
+        
     }
     public function submitEditProfile(Request $request){
         $users = Users::find($request->id);
         $users->name = $request->name;
         $users->email = $request->email;
+        $users->PhoneNumber = $request->PhoneNumber;
         $users->save();
 
         return response()->json($request);
@@ -81,9 +87,33 @@ class UserController extends Controller
              
         }else{
             alert("รหัสผ่านเก่าไม่ถูกต้อง");
+            return false;
         }
  
       
      return response()->json($Datas);
+    }
+
+    public function editProfile(Request $request){
+        $users = Users::find($request->id);
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->PhoneNumber = $request->PhoneNumber;
+        $users->save();
+        return response()->json($request);
+    }
+    public function editPasswordUser(Request $request){
+        /*$Datas=$request->input('passwordedituser');
+        $check = Hash::make($request->input('passwordedituser'));
+        $users = Users::find($request->id);
+        if(Hash::check($request->input('passwordedituser'), $users->password)){
+            $users->password = Hash::make($request->input('passwordedituser'));
+            $users->save();
+             
+        }else{
+            alert("รหัสผ่านเก่าไม่ถูกต้อง");
+            return false;
+        }*/
+        return response()->json($request);
     }
 }

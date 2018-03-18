@@ -46,18 +46,14 @@
 					</center>
 
 					<center>
-						<button class="ui green button item " type="submit" style="width: 200px"><i class="sign in icon"></i>เข้าสู่ระบบ</button>
-						<!-- <a href="{{ route('Project.dashboard') }}" class="ui green button  item " style="width: 200px"><i class="sign in icon"></i>เข้าสู่ระบบ</a> -->
-						<a href="" class="ui green button item " style="width: 200px "> <i class="google icon"></i>เข้าสู่ระบบด้วย Google </a>
+						<button class="ui black button item " type="submit" style="width: 200px"><i class="sign in icon"></i>เข้าสู่ระบบ</button>
+						
 					</center>
 				</form>
-				<center>
-					<br>
-					<a href="{{ route('Project.register')}}" class="ui black button item  ">สมัครสมาชิก</a>
-				</center>
+				
 			</div>
 			
-			<br>
+			
 		</div>
 	</div>
 </div>

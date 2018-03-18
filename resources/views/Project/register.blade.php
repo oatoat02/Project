@@ -45,6 +45,11 @@
           <input type="password" name="password_confirmation" placeholder="ยืนยันรหัสผ่าน" required>
           
         </div>
+        <div class="field required">
+          <label>เบอร์โทรศัพท์</label>
+          <input type="text" name="PhoneNumber" placeholder="080-00000000" maxlength="15" required>
+          
+        </div>
         <div class="ui negative message">
           <li>กรุณณาตรวจสอบข้อมูลให้ถูกต้อง</li>
           <li>กรุณาใส่ชื่อนามสกุลให้ครบถ้วน</li>

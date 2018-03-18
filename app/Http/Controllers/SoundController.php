@@ -54,7 +54,7 @@ class SoundController extends Controller
 		$listSound = Sound::orderBy('Date', 'desc')->get();
 		$listTLE = TLE::get();	
 		$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
-		Alert::success('Success Message', 'Optional Title');
+;
 		return view('Project.SoundArchive')->with('listSound',$listSound)->with('listTLE',$listTLE)->with('data',$data);
 		
 	}

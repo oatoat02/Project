@@ -53,6 +53,9 @@ Route::post('/position',['as'=>'Project.positionSelect','uses'=>'PositionControl
 
 Route::post('/settingPassword',['as'=>'Project.settingPassword','uses'=>'UserController@settingPassword']);
 
+
 Route::post('/submitEditProfile',['as'=>'Project.submitEditProfile','uses'=>'UserController@submitEditProfile']);
 
+Route::post('/editProfile',['as'=>'Project.editProfile','uses'=>'UserController@editProfile']);
+Route::post('/editPasswordUser',['as'=>'Project.editPasswordUser','uses'=>'UserController@editPasswordUser']);
 Route::post('/test',['as'=>'Project.testupload','uses'=>'MainController@testupload']);

@@ -1,134 +1,238 @@
 @extends('layout')
 @section('content')
-	
 
-      <div class="ui sixteen wide column box4 ">
-     
-        <div class="ui grey inverted segment ">
-        <h3>คำร้องขอเข้าใช้งาน</h3>
-        </div>
-          <table class="ui celled table  " >
-            <thead>
-            <tr>
-              <th>#</th>
-              <th>ชื่อ-นามสกุล</th>
-              <th>Username</th>
-              <th>E-mail</th>
-             
-              <th>รายละเอียด</th>
-            
-            </tr>
-            </thead>
-            <tbody>
-           
-              <tr>
-                <td> 1</td>
-                <td> ชนสิษฎ์ มรรยาทอ่อน</td>
-                <td> oatoat02 </td>
-                <td>chonnasit.m@ku.th</td>
-               
-                <td>
-                  <div class="ui buttons" style="font-size: 10px !important; width:100%; ">
-                    <button class="ui green button yes-allow" data-id="" style="font-size: 12px !important;">อนุมัติ</button>
-                    <div class="or"></div>
-                    <button class="ui yellow button No-allow" data-id="" style="font-size: 12px !important;">ปฏิเสธ</button>
-                  </div>
-                </td>
-               
-              </tr>
-              <tr>
-                <td> 2</td>
-                <td> จิระพงศ์ ศรีคำไทย </td>
-                <td> JirapongJack </td>
-                <td>jirapong_Jack@hotmail.com</td>
-               
-                <td>
-                  <div class="ui buttons" style="font-size: 10px !important; width:100%; ">
-                    <button class="ui green button yes-allow" data-id="" style="font-size: 12px !important;">อนุมัติ</button>
-                    <div class="or"></div>
-                    <button class="ui yellow button No-allow" data-id="" style="font-size: 12px !important;">ปฏิเสธ</button>
-                  </div>
-                </td>
-               
-              </tr>
-              <tr>
-                <td> 3</td>
-                <td> วิศรุต โชคสวัสดิ์</td>
-                <td> Newza500 </td>
-                <td>Newza500@gmail.com</td>
-               
-                <td>
-                  <div class="ui buttons" style="font-size: 10px !important; width:100%; ">
-                    <button class="ui green button yes-allow" data-id="" style="font-size: 12px !important;">อนุมัติ</button>
-                    <div class="or"></div>
-                    <button class="ui yellow button No-allow" data-id="" style="font-size: 12px !important;">ปฏิเสธ</button>
-                  </div>
-                </td>
-               
-              </tr>
-          
-            </tbody>
-          </table>
-          <br>
-          <hr>
-         
-          <br>
-        <div class="ui grey inverted segment ">
-        <h3>บัญชี ที่มีในระบบ</h3>
-        </div>
-          <table class="ui celled table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>ชื่อ-นามสกุล</th>
-              <th>Username</th>
-              <th>E-mail</th>
-              
-              <th>รายละเอียด</th>
-            
-            </tr>
-          </thead>
-          <tbody>
-         
-           
-           
-              <tr>
-                 <td> 1</td>
-                <td>สฤษดิ์วงศ์ หวานเสนาะ</td>
-                <td> SalidwongJ </td>
-                <td> Salidwong@hotmail.com</td>
-                <td>
-                  <div class="ui buttons" style="font-size: 10px !important; width:100%; ">
-                    <button class="ui red button editpasswordUser" data-id="" data-name="" style="font-size: 12px !important;">แก้ไข Password</button>
-                    <div class="or"></div>
-                    <button class="ui olive button editProfileuser2" data-id="" data-name=""  data-email="" style="font-size: 12px !important;">แก้ไขข้อมูลส่วนตัว</button>
-                  </div>
-                </td>
-              </tr>
-           
-      
-         
-            
-                <tr>
-                   <td>2</td>
-                <td> สาวภาสินี ขันติวิศิษฎ์</td>
-                <td> navigate </td>
-                <td>pasinee.kh@ku.th</td>
-                <td>
-                  <div class="ui buttons" style="font-size: 10px !important; width:100%; ">
-                    <button class="ui red button editpasswordUser" data-id="" data-name="" style="font-size: 12px !important;">แก้ไข Password</button>
-                    <div class="or"></div>
-                    <button class="ui olive button editProfileuser2" data-id="" data-name=""  data-email="" style="font-size: 12px !important;">แก้ไขข้อมูลส่วนตัว</button>
-                  </div>
-                </td>
-                </tr>
-           
-          </tbody> 
-          </table>
-      
-      </div> 
-    </div> 
+
+<div class="sixteen wide computer sixteen wide tablet sixteen wide mobile column" >
+  <div class="ui segment">
+    <div class="ui clearing grey inverted segment">
+      @if(Auth::check())
+      @if(Auth::user()->type=='admin' ) 
+      <a class="ui right floated  inverted grey button" style="padding: .5em 1.5em .5em;"" href="{{ route('Project.register') }}">เพิ่มผู้ดูแลระบบ</a>
+      @endif
+      @endif
+      <div class="ui left"><h2>สมาชิกในระบบ</h2></div>
+
+
+    </div>
     <br>
+    <table class="ui celled table  " >
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>ชื่อ-นามสกุล</th>
+          <th>Username</th>
+          <th>E-mail</th>
+          <th>เบอร์โทรศัพท์</th>
+          <th>อนุมัติโดย</th>
+          <th>รายละเอียด</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php $count=1 ?>
+        @foreach($listuser as $user)
+        <tr>
+          <td> {{$count}}</td>
+          <td> {{$user->name}}</td>
+          <td> {{$user->username}} </td>
+          <td> {{$user->email }}</td>
+          <td> {{$user->PhoneNumber}}</td>
+          <td> {{$user->Approver}}</td>
+          <td style="width: 275px;">
+            @if( ( Auth::user()->type=='admin' ) || ( Auth::user()->name == $user->name ))
+            <div class="ui buttons" style="font-size: 10px !important; ">
+              <button class="ui green button editProfile" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"  data-email="{{$user->email}}" style="font-size: 12px !important;">แก้ไขข้อมูล</button>
+              <div class="or"></div>
+              <button class="ui yellow button editClick" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"  data-email="{{$user->email}}" style="font-size: 12px !important;">เปลี่ยนPassword</button>
+            </div>
+            @else
+            <div class="ui buttons" style="font-size: 10px !important; width:100%; ">
+              <button class="ui disabled button" style="font-size: 12px !important;">แก้ไข</button>
+              <div class="or"></div>
+              <button class="ui disabled button" style="font-size: 12px !important;">ลบ</button>
+            </div>
+            @endif
+          </td>
+
+        </tr>
+        <?php $count++ ?>
+        @endforeach
+
+
+      </tbody>
+    </table>
     <br>
 
+
+  </div> 
+  <br>
+  <br>
+  <div class="ui modal" id="editProfile">
+    <i class="close icon"></i>
+    <div class="header">
+      แก้ไขข้อมูล
+    </div>
+    <div class="content">
+      <div class="ui form" >
+        <div class="inline fields container">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" id="iduserEdit" value="" >
+          <div class="two wide field">
+            <label>ชื่อ-นามสกุล&nbsp;&nbsp;:</label>
+          </div>
+          <div class="fourteen wide field">
+            <input type="text"  id="name" required>
+          </div>
+        </div>
+        <div class="inline fields container">
+          <div class="two wide field">
+            <label>Email&nbsp;&nbsp;:</label>
+          </div>
+          <div class="fourteen wide field">
+            <input type="email"  id="email" required>
+          </div>
+        </div>
+        <div class="inline fields container">
+          <div class="two wide field">
+            <label>เบอร์โทรศัพท์&nbsp;&nbsp;:</label>
+          </div>
+          <div class="fourteen wide field">
+            <input type="text"  id="PhoneNumber" maxlength="15" required>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui black deny button" >
+        ยกเลิก
+      </div>
+
+      <div class="ui positive right labeled icon button" id="confirm">
+        บันทึก
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui modal" id="editPasswordUser">
+    <i class="close icon"></i>
+    <div class="header">
+      แก้ไขรหัสผ่าน   
+      <div class="nameUser"></div>
+    </div>
+    <div class="content">
+      <div class="ui form" >
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" id="iduserPassword" value="" >
+        <div class="inline fields container">
+          <div class="two wide field">
+            <label>รหัสผ่านใหม่&nbsp;&nbsp;:</label>
+          </div>
+          <div class="fourteen wide field">
+            <input type="password"  id="passwordNew" required>
+          </div>
+        </div>
+        <div class="inline fields container">
+          <div class="two wide field">
+            <label>ยืนยันรหัสผ่าน&nbsp;&nbsp;:</label>
+          </div>
+          <div class="fourteen wide field">
+            <input type="password"  id="passwordAgain" required>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="actions">
+        <div class="ui black deny button" >
+          ยกเลิก
+        </div>
+
+        <div class="ui positive right labeled icon button" id="testSubmit">
+          บันทึก
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div> 
+
+<script type="text/javascript">
+  $(document).on('click', '.editProfile', function() {
+
+
+    $('#iduserEdit').val($(this).data('id'));
+    $('#name').val($(this).data('name'));
+    $('#email').val($(this).data('email'));
+    $('#PhoneNumber').val($(this).data('phonenumber'));
+    $('#editProfile').modal('show');
+  });
+
+  $('.actions').on('click', '#confirm', function() {
+
+    if( ($('#name').val()=='' ) || ($('#email').val()=='' ) || ($('#PhoneNumber').val()=='' ))
+    {
+      alert('ข้อมูลไม่ถูกต้อง');
+      return false;
+
+    }
+    else
+    {
+      $.ajax({
+        type: 'post',
+        url: '/editProfile',
+        data: {
+          '_token': $('input[name=_token]').val(),
+          'id': $('#iduserEdit').val(),
+          'name': $('#name').val(),
+          'email': $('#email').val(),
+          'PhoneNumber': $('#PhoneNumber').val()
+
+        },
+        success: function(data) {
+          alert("สำเร็จ");
+          console.log(data)
+
+        }
+      })
+    }
+  });
+  $(document).on('click', '.editClick', function() {
+    $('#iduserPassword').val($(this).data('id'));
+    $('#editPasswordUser').modal('show');
+  });
+
+  $('.actions').on('click', '#testSubmit', function() {
+    if( ($('#passwordNew').val()!= $('#passwordAgain').val() )|| ($('#passwordNew').val()=='')||($('#passwordAgain').val()=='') ){
+      alert('กรุณาระบุ Password ให้ถูกต้อง');
+      return false;
+    }
+    else{
+      $.ajax({
+        type: 'post',
+        url: '/editPasswordUser',
+        data: {
+          '_token': $('input[name=_token]').val(),
+          'id' : $('#iduserPassword').val(),
+          'password' : $('passwordNew').val()
+
+        },
+        success: function(data) {
+          alert("สำเร็จ");
+          //console.log(data)
+
+        }
+      })
+    }
+  
+  });
+
+
+
+
+
+
+</script>
 @stop
+

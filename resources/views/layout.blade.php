@@ -10,8 +10,9 @@
     <link rel="stylesheet" type="text/css" href="/css/L.Control.MousePosition.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <link rel="stylesheet" href="/semantic-ui-calendar/dist/calendar.css" />
+    <link rel="stylesheet" type="text/css" href="/pace-1.0.2/themes/blue/pace-theme-loading-bar.css">
 
-
+    <script type="text/javascript" src="/pace-1.0.2/pace.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/semantic-ui-calendar/dist/calendar.js"></script>
     <script src="/css/leaflet/leaflet.js"></script>
@@ -106,7 +107,7 @@
               <i class="large inverted blue user circle outline icon"></i>{{ Auth::user()->name }}<i class="dropdown icon"></i>
               <div class="menu">
 
-                <a class="item editProfilelogin" data-id="{{ Auth::user()->id }}" data-name="{{ Auth::user()->name }}"  data-email="{{ Auth::user()->email }}"><i class="edit icon"></i>แก้ไขข้อมูลส่วนตัว</a>
+                <a class="item editProfilelogin" data-id="{{ Auth::user()->id }}" data-name="{{ Auth::user()->name }}"  data-email="{{ Auth::user()->email }}"  data-phonenumber="{{ Auth::user()->PhoneNumber }}"><i class="edit icon"></i>แก้ไขข้อมูลส่วนตัว</a>
                 <a class="item" id="editpassword"><i class="settings icon"></i>เปลี่ยนPassword</a>
                 <a class="item" href="" download='guideadmin.pdf'><i class="warning sign icon"></i>คู่มือแนะนำการใช้เว็ปไซต์</a>
                 <a class="item" href="{{ route('Project.logout') }}"><i class="sign out icon"></i>ออกจากระบบ</a>
@@ -223,7 +224,7 @@
 
            <div class="menu">
             <div id="hideProfile">
-              <a class="item editProfilelogin" data-id="{{ Auth::user()->id }}" data-name="{{ Auth::user()->name }}"  data-email="{{ Auth::user()->email }}"><i class="edit icon"></i>แก้ไขข้อมูลส่วนตัว</a>
+              <a class="item editProfilelogin" data-id="{{ Auth::user()->id }}" data-name="{{ Auth::user()->name }}"  data-email="{{ Auth::user()->email }}"  data-phonenumber="{{ Auth::user()->PhoneNumber }}"><i class="edit icon"></i>แก้ไขข้อมูลส่วนตัว</a>
               <a class="item" id="editpassword"><i class="settings icon"></i>เปลี่ยนPassword</a>
               <a class="item" href="/admin/guideadmin.pdf" download='guideadmin.pdf'><i class="warning sign icon"></i>คู่มือแนะนำการใช้เว็ปไซต์</a>
               <a class="item" href="{{ route('Project.logout') }}"><i class="sign out icon"></i>ออกจากระบบ</a>
@@ -266,7 +267,6 @@
           </div>
         </div>
         <div class="inline fields container">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="hidden" id="iduser" value="{{ Auth::user()->id }}">
           <div class="two wide field">
             <label>รหัสผ่านใหม่&nbsp;&nbsp;:</label>
@@ -336,6 +336,15 @@
             <input type="email"  id="emaillogin" required>
           </div>
         </div>
+         <div class="inline fields container">
+          <div class="two wide field">
+            <label>เบอร์โทรศัพท์&nbsp;&nbsp;:</label>
+          </div>
+          <div class="fourteen wide field">
+            <input type="text"  id="phonenumber" maxlength="15" required>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -387,6 +396,7 @@
       $('#iduserlogin').val($(this).data('id'));
       $('#nameuserlogin').val($(this).data('name'));
       $('#emaillogin').val($(this).data('email'));
+      $('#phonenumber').val($(this).data('phonenumber'));
       $('#editProfilelogin').modal('show');
     });
     $('.actions').on('click', '#editsubmitlogin', function() {
@@ -400,6 +410,7 @@
             '_token': $('input[name=_token]').val(),
             'id': $('#iduserlogin').val(),
             'name' : $('#nameuserlogin').val(),
+            'PhoneNumber' : $('#phonenumber').val(),
             'email' : $('#emaillogin').val()
           },
           success: function(data) {
