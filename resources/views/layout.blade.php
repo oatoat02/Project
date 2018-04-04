@@ -26,8 +26,7 @@
     <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="/js/date.js"></script>
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
-    <link rel="stylesheet" href="/flipclock/flipclock.css">
-    <script src="/flipclock/flipclock.js"></script>
+
     <script src="https://cdn.rawgit.com/hayeswise/Leaflet.PointInPolygon/v1.0.0/wise-leaflet-pip.js"></script>
 
     <title>Project</title>
@@ -52,7 +51,7 @@
           @endif
           <div class="right menu">
 
-            <div class="ui pointing dropdown link item ">
+            <div class="ui pointing dropdown link item " style="z-index: 600 !important;">
               <i class="large send icon"></i>ดาวเทียม<i class="dropdown icon"></i>
               <div class="menu">
                 <a class="item" href="{{ route('Project.checksatellite') }}">
@@ -60,26 +59,29 @@
                 </a>
                 <a class="item" href="{{ route('Project.position') }}">
                   <i class="rocket icon"></i>ตำแหน่งดาวเทียม
+                </a> 
+                <a class="item" href="{{ route('Project.position') }}">
+                  <i class="rocket icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
                 </a>
 
               </div>
             </div>
 
-            <div class="ui pointing dropdown link item ">
+            <div class="ui pointing dropdown link item " style="z-index: 600 !important;">
               <i class="large inverted archive icon"></i>คลังข้อมูล<i class="dropdown icon"></i>
               <div class="menu">
                 <a class="item" href="{{ route('Project.PhotoGallery') }}"><i class="photo icon"></i>คลังรูปภาพ</a>
                 <a class="item" href="{{ route('Project.SoundArchive') }}"><i class="signal icon"></i>คลังเสียง</a>
                 @if(Auth::check())
-                @if(Auth::user()->type=='admin' ) 
+                
                 <a class="item" href="{{ route('Project.logCollection') }}"><i class="list layout icon"></i>ประวัติการรับสัญาณ</a>
-                @endif
+             
                 @endif
               </div>
             </div>
             @if(Auth::check())
-            @if(Auth::user()->type=='admin' ) 
-            <div class="ui pointing dropdown link item ">
+             
+            <div class="ui pointing dropdown link item " style="z-index: 600 !important;">
               <i class="large settings icon"></i>จัดการระบบ<i class="dropdown icon" ></i>
               <div class="menu">
 
@@ -96,14 +98,14 @@
 
               </div>
             </div>
-            @endif
+          
             @endif
 
 
 
             @if(Auth::check())
 
-            <div class="ui pointing dropdown link item ">
+            <div class="ui pointing dropdown link item " style="z-index: 600 !important;">
               <i class="large inverted blue user circle outline icon"></i>{{ Auth::user()->name }}<i class="dropdown icon"></i>
               <div class="menu">
 
@@ -128,7 +130,7 @@
       </div>
 
       <div class="mobile only row">
-        <div class="ui fixed inverted menu navbar menu menu-nav" style="position: fixed;" >
+        <div class="ui fixed inverted menu navbar menu-nav" style="position: fixed; z-index: 3000 !important" >
          @if(Auth::check())
 
          <a href="{{ route('Project.dashboard') }}" >
@@ -151,7 +153,7 @@
       </div>
 
       <div class="ui bottom attached segment pushable">
-        <div class="ui inverted labeled  vertical wide sidebar menu">
+        <div class="ui inverted labeled  vertical sidebar menu">
           <a href="{{ route('Project.dashboard') }}" >
             <div class="navbar-header">
               <center><img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo2"></center>
@@ -168,6 +170,9 @@
                 <a class="item" href="{{ route('Project.position') }}">
                   <i class="rocket icon"></i>ตำแหน่งดาวเทียม
                 </a>
+                <a class="item" href="{{ route('Project.position') }}">
+                  <i class="rocket icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
+                </a>
               </div>
             </div>
 
@@ -183,11 +188,11 @@
                   <i class="signal icon"></i>คลังเสียง
                 </a>
                 @if(Auth::check())
-                @if(Auth::user()->type=='admin' ) 
+                
                 <a class="item" href="{{ route('Project.logCollection') }}">
                   <i class="list layout icon"></i>ประวัติการรับสัญาณ
                 </a>
-                @endif
+               
                 @endif
               </div>
             </div>
@@ -383,7 +388,7 @@
   $(document).on('click', '#menubar', function() {
 
     $('.ui.labeled.sidebar')
-    .sidebar('setting', 'transition', 'overlay')
+    .sidebar('setting', {transition: 'overlay'})
     .sidebar('toggle');
 
   });
@@ -455,6 +460,7 @@
     });
 
   });
+  
 </script>
 
 

@@ -9,67 +9,82 @@
 	</div>
 </div>
 
-<div class="three wide computer sixteen wide tablet sixteen wide mobile column " >
-	<div class="ui segment" style="height: 100%">
-		<div class="fields box1"  style="height: 500px;">
+<div class="three wide computer sixteen wide tablet sixteen wide mobile column "  >
+	<div class="ui segment" style="height: 100%; overflow: auto;">
+		<div class="fields box1"  style="height: 500px;  " >
 			<div class="ui form">
-						<table class="ui celled table ">
-					<thead>
-						<tr>
-							<th>ดาวเทียม<br></th>
-						</tr></thead>
-						<tbody>
-							@foreach($listTLE as $Item)
-							<tr>
+        <table class="ui celled table ">
+         <thead>
+          <tr>
+           <th>ดาวเทียม<br></th>
+         </tr></thead>
+         <tbody>
+           @foreach($listTLE as $Item)
+           <tr>
 
-								<td>
-									<form class="ui form" action="{{ route('Project.positionSelect')}}" method="post" >
+            <td>
+             <form class="ui form" action="{{ route('Project.positionSelect')}}" method="post" >
 
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<input type="hidden" name="id" value="{{ $Item->id }}">
-                  <input type="hidden" name="name" value="{{ $Item->name }}">
-                  <input type="hidden" name="line1" value="{{ $Item->line1 }}">
-									<input type="hidden" name="line2" value="{{ $Item->line2 }}">
-							
-									<button type="submit" class="ui primary button" style="width: 100%">
-										{{ $Item->name }}
-									</button>
-									</form>
-								</td>
-								
+               <input type="hidden" name="_token" value="{{ csrf_token() }}">
+               <input type="hidden" name="id" value="{{ $Item->id }}">
+               <input type="hidden" name="name" value="{{ $Item->name }}">
+               <input type="hidden" name="line1" value="{{ $Item->line1 }}">
+               <input type="hidden" name="line2" value="{{ $Item->line2 }}">
 
-							</tr>
-									@endforeach
-							
-						</tbody>
+               <button type="submit" class="ui primary button" style="width: 100%">
+                {{ $Item->name }}
+              </button>
+            </form>
+          </td>
 
-					</table>
-				</div>
-				
-			</div>
 
-			
-			</div>
+        </tr>
+        @endforeach
 
-		</div>
-	</div>
-	<script type="text/javascript">
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+
+</div>
+
+</div>
+<div class="sixteen wide computer sixteen wide tablet sixteen wide mobile column  ">
+  <div class="ui segment" >
+    <div class="ui negative message">
+          <li>ดาวเทียมบางดวงเป็นดาวเทียมที่เคลื่อนที่ช้าหรือดาวเทียมค้างฟ้า</li>
+          <li>ท่านสามารถเลื่อนหาตำแหน่งดาวเทียมได้บนแผนที่</li>
+          <li>เส้นทางบนแผนที่จะเป็นเส้นทางการเคลื่อนที่ของดาวเทียมล่วงหน้า 2 ชั่วโมง</li>
+          
+        
+          
+        </div> 
+      
+  </div>
+</div>
+</div>
+<br>
+<script type="text/javascript">
 
   /*draw map*/
   var mymap = L.map('mapposition',{
     worldCopyJump: true,
     inertia:false,
-  }).setView([0, 0], 1);
+  }).setView([13.11, 100.91972], 2);
   L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
     attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
-    minZoom: 1,
+    minZoom: 2,
     maxZoom: 5, 
-    worldCopyJump:true,
     /*zoomSnap: 0.25,*/
     id: 'mapbox.streets',
     accessToken: 'your.mapbox.access.token'
   }).addTo(mymap);
-
+  // L.polygon(WorldWarp).addTo(mymap);
+  var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
+  mymap.setMaxBounds(WorldWarp);
   /*----------------------------------*/
 
 // Sample TLE 
@@ -190,7 +205,7 @@ L.polyline(latlngsArr, {
 
 /*update updateSatellite*/
 function updateSatellite(){
-  
+
 
   var date = new Date();
   
@@ -289,4 +304,4 @@ function updateSatellite(){
   /*---------------*/
 
 </script>
-		@stop
+@stop

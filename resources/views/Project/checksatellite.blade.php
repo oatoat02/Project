@@ -7,8 +7,13 @@
 		
 			<div  class="" id="mapid" >
 			</div>
-	
+	<div class="ui negative message">
+          <li>ดาวเทียมบางดวงเป็นดาวเทียมที่เคลื่อนที่ช้าหรือดาวเทียมค้างฟ้า</li>
+          <li>ท่านสามารถเลื่อนหาตำแหน่งดาวเทียมได้บนแผนที่</li>
+
+        </div> 
 	</div>
+
 </div>
 
 <div class="eight wide computer eight wide tablet sixteen wide mobile column " >
@@ -18,7 +23,7 @@
 				<div class="two fields">
 					<div class="field" style="display: inline-block;">
 						<label>ดาวเทียม</label>
-						<div class="ui selection dropdown testonchange" style="z-index:10 !important">
+						<div class="ui selection dropdown testonchange">
 							<i class="dropdown icon"></i>
 							<div class="default text" id="selectSatellite">ดาวเทียม</div>
 							<div class="menu">
@@ -31,7 +36,7 @@
 					</div>
 					<div class="field" style="display: inline-block;">
 						<label>ช่วงเวลา</label>
-						<div class="ui selection dropdown " style="z-index:10 !important">
+						<div class="ui selection dropdown " >
 							<i class="dropdown icon"></i>
 							<div class="default text" id="SelectTime" data-value="daylight">กลางวัน</div>
 							<div class="menu">

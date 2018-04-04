@@ -107,17 +107,19 @@
   var mymap = L.map('mapindex',{
     worldCopyJump: true,
     inertia:false,
-  }).setView([0, 0], 1);
+  }).setView([13.11, 100.91972], 2);
   L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
     attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
-    minZoom: 1,
-    maxZoom: 15, 
+    minZoom: 2,
+    maxZoom: 5, 
     worldCopyJump:true,
     /*zoomSnap: 0.25,*/
     id: 'mapbox.streets',
     subdomains:['mt0','mt1','mt2','mt3'],
     accessToken: 'your.mapbox.access.token'
   }).addTo(mymap);
+var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
+  mymap.setMaxBounds(WorldWarp);
 
   /*----------------------------------*/
 

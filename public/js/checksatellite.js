@@ -20,6 +20,8 @@ circle = L.circle([13.12036, 100.91972], 2000000, {
 }).addTo(mymap);
 L.control.scale().addTo(mymap);
 L.control.mousePosition().addTo(mymap);
+var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
+ mymap.setMaxBounds(WorldWarp);
 
 		/*// define rectangle geographical bounds
 		var Rectangle = [[31.10, 82.4331], [-5,119.4]];
@@ -439,9 +441,9 @@ function onMapClick(e) {
 								color : 'green' ,
 							})
 							.addTo(mymap)
-							.bindTooltip((layerGroup._layers[i])[4]+	" Time : " + strDate + 
+							.bindPopup( (layerGroup._layers[i])[4]+	" Time : " + strDate + 
 								"<br> AZ : " + (layerGroup._layers[i])[2] + 
-								"  EL : " + (layerGroup._layers[i])[3] )
+								"  EL : " + (layerGroup._layers[i])[3])
 							);
 					}
 

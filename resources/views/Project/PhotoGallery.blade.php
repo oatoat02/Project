@@ -23,11 +23,11 @@
 				<div class="inline fields " >
 					
 					<label>Satellite&nbsp;Name&nbsp;:</label>
-					<div class="ui selection dropdown myDropdown selectSatellite" style="width: 100%">
+					<div class="ui selection dropdown myDropdown selectSatellite" style="width: 100% ">
 						<input type="hidden" name="SatelliteName" value="All">
 						<i class="dropdown icon"></i>
 						<div class="default text">All</div>
-						<div class="menu">
+						<div class="menu" ">
 							@foreach($listTLE as $Item)
 							<div class="item" data-value="{{$Item->name}}">{{$Item->name}}</div>
 
@@ -129,11 +129,14 @@
 
 <div class="ui basic modal" id="ShowPhoto" style="z-index: 250 !important;">
 	<i class="close icon"></i>
-	
 
 
-	<img class="image" id='fullImage' style="min-width: 350px;min-height: 400px">
-	
+  	<center>
+	<img class="image" id='fullImage' style="width: 70% ;height: 70%">
+	</center>
+
+
+
 
 </div>
 

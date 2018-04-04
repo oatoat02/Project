@@ -6,7 +6,7 @@
   <div class="ui segment">
     <div class="ui clearing grey inverted segment">
       @if(Auth::check())
-      @if(Auth::user()->type=='admin' ) 
+      @if(Auth::user()->status=='superadmin' ) 
       <a class="ui right floated  inverted grey button" style="padding: .5em 1.5em .5em;"" href="{{ route('Project.register') }}">เพิ่มผู้ดูแลระบบ</a>
       @endif
       @endif
@@ -14,6 +14,7 @@
 
 
     </div>
+      
     <br>
     <table class="ui celled table  " >
       <thead>
@@ -24,7 +25,9 @@
           <th>E-mail</th>
           <th>เบอร์โทรศัพท์</th>
           <th>อนุมัติโดย</th>
+          @if( ( Auth::user()->status=='superadmin' ) )
           <th>รายละเอียด</th>
+          @endif
         </tr>
       </thead>
       <tbody>
@@ -37,21 +40,16 @@
           <td> {{$user->email }}</td>
           <td> {{$user->PhoneNumber}}</td>
           <td> {{$user->Approver}}</td>
+          @if( ( Auth::user()->status=='superadmin' ) )
           <td style="width: 275px;">
-            @if( ( Auth::user()->type=='admin' ) || ( Auth::user()->name == $user->name ))
             <div class="ui buttons" style="font-size: 10px !important; ">
               <button class="ui green button editProfile" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"  data-email="{{$user->email}}" style="font-size: 12px !important;">แก้ไขข้อมูล</button>
               <div class="or"></div>
               <button class="ui yellow button editClick" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"  data-email="{{$user->email}}" style="font-size: 12px !important;">เปลี่ยนPassword</button>
             </div>
-            @else
-            <div class="ui buttons" style="font-size: 10px !important; width:100%; ">
-              <button class="ui disabled button" style="font-size: 12px !important;">แก้ไข</button>
-              <div class="or"></div>
-              <button class="ui disabled button" style="font-size: 12px !important;">ลบ</button>
-            </div>
-            @endif
+          
           </td>
+            @endif
 
         </tr>
         <?php $count++ ?>
@@ -60,10 +58,13 @@
 
       </tbody>
     </table>
-    <br>
+   
 
-
+  <div class="ui negative message">
+          <p>หากต้องการเพิ่มผู้ดูแลระบบกรุณาติดตอบสอบถามหัวหน้า</p>
+      </div> 
   </div> 
+
   <br>
   <br>
   <div class="ui modal" id="editProfile">
