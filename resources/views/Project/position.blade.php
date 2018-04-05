@@ -69,23 +69,7 @@
 <br>
 <script type="text/javascript">
 
-  /*draw map*/
-  var mymap = L.map('mapposition',{
-    worldCopyJump: true,
-    inertia:false,
-  }).setView([13.11, 100.91972], 2);
-  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-    attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
-    minZoom: 2,
-    maxZoom: 5, 
-    /*zoomSnap: 0.25,*/
-    id: 'mapbox.streets',
-    accessToken: 'your.mapbox.access.token'
-  }).addTo(mymap);
-  // L.polygon(WorldWarp).addTo(mymap);
-  var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
-  mymap.setMaxBounds(WorldWarp);
-  /*----------------------------------*/
+  
 
 // Sample TLE 
 var nameSatellite = '<?php echo $tleFrist->name ?>';
@@ -98,8 +82,11 @@ latitudeStrArr  = new Array(),
 latlngsArr  = new Array(),
 azimuthArr  = new Array(),
 elevationArr  = new Array(),
-latlngs = new Array();
-timeArr = new Array();
+latlngs = new Array(),
+timeArr = new Array(),
+startlat=-99,
+startlngs=-99;
+
 var SatelliteIcon = L.layerGroup();
 var satrec = satellite.twoline2satrec(tleLine1, tleLine2);
 
@@ -152,15 +139,15 @@ for ( var i = -60*10 ;i < 2*60*60; i+=5){
   latitudeStrArr[i] =  latitudeStr;
   azimuthArr[i]=azimuth;
   elevationArr[i]=elevation;
+  if(startlat==-99 && startlngs == -99)
+  {
+    startlat=latitudeStr;
+    startlngs=longitudeStr;
+  }
 }
 
 
 
-
-
-
-L.control.scale().addTo(mymap);
-L.control.mousePosition().addTo(mymap);
 
 
 
@@ -191,6 +178,27 @@ for(var i = -60*10 ; i < 2*60*60; i+=5){
   
   
 }
+/*draw map*/
+  var mymap = L.map('mapposition',{
+    worldCopyJump: true,
+    inertia:false,
+  }).setView([startlat, startlngs], 2);
+  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
+    minZoom: 2,
+    maxZoom: 5, 
+    /*zoomSnap: 0.25,*/
+    id: 'mapbox.streets',
+    accessToken: 'your.mapbox.access.token'
+  }).addTo(mymap);
+  // L.polygon(WorldWarp).addTo(mymap);
+  var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
+  mymap.setMaxBounds(WorldWarp);
+  /*----------------------------------*/
+
+
+L.control.scale().addTo(mymap);
+L.control.mousePosition().addTo(mymap);
 
 L.polyline(latlngsArr, {
   color: 'red',
@@ -254,8 +262,6 @@ function updateSatellite(){
   var greenIcon = L.icon({
     iconUrl: 'Satellite.png',
     iconSize:     [50, 50], // size of the icon
-
-
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
   });
   

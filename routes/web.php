@@ -59,3 +59,5 @@ Route::post('/submitEditProfile',['as'=>'Project.submitEditProfile','uses'=>'Use
 Route::post('/editProfile',['as'=>'Project.editProfile','uses'=>'UserController@editProfile']);
 Route::post('/editPasswordUser',['as'=>'Project.editPasswordUser','uses'=>'UserController@editPasswordUser']);
 Route::post('/test',['as'=>'Project.testupload','uses'=>'MainController@testupload']);
+Route::get('/antennacontrol',['as'=>'Project.antennacontrol','uses'=>'AntennaController@antennacontrol']);
+Route::post('/showtimecontrol',['as'=>'Project.showtimecontrol','uses'=>'AntennaController@showtimecontrol']);

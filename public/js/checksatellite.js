@@ -198,8 +198,9 @@ var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
 					arrFree  = new Array(2);
 					if(($('#SelectTime').text()) == "กลางวัน")
 					{
-						if( (timeArr[i].getHours()) > 6  && (timeArr[i].getHours())<18 )
+						if( (timeArr[i].getHours()) >= 6  && (timeArr[i].getHours())<18 )
 						{
+						
 							if(longitudeStrArr[i-30] > 43 && longitudeStrArr[i] < 150 && latitudeStrArr[i-30] > -29 && latitudeStrArr[i] < 45 )
 							{
 
@@ -251,7 +252,7 @@ var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
 					}
 					else if(($('#SelectTime').text()) == "กลางคืน")
 					{
-						if( ( (timeArr[i].getHours()) > 18  && (timeArr[i].getHours())<24) || ( (timeArr[i].getHours()) > 0  && (timeArr[i].getHours())<6) )
+						if( ( (timeArr[i].getHours()) >= 18  && (timeArr[i].getHours())<24) || ( (timeArr[i].getHours()) > 0  && (timeArr[i].getHours())<6) )
 						{
 							if(longitudeStrArr[i-30] > 43 && longitudeStrArr[i] < 150 && latitudeStrArr[i-30] > -29 && latitudeStrArr[i] < 45 )
 							{
@@ -435,7 +436,7 @@ function onMapClick(e) {
 						(layerGroup._layers[i])[1].getFullYear() +"  " +strTime;
 						
 
-						console.log((layerGroup._layers[i])[1].toUTCString());
+						// console.log((layerGroup._layers[i])[1].toUTCString());
 						layerGroup2 = layerGroup2.addLayer(
 							L.polygon(layerGroup._layers[i][0],{
 								color : 'green' ,

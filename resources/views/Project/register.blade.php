@@ -61,7 +61,7 @@
 
       
         <center>
-        <button class="ui green button" type="submit"add">ยืนยันการสมัคร</button>
+        <button class="ui green button" type="submit">ยืนยันการสมัคร</button>
         </center>
       </form>
     </div>

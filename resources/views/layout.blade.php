@@ -60,8 +60,8 @@
                 <a class="item" href="{{ route('Project.position') }}">
                   <i class="rocket icon"></i>ตำแหน่งดาวเทียม
                 </a> 
-                <a class="item" href="{{ route('Project.position') }}">
-                  <i class="rocket icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
+                <a class="item" href="{{ route('Project.antennacontrol') }}">
+                  <i class="rss icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
                 </a>
 
               </div>
@@ -170,8 +170,8 @@
                 <a class="item" href="{{ route('Project.position') }}">
                   <i class="rocket icon"></i>ตำแหน่งดาวเทียม
                 </a>
-                <a class="item" href="{{ route('Project.position') }}">
-                  <i class="rocket icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
+                <a class="item" href="{{ route('Project.antennacontrol') }}">
+                  <i class="rss icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
                 </a>
               </div>
             </div>
