@@ -60,9 +60,7 @@
                 <a class="item" href="{{ route('Project.position') }}">
                   <i class="rocket icon"></i>ตำแหน่งดาวเทียม
                 </a> 
-                <a class="item" href="{{ route('Project.antennacontrol') }}">
-                  <i class="rss icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
-                </a>
+
 
               </div>
             </div>
@@ -86,7 +84,7 @@
               <div class="menu">
 
                 <a class="item" href="{{ route('Project.control') }}">
-                  <i class="large rss icon"></i>ตั้งค่ามุมเสาอากาศ
+                  <i class="large rss icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
                 </a>
                 <a class="item" href="{{ route('Project.tle') }}">
                   <i class="large rocket icon"></i>TLE
@@ -170,9 +168,7 @@
                 <a class="item" href="{{ route('Project.position') }}">
                   <i class="rocket icon"></i>ตำแหน่งดาวเทียม
                 </a>
-                <a class="item" href="{{ route('Project.antennacontrol') }}">
-                  <i class="rss icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
-                </a>
+
               </div>
             </div>
 
@@ -206,7 +202,7 @@
             <div class="menu">
               <div id="hideSetting">
                 <a class="item" href="{{ route('Project.control') }}">
-                  <i class="large rss icon"></i>ตั้งค่ามุมเสาอากาศ
+                  <i class="large rss icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
                 </a>
                 <a class="item" href="{{ route('Project.tle') }}">
                   <i class="large rocket icon"></i>TLE

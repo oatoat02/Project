@@ -103,17 +103,17 @@ class UserController extends Controller
         return response()->json($request);
     }
     public function editPasswordUser(Request $request){
-        /*$Datas=$request->input('passwordedituser');
-        $check = Hash::make($request->input('passwordedituser'));
-        $users = Users::find($request->id);
-        if(Hash::check($request->input('passwordedituser'), $users->password)){
-            $users->password = Hash::make($request->input('passwordedituser'));
-            $users->save();
+        // $Datas=$request->input('passwordedituser');
+        // $check = Hash::make($request->input('passwordedituser'));
+        // $users = Users::find($request->id);
+        // if(Hash::check($request->input('passwordedituser'), $users->password)){
+        //     $users->password = Hash::make($request->input('passwordedituser'));
+        //     $users->save();
              
-        }else{
-            alert("รหัสผ่านเก่าไม่ถูกต้อง");
-            return false;
-        }*/
+        // }else{
+        //     alert("รหัสผ่านเก่าไม่ถูกต้อง");
+        //     return false;
+        // }
         return response()->json($request);
     }
 }

@@ -26,11 +26,6 @@ class MainController extends Controller
     	return view('Project.index');
     }
 
-    public function control()
-    {
-        return view('Project.control');
-    }
-
    
     public function settingSystem()
     {

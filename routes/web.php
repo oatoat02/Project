@@ -19,7 +19,7 @@ Route::get('/map',['as'=>'Project.map','uses'=>'MainController@map']);
 Route::get('/dashboard',['as'=>'Project.dashboard','uses'=>'MainController@indexdashboard']);
 Route::get('/checksatellite',['as'=>'Project.checksatellite','uses'=>'MainController@checksatellite']);
 Route::get('/member',['as'=>'Project.member','uses'=>'UserController@member']);
-Route::get('/control',['as'=>'Project.control','uses'=>'MainController@control']);
+
 Route::get('/index',['as'=>'Project.index1','uses'=>'MainController@index1']);
 Route::get('/test',['as'=>'Project.test','uses'=>'MainController@test']);
 
@@ -59,5 +59,9 @@ Route::post('/submitEditProfile',['as'=>'Project.submitEditProfile','uses'=>'Use
 Route::post('/editProfile',['as'=>'Project.editProfile','uses'=>'UserController@editProfile']);
 Route::post('/editPasswordUser',['as'=>'Project.editPasswordUser','uses'=>'UserController@editPasswordUser']);
 Route::post('/test',['as'=>'Project.testupload','uses'=>'MainController@testupload']);
-Route::get('/antennacontrol',['as'=>'Project.antennacontrol','uses'=>'AntennaController@antennacontrol']);
+
+Route::get('/control',['as'=>'Project.control','uses'=>'AntennaController@control']);
+
 Route::post('/showtimecontrol',['as'=>'Project.showtimecontrol','uses'=>'AntennaController@showtimecontrol']);
+Route::post('/settimecontrol',['as'=>'Project.settimecontrol','uses'=>'AntennaController@settimecontrol']);
+Route::post('/deleteTimeControl',['as'=>'Project.deleteTimeControl','uses'=>'AntennaController@deleteTimeControl']);
