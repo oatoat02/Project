@@ -4,39 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TLE;
+use Auth;
 use App\control;
 class AntennaController extends Controller
 {
     public function control()
     {
-        $listTLE = TLE::get();
-        $listControl = control::where('status','N')->orderBy('timestamp', 'asc')->get();
-        $timestart='';
-        $timestop='';
-        for($i = 0 ; $i < sizeof($listControl);$i++ ){
-            if($timestart==''){
-                $timestart=$listControl[$i]['timestart'];
-            }
-            $timestop=$listControl[$i]['timestop'];
-            
-        }
-        $time=[];
-        array_push($time,$timestart);
-        array_push($time,$timestop);
-        // dd($listControl);
-        return view('Project.control')->with('listTLE',$listTLE)->with('listControl',$listControl)->with('time',$time);
+        if(Auth::check()){
+
+            $listTLE = TLE::get();
+            $listControl = control::where('status','N')->orderBy('timestamp', 'asc')->get();
+            return view('Project.control')->with('listTLE',$listTLE)->with('listControl',$listControl);
+        }else{
+          return redirect('/login');
+      }
     }
 
     public function showtimecontrol(Request $request)
     {
-    	
+    	// dd($request);
     	$namesatellite = $request->namesatellite;
     	$data= $request->control;
     	$dataspilt = explode(",", $data);
         // dd($dataspilt);
     	// dd(sizeof($dataspilt));
     	$arraylist= array();
-        $date="";
     	$timestart="";
     	for($i = 0 ; $i < sizeof($dataspilt);$i+=4 ){
     		if($timestart==''){
@@ -64,9 +56,21 @@ class AntennaController extends Controller
     	$control= [];
     	$timestart="";
     	$timestop="";
+        $dd="";
+        $mm="";
+        $date="";
     	for($i = 0 ; $i < sizeof($dataspilt);$i+=4 ){
             if($timestart==""){
                 $timestart=$dataspilt[$i].' ,'.$dataspilt[$i+1];
+                $textfree= explode("/", $dataspilt[$i]);
+                // dd(($textfree[2]));
+                if(strlen($textfree[1]) == 1){
+                    $dd='0'.$textfree[1];
+                }
+                if(strlen($textfree[0]) == 1){
+                    $mm='0'.$textfree[0];
+                }
+                $date=$mm.'/'.$dd.'/'.$textfree[2];
                 
             }
     		$arrayfree= [];
@@ -82,6 +86,8 @@ class AntennaController extends Controller
 		$store->status = $request->status;
 		$store->timestart =	$timestart;
 		$store->timestop =	$timestop;
+        // dd($date);
+        $store->Date = $date;
         $store->timestamp =  $request->timestamp;
 		$store->control = $control;
 		$store->save();
@@ -96,5 +102,34 @@ class AntennaController extends Controller
         $data->delete();
        
         return redirect()->back();
+    }
+    public function logCollection()
+    {
+        if(Auth::check()){
+            $listControl = control::orderBy('timestamp', 'asc')->get();
+
+            return view('Project.logCollection')->with('listControl',$listControl);
+            
+        }else{
+            return redirect('/login');
+        }
+    }
+    public function schedulecontrol(Request $request)
+    {
+        
+        $listdata = control::find($request->id);
+        // dd($listdata->control);
+        return view('Project.schedulecontrol')->with('listdata',$listdata);
+    }
+    public function findControl(Request $request)
+    {
+        $StartDate = date_create_from_format('d/m/Y', ($request->StartDate));   
+        $StartDateFomat=($StartDate->format('m/d/Y'));
+        $EndDate = date_create_from_format('d/m/Y', ($request->EndDate));   
+        $EndDateFomat=($EndDate->format('m/d/Y'));
+
+        $listControl = control::whereBetween('Date', [$StartDateFomat, $EndDateFomat])->get();
+        return view('Project.logCollection')->with('listControl',$listControl);
+       
     }
 }

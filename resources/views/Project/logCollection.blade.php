@@ -8,184 +8,121 @@
 			<h2>ประวัติการรับสัญญาณ</h2>
 		</div>
 		<br>
-		<label>วันเวลาที่ต้องการค้นหา : </label>
-		<div class="ui left icon input">
-			<input type="date" name="StartDate" id="StartDate" placeholder="เวลาเริ่มต้น" value="<?php echo date('Y-m-d'); ?>">
-			<i class="calendar icon"></i>
-		</div>
-		&nbsp;
-		<button class="ui green button">ค้นหา</button>
+		
+		<form action="{{ route('Project.findControl') }}"  method="post"  class="ui form segment">
+			<h4 class="ui dividing header">วันเวลาที่ต้องการค้นหา</h4>
+			<div class="three fields">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<div class="inline fields">
+					<label>เวลาเริ่มต้น</label>
+					<div class="ui calendar" id="Startcalendar" style="width: 80% ;margin-left:5px" >
+						<div class="ui left icon input" style="width: 90%">
+							<input type="text" name="StartDate" id="StartDate" value="<?php echo date('d/m/Y'); ?>">
+							<i class="calendar icon"></i>
+						</div>
+					</div>
+				</div>
+				<div class="inline fields">
+					<label>เวลาสิ้นสุด</label> 
+					<div class="ui calendar" id="Endcalendar" style="width: 80% ;margin-left:5px">
+						<div class="ui left icon input"  style="width: 90%">
+							<input type="text" name="EndDate" id="EndDate" value="<?php echo date('d/m/Y'); ?>">
+							<i class="calendar icon"></i>
+						</div>
+					</div>
+				</div>
+				<div class="inline fields">
+					<button class="ui black button" style="width:100%">ค้นหา</button>
+				</div>
+
+			</div>
+		</form>
+		
+
 		<table class="ui celled table">
 
 
 			<thead>
-				<th>Date</th>
-				<th>Satellite</th>
-				<th>เวลาที่รับ</th>
-
-				<th>การรับสัญญาณ</th>
-
-				<th>ไฟล์เสียง</th>
-				<th>ไฟล์รูปภาพ</th>
-				<th>ตัวอย่างรูปภาพ</th>
+				<th style="width: 12.5%"><center>Date</center></th>
+				<th style="width: 12.5%"><center>Satellite</center></th>
+				<th style="width: 12.5%"><center>เวลาที่รับ</center></th>
+				<th style="width: 12.5%"><center>เวลาสิ้นสุด</center></th>
+				<th style="width: 12.5%"><center>การรับสัญญาณ</center></th>
+				<th style="width: 10%"><center>Start<br> Azimuth</center></th>
+				<th style="width: 10%"><center>Start<br> Elevation</center></th>
+				<th style="width: 17.5%"><center>รายละเอียด</center></th>
 
 
 
 			</thead>
 			<tbody>
+				@foreach($listControl as $Data)
 				<tr>
-
-					<td>1/11/2560</td>
-					<td>NOAA-15</td>
-					<td>14:02:10</td>
-					<td><i class="green checkmark big icon"></i></td>
 					<td>
-						<a href="/Sound/08130855.wav" download><i class="download icon"></i>Download</a>
+						<center>
+							<?php 
+							$dataspilt = explode(",", $Data->timestart);
+							echo $dataspilt[0];
+							?> 
+						</center>
 					</td>
 					<td>
-						<a download="I-noaa-19-08130855-contrasta-jpg.jpg" href="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg">
-							<i class="photo icon"></i>Download</a>
+						<center>{{$Data->namesatellite}}</center>
+					</td>
+					<td>
+						<center>
+							<?php 
+							$dataspilt = explode(",", $Data->timestart);
+							echo $dataspilt[1];
+							?> 
+						</center>
+					</td>
+					<td>
+						<center>
+							<?php 
+							$dataspilt = explode(",", $Data->timestop);
+							echo $dataspilt[1];
+							?> 
+						</center>
+					</td>
+					<td>
+						<center>
+							@if($Data->status=='N')
+							<i class=" red huge calendar times outline icon"></i>
+							@else
+							<i class=" green huge calendar check outline icon"></i>
+							@endif
+						</center>
+						<td>
+							<center>
+								{{$Data->control[0]['azimuth']}}
+							</center>
 						</td>
 						<td>
-							<center><img src="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg" style="width: 100px ;height: 100px;"></center>
+							<center>
+								{{$Data->control[0]['elevation']}}
+							</center>
 						</td>
-
-
+						<td>
+							<form action="{{ route('Project.schedulecontrol') }}"  method='post'>
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<input type="hidden" name="id" value="{{ $Data->_id }}">
+								<button class='ui green button' style="width: 95%" type='submit'>ดูรายระเอียด</button>
+							</form>
+						</td>
 
 					</tr>
-					<tr>
+					@endforeach
+				</tbody>
+			</table>
 
-						<td>1/11/2560</td>
-						<td>NOAA-15</td>
-						<td>14:02:10</td>
-						<td><i class="green checkmark big icon"></i></td>
-						<td>
-							<a href="/Sound/08130855.wav" download><i class="download icon"></i>Download</a>
-						</td>
-						<td>
-							<a download="I-noaa-19-08130855-contrasta-jpg.jpg" href="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg">
-								<i class="photo icon"></i>Download</a>
-							</td>
-							<td>
-								<center><img src="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg" style="width: 100px ;height: 100px;"></center>
-							</td>
+		</div>
+		<br>
 
 
+	</div>
 
-						</tr>
-						<tr>
-
-							<td>1/11/2560</td>
-							<td>NOAA-15</td>
-							<td>14:02:10</td>
-							<td><i class="green checkmark big icon"></i></td>
-							<td>
-								<a href="/Sound/08130855.wav" download><i class="download icon"></i>Download</a>
-							</td>
-							<td>
-								<a download="I-noaa-19-08130855-contrasta-jpg.jpg" href="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg">
-									<i class="photo icon"></i>Download</a>
-								</td>
-								<td>
-									<center><img src="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg" style="width: 100px ;height: 100px;"></center>
-								</td>
+	<script type="text/javascript" src="/js/date.js"></script>
 
 
-
-							</tr>
-							<tr>
-
-								<td>1/11/2560</td>
-								<td>NOAA-15</td>
-								<td>14:02:10</td>
-								<td><i class="green checkmark big icon"></i></td>
-								<td>
-									<a href="/Sound/08130855.wav" download><i class="download icon"></i>Download</a>
-								</td>
-								<td>
-									<a download="I-noaa-19-08130855-contrasta-jpg.jpg" href="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg">
-										<i class="photo icon"></i>Download</a>
-									</td>
-									<td>
-										<center><img src="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg" style="width: 100px ;height: 100px;"></center>
-									</td>
-
-
-
-								</tr>
-								<tr>
-
-									<td>1/11/2560</td>
-									<td>NOAA-15</td>
-									<td>14:02:10</td>
-									<td><i class="green checkmark big icon"></i></td>
-									<td>
-										<a href="/Sound/08130855.wav" download><i class="download icon"></i>Download</a>
-									</td>
-									<td>
-										<a download="I-noaa-19-08130855-contrasta-jpg.jpg" href="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg">
-											<i class="photo icon"></i>Download</a>
-										</td>
-										<td>
-											<center><img src="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg" style="width: 100px ;height: 100px;"></center>
-										</td>
-
-
-
-									</tr>
-									<tr>
-
-										<td>1/11/2560</td>
-										<td>NOAA-15</td>
-										<td>14:02:10</td>
-										<td><i class="green checkmark big icon"></i></td>
-										<td>
-											<a href="/Sound/08130855.wav" download><i class="download icon"></i>Download</a>
-										</td>
-										<td>
-											<a download="I-noaa-19-08130855-contrasta-jpg.jpg" href="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg">
-												<i class="photo icon"></i>Download</a>
-											</td>
-											<td>
-												<center><img src="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg" style="width: 100px ;height: 100px;"></center>
-											</td>
-
-
-
-										</tr>
-										<tr>
-
-											<td>1/11/2560</td>
-											<td>NOAA-15</td>
-											<td>14:02:10</td>
-											<td><i class="green checkmark big icon"></i></td>
-											<td>
-												<a href="/Sound/08130855.wav" download><i class="download icon"></i>Download</a>
-											</td>
-											<td>
-												<a download="I-noaa-19-08130855-contrasta-jpg.jpg" href="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg">
-													<i class="photo icon"></i>Download</a>
-												</td>
-												<td>
-													<center><img src="photo/NOAA/I-noaa-19-08130855-contrasta-jpg.jpg" style="width: 100px ;height: 100px;"></center>
-												</td>
-
-
-
-											</tr>
-											<!--  -->
-
-											
-										</tbody>
-									</table>
-
-								</div>
-								<br>
-
-
-							</div>
-
-
-
-
-							@stop
+	@stop

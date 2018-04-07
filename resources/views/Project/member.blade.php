@@ -130,7 +130,7 @@
             <label>รหัสผ่านใหม่&nbsp;&nbsp;:</label>
           </div>
           <div class="fourteen wide field">
-            <input type="password"  id="passwordNew" required>
+            <input type="password"  id="passwordNew">
           </div>
         </div>
         <div class="inline fields container">
@@ -138,27 +138,44 @@
             <label>ยืนยันรหัสผ่าน&nbsp;&nbsp;:</label>
           </div>
           <div class="fourteen wide field">
-            <input type="password"  id="passwordAgain" required>
+            <input type="password"  id="passwordAgain">
           </div>
         </div>
+        
       </div>
     </div>
-      <div class="actions">
-        <div class="ui black deny button" >
-          ยกเลิก
-        </div>
+    <div class="actions">
+      <div class="ui black deny button" >
+        ยกเลิก
+      </div>
 
-        <div class="ui positive right labeled icon button" id="testSubmit">
-          บันทึก
-          <i class="checkmark icon"></i>
-        </div>
+      <div class="ui positive right labeled icon button" id="testSubmit">
+        บันทึก
+        <i class="checkmark icon"></i>
       </div>
     </div>
   </div>
 
+</div>
+
 
 </div> 
+<div class="ui basic modal" id="finishPasswordedit" >
+    <i class="close icon"></i>
+    <div class="ui icon header">
+      <i class="checkmark box icon"></i>
+      เปลี่ยนรหัสผ่าน user สำเร็จ
+    </div>
 
+  </div>
+  <div class="ui basic modal" id="finisheditProfile" >
+    <i class="close icon"></i>
+    <div class="ui icon header">
+      <i class="checkmark box icon"></i>
+      แก้ไขข้อมูล user สำเร็จ
+    </div>
+
+  </div>
 <script type="text/javascript">
   $(document).on('click', '.editProfile', function() {
 
@@ -172,14 +189,46 @@
 
   $('.actions').on('click', '#confirm', function() {
 
-    if( ($('#name').val()=='' ) || ($('#email').val()=='' ) || ($('#PhoneNumber').val()=='' ))
-    {
-      alert('ข้อมูลไม่ถูกต้อง');
-      return false;
+     if ( $('#email').val() == '' ) {
 
-    }
-    else
-    {
+        $.uiAlert({
+            textHead: "email ไม่ถูกต้อง", // header
+            text: ' กรุณาระบุ email ให้ถูกต้อง', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
+        return false;
+      }
+      if( $('#name').val() == '' ){
+        $.uiAlert({
+            textHead: "ชื่อ-นามสกุล ไม่ถูกต้อง", // header
+            text: ' กรุณาระบุ ชื่อ-นามสกุล', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
+        return false;
+
+      } 
+      if( $('#PhoneNumber').val() == '' ){
+        $.uiAlert({
+              textHead: "เบอร์โทรศัพท์ไม่ถูกต้อง", // header
+              text: ' กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง', // Text
+              bgcolor: '#DB2828', // background-color
+              textcolor: '#fff', // color
+              position: 'top-center',// position . top And bottom ||  left / center / right
+              icon: 'remove circle', // icon in semantic-UI
+              time: 3, // time
+            })
+        return false;
+
+      }
+    
       $.ajax({
         type: 'post',
         url: '/editProfile',
@@ -192,12 +241,21 @@
 
         },
         success: function(data) {
-          alert("สำเร็จ");
-          console.log(data)
+          $('#finisheditProfile').modal({
+                  onHide: function(){
+                      location.reload();
+
+                  },
+                  onShow: function(){
+                      console.log('shown');
+                  }
+      
+              }).modal('show');
+              
 
         }
       })
-    }
+    
   });
   $(document).on('click', '.editClick', function() {
     $('#iduserPassword').val($(this).data('id'));
@@ -206,8 +264,16 @@
 
   $('.actions').on('click', '#testSubmit', function() {
     if( ($('#passwordNew').val()!= $('#passwordAgain').val() )|| ($('#passwordNew').val()=='')||($('#passwordAgain').val()=='') ){
-      alert('กรุณาระบุ Password ให้ถูกต้อง');
-      return false;
+      $.uiAlert({
+            textHead: "รหัสผ่านไม่ถูกต้อง", // header
+            text: ' กรุณาระบุรหัสผ่านให้เหมือนกันทั้ง2ช่อง', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
+        return false;
     }
     else{
       $.ajax({
@@ -215,13 +281,23 @@
         url: '/editPasswordUser',
         data: {
           '_token': $('input[name=_token]').val(),
+          'password' : $('#passwordNew').val(),
           'id' : $('#iduserPassword').val(),
-          'password' : $('passwordNew').val()
+
 
         },
         success: function(data) {
-          alert("สำเร็จ");
-          //console.log(data)
+          $('#finishPasswordedit').modal({
+                  onHide: function(){
+                      location.reload();
+
+                  },
+                  onShow: function(){
+                      console.log('shown');
+                  }
+      
+              }).modal('show');
+              
 
         }
       })

@@ -20,7 +20,6 @@ Route::get('/dashboard',['as'=>'Project.dashboard','uses'=>'MainController@index
 Route::get('/checksatellite',['as'=>'Project.checksatellite','uses'=>'MainController@checksatellite']);
 Route::get('/member',['as'=>'Project.member','uses'=>'UserController@member']);
 
-Route::get('/index',['as'=>'Project.index1','uses'=>'MainController@index1']);
 Route::get('/test',['as'=>'Project.test','uses'=>'MainController@test']);
 
 Route::get('/PhotoGallery',['as'=>'Project.PhotoGallery','uses'=>'PhotoController@PhotoGallery']);
@@ -31,7 +30,9 @@ Route::get('/SoundArchive',['as'=>'Project.SoundArchive','uses'=>'SoundControlle
 Route::post('/SoundArchive',['as'=>'Project.findSound','uses'=>'SoundController@findSound']);
 Route::post('/AddSound',['as'=>'Project.AddSound','uses'=>'SoundController@AddSound']);
 
-Route::get('/logCollection',['as'=>'Project.logCollection','uses'=>'MainController@logCollection']);
+Route::get('/logCollection',['as'=>'Project.logCollection','uses'=>'AntennaController@logCollection']);
+Route::post('/logCollection',['as'=>'Project.findControl','uses'=>'AntennaController@findControl']);
+
 Route::get('/test',['as'=>'Project.test','uses'=>'MainController@test']);
 
 Route::get('/login',['as'=>'Project.login','uses'=>'UserController@login']);
@@ -65,3 +66,4 @@ Route::get('/control',['as'=>'Project.control','uses'=>'AntennaController@contro
 Route::post('/showtimecontrol',['as'=>'Project.showtimecontrol','uses'=>'AntennaController@showtimecontrol']);
 Route::post('/settimecontrol',['as'=>'Project.settimecontrol','uses'=>'AntennaController@settimecontrol']);
 Route::post('/deleteTimeControl',['as'=>'Project.deleteTimeControl','uses'=>'AntennaController@deleteTimeControl']);
+Route::post('/schedulecontrol',['as'=>'Project.schedulecontrol','uses'=>'AntennaController@schedulecontrol']);

@@ -41,16 +41,7 @@
 							<tr>
 								<td> <center>
 									{{$data[0]}}
-									<?php
-
-/*
-									$mil = $data[0];
-									$seconds = $mil / 1000;
-									echo date("h:i:s A", $seconds);;
-*/
-										// echo gettype($datePase);
-										// echo $creation_date->format('Y-m-d'); // Outputs 2016-07-09
-									?>
+					
 								</center></td>
 								<td> <center> {{$data[1]}}</center></td>
 								<td> <center> {{$data[2]}}</center></td>

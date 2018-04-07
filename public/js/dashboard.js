@@ -28,19 +28,19 @@
 			timeArr =  Array();
 			var ArrData  = new Array();
 			var DateStartDefault=$('#StartDate').val();
-				var DateStartSet=DateStartDefault.split('/')[0];
-				var MonthStartSet=DateStartDefault.split('/')[1];
-				var YearStartSet=DateStartDefault.split('/')[2];
-				
-				var DateEndDefault=$('#EndDate').val();
-				var DateEndtSet=DateEndDefault.split('/')[0];
-				var MonthEndSet=DateEndDefault.split('/')[1];
-				var YearhEndSet=DateEndDefault.split('/')[2];
+			var DateStartSet=DateStartDefault.split('/')[0];
+			var MonthStartSet=DateStartDefault.split('/')[1];
+			var YearStartSet=DateStartDefault.split('/')[2];
+			
+			var DateEndDefault=$('#EndDate').val();
+			var DateEndtSet=DateEndDefault.split('/')[0];
+			var MonthEndSet=DateEndDefault.split('/')[1];
+			var YearhEndSet=DateEndDefault.split('/')[2];
 
-				var StartDateMDY = MonthStartSet+'/'+DateStartSet+'/'+YearStartSet;
-				var EndDateMDY = MonthEndSet+'/'+DateEndtSet+'/'+YearhEndSet;
-				var StartDateTemp = Date.parse(StartDateMDY);
-				var EndDateTemp = Date.parse(EndDateMDY);
+			var StartDateMDY = MonthStartSet+'/'+DateStartSet+'/'+YearStartSet;
+			var EndDateMDY = MonthEndSet+'/'+DateEndtSet+'/'+YearhEndSet;
+			var StartDateTemp = Date.parse(StartDateMDY);
+			var EndDateTemp = Date.parse(EndDateMDY);
 
 			if( ($('#selectSatellite')[0].innerHTML != 'ดาวเทียม') && ( StartDateTemp <= EndDateTemp) )
 			{
@@ -57,7 +57,7 @@
 				EndDateTime.setDate(EndDateTime.getDate()+1);
 				EndDateTime.setSeconds(EndDateTime.getSeconds()-1);
 
-			
+				
 				DateSecond=(EndDateTime.getTime() - StartDateTemp)/1000; //เวลาที่จะพล็อตกี่วิ
 				var satrec = satellite.twoline2satrec(tleLine1, tleLine2);
 				
@@ -142,9 +142,9 @@
 						
 
 						var nameSattellite = $('#selectSatellite')[0].innerHTML;
-					
+						
 					}
-				
+					
 					if(longitudeStrArr[i-30] > 85 && longitudeStrArr[i] < 116 && latitudeStrArr[i-30] > -3 && latitudeStrArr[i] < 29 )
 					{
 						if(jumlatStart==-999 && jumlongStart==-999)
@@ -178,24 +178,43 @@
 					}
 
 				}
-	
-				}
-
-			if( StartDateTemp > EndDateTemp){
-				alert("กรุณากรอกเวลาให้ถูกต้อง");
+				
 			}
+
+			if( StartDateTemp > EndDateTemp || isNaN(EndDateTemp) || isNaN(StartDateTemp)){
+				
+				$.uiAlert({
+		            textHead: "กรุณากรอกเวลาให้ถูกต้อง", // header
+		            text: '', // Text
+		            bgcolor: '#DB2828', // background-color
+		            textcolor: '#fff', // color
+		            position: 'top-center',// position . top And bottom ||  left / center / right
+		            icon: 'remove circle', // icon in semantic-UI
+		            time: 3, // time
+		        })
+			}
+
 			if( ($('#selectSatellite')[0].innerHTML == 'ดาวเทียม')){
-				alert("กรุณาเลือกดาวเทียม");
+				
+				$.uiAlert({
+		            textHead: "กรุณาเลือกดาวเทียม", // header
+		            text: '', // Text
+		            bgcolor: '#DB2828', // background-color
+		            textcolor: '#fff', // color
+		            position: 'top-center',// position . top And bottom ||  left / center / right
+		            icon: 'remove circle', // icon in semantic-UI
+		            time: 3, // time
+		        })
 			}
 
 			$("#tableshow tr").remove();
 			for (var i = 0; i < ArrData.length ; i++) { 
-			
+				
 				$('#tableshow').append(
 					"<tr class='item' id="+ArrData[i][5]+">"+
 					"<td>"+ArrData[i][0].getDate()+
-						"/"+(ArrData[i][0].getMonth()+1)+
-						"/"+ArrData[i][0].getFullYear()+"</td>"+
+					"/"+(ArrData[i][0].getMonth()+1)+
+					"/"+ArrData[i][0].getFullYear()+"</td>"+
 					"<td>"+ArrData[i][0].toLocaleTimeString()+"</td>"+
 					"<td>"+ArrData[i][2]+"</td>"+
 					"<td>"+ArrData[i][3]+"</td>"+
@@ -207,15 +226,66 @@
 
 
 		
-			$( document ).ready(function() {
-				$(".testonchange").dropdown({
-					onChange: function (value, text , choice) {
+		$( document ).ready(function() {
+			$(".testonchange").dropdown({
+				onChange: function (value, text , choice) {
 
-						tleLine1=choice[0].dataset.line1;
-						tleLine2=choice[0].dataset.line2;
-						_id=choice[0].dataset._id;
-						
-					}
-				});
+					tleLine1=choice[0].dataset.line1;
+					tleLine2=choice[0].dataset.line2;
+					_id=choice[0].dataset._id;
+					
+				}
 			});
-	
+		});
+		$(document).on('click', '.btTLE', function() {
+
+			$('#id').val($(this).data('id'));
+			$('#name').val($(this).data('name'));
+			$('#line1').val($(this).data('line1'));
+			$('#line2').val($(this).data('line2'));
+
+
+			$('#updateTLEmodal').modal('show');
+		});   
+		$('.actions').on('click', '.updateTLE', function() {
+			if( (($('#line1').val()).length)!=69 || (($('#line2').val()).length)!=69  ){
+				
+				$.uiAlert({
+	              textHead: "กรุณากรอกข้อมูลให้ถูกต้อง", // header
+	              text: '', // Text
+	              bgcolor: '#DB2828', // background-color
+	              textcolor: '#fff', // color
+	              position: 'top-center',// position . top And bottom ||  left / center / right
+	              icon: 'remove circle', // icon in semantic-UI
+	              time: 3, // time
+	          })
+				return false;
+			}
+			$.ajax({
+				type: 'post',
+				url: '/updateTLE',
+				data: {
+					'_token': $('input[name=_token]').val(),
+					'id': $('#id').val(),
+					'name': $('#name').val(),
+					'line1' : $('#line1').val(),
+					'line2': $('#line2').val()
+				},
+				success: function(data) {
+					
+					/*$('#messageEditTLE').modal('show');*/
+					$('#messageEditTLE').modal({
+						onHide: function(){
+							location.reload();
+
+						},
+						onShow: function(){
+							console.log('shown');
+						}
+						
+					}).modal('show');
+					
+				}
+			})
+			
+		});

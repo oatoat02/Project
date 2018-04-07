@@ -70,7 +70,7 @@ class SoundController extends Controller
 		$listTLE = TLE::get();
 		
 		if($request->Durations == 'All'){
-			$listSound = Sound::where('SatelliteName',$request->SatelliteName)->orderBy('Date', 'desc')->get();
+			$listSound = Sound::orderBy('Date', 'desc')->get();
 			$listTLE = TLE::get();
 			
 		}else{

@@ -85,8 +85,6 @@
 		<script type="text/javascript">
 				$('.selectSatellite').dropdown('set selected','{{$data[0]}}');
 				$('.selectDurations').dropdown('set selected','{{$data[1]}}');
-				document.getElementById("StartDate").value = "{{$data[2]}}";
-				document.getElementById("EndDate").value = "{{$data[3]}}";
 				
 			</script>
 		<table class="ui celled table">
@@ -288,11 +286,27 @@
 
 		console.log($('#SatelliteNameAdd').val());
 		if ( $('#SatelliteNameAdd').val() == '-' ) {
-			alert('ชื่อดาวเทียม ไม่ถูกต้อง');
+			$.uiAlert({
+            textHead: "ชื่อดาวเทียม ไม่ถูกต้อง", // header
+            text: '', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
 			return false;
 		}
 		if( document.getElementById("Sound").files.length == 0 ){
-			alert('โปรดเลือกไฟล์เสียง');
+			$.uiAlert({
+            textHead: "โปรดเลือกไฟล์เสียง", // header
+            text: '', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
 			return false;
 		}
 		$('#ShowSound').modal('hide');

@@ -18,46 +18,59 @@
 
 
 			<thead>
-				<th>Date</th>
-				<th>Satellite</th>
-				<th>Start Time<br>(UTC+7:00)</th>
-
-				<th>End<br> time</th>
+				<th><center>Date</center></th>
+				<th><center>Satellite</center></th>
+				<th><center>Start Time</center></th>
+				<th><center>End time </center></th>
+				<th><center>Start<br> Azimuth</center></th>
+				<th><center>Start<br> Elevation</center></th>
 
 
 
 
 
 			</thead>
-			<tr>
+			<tbody>
+				@foreach($listControl as $Data)
+				<tr>
+					<td> 
+						<center>
+							<?php 
+							$dataspilt = explode(",", $Data->timestart);
+							echo $dataspilt[0];
+							?> 
+						</center>
+					</td>
+					<td> 
+						<center>{{$Data->namesatellite}}</center>
+					</td>
+					<td> 
+						<center>
+							<?php 
+							$dataspilt = explode(",", $Data->timestart);
+							echo $dataspilt[1];
+							?> 
+						</center>
+					</td>
+					<td> 
+						<center>
+							<?php 
+							$dataspilt = explode(",", $Data->timestop);
+							echo $dataspilt[1];
+							?> 
+						</center>
+					</td>
+					<td> 
+						<center>{{$Data->control[0]['azimuth']}}</center>
+					</td>
+					<td> 
+						<center>{{$Data->control[0]['elevation']}}</center>
+					</td>
 
-				<td>1/11/2560</td>
-				<td>NOAA-15</td>
-				<td>14:02:10</td>
 
-
-				<td>14:16:30</td>
-
-
-
-			</tr>
-			<tr>
-				<td>31/10/2560</td>
-				<td>NOAA-18</td>
-				<td>15:22:10</td>
-
-
-				<td>15:36:30</td>
-
-
-			</tr>
-			<tr>
-				<td>30/10/2560</td>
-				<td>NOAA-19</td>
-				<td>11:02:12</td>
-
-				<td>11:16:23</td>
-			</tr>
+				</tr>
+				@endforeach
+			</tbody>
 		</table>
 	</div>
 	<br>
@@ -181,6 +194,66 @@
 
 		</div>
 	</div>
+	<div class="ui modal" id="updateTLEmodal">
+		<i class="close icon"></i>
+		<div class="header">
+			อัพเดท TLE   
+			<div class="nameUser"></div>
+		</div>
+		<div class="content">
+			<form>
+				<div class="ui form" >
+
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" id="id" >
+					<div class="inline fields">
+						<div class="two wide field">
+							<label>ชื่อดาวเทียม&nbsp;&nbsp;:</label>
+						</div>
+						<div class="fourteen wide field">
+							<input type="text" id="name">
+						</div>
+					</div>
+					<div class="inline fields">
+						<div class="two wide field">
+							<label>Line1&nbsp;&nbsp;:</label>
+						</div>
+						<div class="fourteen wide field">
+							<input id="line1" type="text" placeholder="1 33591U 09005A   17318.89666673 +.00000092 +00000-0 +75275-4 0  9997" required>
+
+						</div>
+					</div>
+					<div class="inline fields">
+						<div class="two wide field">
+							<label>Line2&nbsp;&nbsp;:</label>
+						</div>
+						<div class="fourteen wide field">
+
+							<input id="line2" type="text" placeholder="2 33591 099.1135 288.0102 0013457 205.4152 154.6359 14.12228622451666" required>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="actions">
+			<div class="ui black deny button" >
+				ยกเลิก
+			</div>
+			<div class="ui positive right labeled icon button updateTLE">
+				บันทึก
+				<i class="checkmark icon"></i>
+			</div>
+		</div>
+	</div>
+	<div class="ui basic modal" id="messageEditTLE" >
+		<i class="close icon"></i>
+		<div class="ui icon header">
+			<i class="checkmark box icon"></i>
+			อัพเดท TLE สำเร็จ
+		</div>
+		
+	</div>
 	<script type="text/javascript" src="/js/date.js"></script>
 	<script type="text/javascript" src="/js/dashboard.js"></script>
 	<script type="text/javascript">
@@ -219,8 +292,6 @@
 				}, {
 					name: 'กุมภาพันธ์',
 					y: 24.03,
-					sliced: true,
-					selected: true
 				}, {
 					name: 'มีนาคม',
 					y: 10.38

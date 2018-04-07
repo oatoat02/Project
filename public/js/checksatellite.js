@@ -366,10 +366,29 @@ var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
 	}
 
 	if( StartDateTemp > EndDateTemp){
-		alert("กรุณากรอกเวลาให้ถูกต้อง");
+		$.uiAlert({
+            textHead: "กรุณากรอกเวลาให้ถูกต้อง", // header
+            text: '', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
+		
 	}
 	if( ($('#selectSatellite')[0].innerHTML == 'ดาวเทียม')){
-		alert("กรุณาเลือกดาวเทียม");
+		$.uiAlert({
+            textHead: "กรุณาเลือกดาวเทียม", // header
+            text: '', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
+
+	
 	}
 
 	$("#tableshow tr").remove();

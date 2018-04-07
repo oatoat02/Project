@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TLE;
+use App\Users;
+use App\control;
+use Auth;
+use DateTime;
 class MainController extends Controller
 {
     public function info()
@@ -12,8 +16,32 @@ class MainController extends Controller
     }
     public function indexdashboard()
     {
-        $listTLE = TLE::get();
-    	return view('Project.dashboard')->with('listTLE',$listTLE);
+        if(Auth::check()){
+            $listTLE = TLE::get();
+            $listControl = control::where('status','N')->orderBy('timestamp', 'asc')->get();
+            $timestart='';
+            $timestop='';
+            for($i = 0 ; $i < sizeof($listControl);$i++ ){
+                if($timestart==''){
+                    $timestart=$listControl[$i]['timestart'];
+                }
+                $timestop=$listControl[$i]['timestop'];
+
+            }
+            $time=[];
+            array_push($time,$timestart);
+            array_push($time,$timestop);
+
+            
+            $yearStart = date('01/01/Y');
+            $yearEnd = date('12/31/Y');
+            $controlComplete = control::where('status','Y')->whereBetween('Date', [$yearStart, $yearEnd])->get();
+            dd($controlComplete);
+            return view('Project.dashboard')->with('listTLE',$listTLE)->with('listControl',$listControl)->with('time',$time);
+        }else{
+            return redirect('/login');
+        }
+
     }
     public function checksatellite()
     {
@@ -25,23 +53,9 @@ class MainController extends Controller
     {
     	return view('Project.index');
     }
-
-   
-    public function settingSystem()
-    {
-        return view('Project.settingSystem');
-    }
-    public function logCollection()
-    {
-        return view('Project.logCollection');
-    }
     public function checktle()
     {
         return view('Project.checktle');
-    }
-    public function tle()
-    {
-        return view('Project.tle');
     }
     public function test()
     {

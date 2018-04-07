@@ -37,10 +37,6 @@
 						<div class="Other"></div>
 					</div>
 
-					
-					<!-- <script type="text/javascript">
-						$('.selectSatellite').dropdown('set selected',{!! json_encode(Session::get('selectSatellite')) !!})
-					</script> -->
 
 				</div>
 				<div class="inline fields " >
@@ -66,7 +62,7 @@
 					<label>เวลาเริ่มต้น</label>
 					<div class="ui calendar" id="Startcalendar" style="width: 80% ;margin-left:5px" >
 						<div class="ui left icon input" style="width: 80%">
-							<input type="text" name="StartDate" id="StartDate" value="<?php echo date('d/m/Y'); ?>"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+							<input type="text" name="StartDate" id="StartDate" value="<?php echo date('d/m/Y'); ?>">
 							<i class="calendar icon"></i>
 						</div>
 					</div>
@@ -75,7 +71,7 @@
 					<label>เวลาสิ้นสุด</label> 
 					<div class="ui calendar" id="Endcalendar" style="width: 80% ;margin-left:5px">
 						<div class="ui left icon input"  style="width: 80%">
-							<input type="text" name="EndDate" id="EndDate" value="<?php echo date('d/m/Y'); ?>" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+							<input type="text" name="EndDate" id="EndDate" value="<?php echo date('d/m/Y'); ?>">
 							<i class="calendar icon"></i>
 						</div>
 					</div>
@@ -89,8 +85,6 @@
 			<script type="text/javascript">
 				$('.selectSatellite').dropdown('set selected','{{$data[0]}}');
 				$('.selectDurations').dropdown('set selected','{{$data[1]}}');
-				document.getElementById("StartDate").value = "{{$data[2]}}";
-				document.getElementById("EndDate").value = "{{$data[3]}}";
 				
 			</script>
 	<br>
@@ -258,11 +252,28 @@
 		
 		console.log($('#SatelliteNameAdd').val());
 		if ( $('#SatelliteNameAdd').val() == '-' ) {
-			alert('ชื่อดาวเทียม ไม่ถูกต้อง');
+			
+			$.uiAlert({
+            textHead: "ชื่อดาวเทียม ไม่ถูกต้อง", // header
+            text: '', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
 			return false;
 		}
 		if( document.getElementById("photo").files.length == 0 ){
-			alert('โปรดเลือกรูปภาพ');
+			$.uiAlert({
+            textHead: "โปรดเลือกรูปภาพ", // header
+            text: '', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
 			return false;
 		}
 	});

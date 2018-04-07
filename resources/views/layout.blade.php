@@ -26,8 +26,11 @@
     <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="/js/date.js"></script>
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
-
     <script src="https://cdn.rawgit.com/hayeswise/Leaflet.PointInPolygon/v1.0.0/wise-leaflet-pip.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/Aitthi-semanticUiAlert/Semantic-UI-Alert.css">
+    <script type="text/javascript" src="/Aitthi-semanticUiAlert/Semantic-UI-Alert.js"></script>
+
 
     <title>Project</title>
   </head>
@@ -73,12 +76,12 @@
                 @if(Auth::check())
                 
                 <a class="item" href="{{ route('Project.logCollection') }}"><i class="list layout icon"></i>ประวัติการรับสัญาณ</a>
-             
+                
                 @endif
               </div>
             </div>
             @if(Auth::check())
-             
+            
             <div class="ui pointing dropdown link item " style="z-index: 600 !important;">
               <i class="large settings icon"></i>จัดการระบบ<i class="dropdown icon" ></i>
               <div class="menu">
@@ -96,7 +99,7 @@
 
               </div>
             </div>
-          
+            
             @endif
 
 
@@ -157,7 +160,7 @@
               <center><img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo2"></center>
             </div>
           </a>
-         
+          
           <div class="ui item ">
             <div class="text " id="hideShowSatellite"><i class="large send icon"></i>ดาวเทียม</div>
             <div class="menu">
@@ -188,7 +191,7 @@
                 <a class="item" href="{{ route('Project.logCollection') }}">
                   <i class="list layout icon"></i>ประวัติการรับสัญาณ
                 </a>
-               
+                
                 @endif
               </div>
             </div>
@@ -310,7 +313,14 @@
       </center>
     </div>
   </div>
+  <div class="ui basic modal" id="editProfilefinish" >
+    <i class="close icon"></i>
+    <div class="ui icon header">
+      <i class="checkmark box icon"></i>
+      แก้ไขข้อมูลสำเร็จ
+    </div>
 
+  </div>
   <div class="ui modal" id="editProfilelogin">
     <i class="close icon"></i>
     <div class="header">
@@ -337,7 +347,7 @@
             <input type="email"  id="emaillogin" required>
           </div>
         </div>
-         <div class="inline fields container">
+        <div class="inline fields container">
           <div class="two wide field">
             <label>เบอร์โทรศัพท์&nbsp;&nbsp;:</label>
           </div>
@@ -402,29 +412,73 @@
     });
     $('.actions').on('click', '#editsubmitlogin', function() {
       if ( $('#emaillogin').val() == '' ) {
-        alert('email ไม่ถูกต้อง');
-      }else{
-        $.ajax({
-          type: 'post',
-          url: '/submitEditProfile',
-          data: {
-            '_token': $('input[name=_token]').val(),
-            'id': $('#iduserlogin').val(),
-            'name' : $('#nameuserlogin').val(),
-            'PhoneNumber' : $('#phonenumber').val(),
-            'email' : $('#emaillogin').val()
-          },
-          success: function(data) {
-            alert('ยืนยันสำเร็จ');
+
+        $.uiAlert({
+            textHead: "email ไม่ถูกต้อง", // header
+            text: ' กรุณาระบุ email ให้ถูกต้อง', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
+        return false;
+      }
+      if( $('#nameuserlogin').val() == '' ){
+        $.uiAlert({
+            textHead: "ชื่อ-นามสกุล ไม่ถูกต้อง", // header
+            text: ' กรุณาระบุ ชื่อ-นามสกุล', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
+        return false;
+
+      } 
+      if( $('#phonenumber').val() == '' ){
+        $.uiAlert({
+              textHead: "เบอร์โทรศัพท์ไม่ถูกต้อง", // header
+              text: ' กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง', // Text
+              bgcolor: '#DB2828', // background-color
+              textcolor: '#fff', // color
+              position: 'top-center',// position . top And bottom ||  left / center / right
+              icon: 'remove circle', // icon in semantic-UI
+              time: 3, // time
+            })
+        return false;
+
+      }
+     $.ajax({
+      type: 'post',
+      url: '/submitEditProfile',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id': $('#iduserlogin').val(),
+        'name' : $('#nameuserlogin').val(),
+        'PhoneNumber' : $('#phonenumber').val(),
+        'email' : $('#emaillogin').val()
+      },
+      success: function(data) {
+        $('#editProfilefinish').modal({
+          onHide: function(){
             location.reload();
+
           },
-          error: function(){
-            alert('มีemailนี้ในระบบ แล้ว กรุณาใช้email อื่น');
+          onShow: function(){
+            console.log('shown');
           }
 
-        })
-      }     
-    });
+        }).modal('show');
+      },
+      error: function(){
+        alert('มีemailนี้ในระบบ แล้ว กรุณาใช้email อื่น');
+      }
+
+    })
+
+   });
 
     $(document).on('click', '#editpassword', function() {
       $('#editmodal').modal('show');
@@ -432,7 +486,17 @@
 
     $('.actions').on('click', '#confirmpassword', function() {
       if($('#passwordedit').val()!=$('#passwordedit2').val()){
-        alert('รหัสผ่านไม่ถูกต้อง');
+  
+         $.uiAlert({
+            textHead: "รหัสผ่านไม่ถูกต้อง", // header
+            text: ' กรุณาระบุรหัสผ่านให้เหมือนกันทั้ง2ช่อง', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
+        return false;
       }else{
         $.ajax({
           type: 'post',
@@ -449,7 +513,17 @@
             $('#message-pass-modal').modal('show');
           },
           error: function(){
-            alert('รหัสผ่านเก่าไม่ถูกต้อง');
+           
+            $.uiAlert({
+            textHead: "รหัสผ่านเก่าไม่ถูกต้อง", // header
+            text: ' กรุณาระบุรหัสผ่านเก่าให้ถูกต้อง', // Text
+            bgcolor: '#DB2828', // background-color
+            textcolor: '#fff', // color
+            position: 'top-center',// position . top And bottom ||  left / center / right
+            icon: 'remove circle', // icon in semantic-UI
+            time: 3, // time
+          })
+          $('#editmodal').modal('show');
           }
         })
       }

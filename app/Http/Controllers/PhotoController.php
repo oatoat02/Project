@@ -59,7 +59,7 @@ class PhotoController extends Controller
 		$listTLE = TLE::get();
 		
 		if($request->Durations == 'All'){
-			$listPhoto = Photo::where('SatelliteName',$request->SatelliteName)->orderBy('Date', 'desc')->get();
+			$listPhoto = Photo::orderBy('Date', 'desc')->get();
 			$listTLE = TLE::get();
 			
 		}else{

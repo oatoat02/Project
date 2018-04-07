@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TLE;
+use Auth;
 class TLEController extends Controller
 {
 	public function showtle()
 	{
-		$listTLE = TLE::get();
-		return view('Project.tle')->with('listTLE',$listTLE);
+		if(Auth::check()){
+
+			$listTLE = TLE::get();
+			return view('Project.tle')->with('listTLE',$listTLE);
+		}else{
+			return redirect('/login');
+		}
 	}
 	public function addTLE(Request $request)
 	{
