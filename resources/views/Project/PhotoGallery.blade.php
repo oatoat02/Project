@@ -126,7 +126,7 @@
 
 
   	<center>
-	<img class="image" id='fullImage' style="width: 70% ;height: 70%">
+	<img class="image" id='fullImage' style="width: 70% ;height: auto">
 	</center>
 
 
@@ -224,7 +224,7 @@
 				$('#DateAcquired').calendar({
 					type: 'date',
 					monthFirst: false,
-					formatter:formatter: {
+					formatter: {
 						date: function (date, settings) {
 							if(!date) return '';
 							var day = ("0" + date.getDate()).slice(-2);

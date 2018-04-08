@@ -38,16 +38,19 @@
 	
 }
 #mapid { 
-	height: 90vh;
+	height: 80vh;
 }
 #mapposition { 
-	height: 90vh;
+	height: 80vh;
 }
 
-#mapindex { 
-	height: 500px;
+#mapindex1 { 
+	height: 80vh;
 	/*max-width: 90% ;*/
-
+}
+#mapindex2 { 
+	height: 80vh;
+	/*max-width: 90% ;*/
 }
 .ui.grid{
 	margin: 0rem !important;

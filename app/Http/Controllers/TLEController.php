@@ -43,4 +43,13 @@ class TLEController extends Controller
 		
 		 return response()->json($request);
 	}
+	public function deleteTle(Request $request)
+    {
+        
+        $data = Tle::find($request->id);
+        // dd($data);
+        $data->delete();
+       
+        return redirect()->back();
+    }
 }

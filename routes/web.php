@@ -67,3 +67,5 @@ Route::post('/showtimecontrol',['as'=>'Project.showtimecontrol','uses'=>'Antenna
 Route::post('/settimecontrol',['as'=>'Project.settimecontrol','uses'=>'AntennaController@settimecontrol']);
 Route::post('/deleteTimeControl',['as'=>'Project.deleteTimeControl','uses'=>'AntennaController@deleteTimeControl']);
 Route::post('/schedulecontrol',['as'=>'Project.schedulecontrol','uses'=>'AntennaController@schedulecontrol']);
+
+Route::post('/deleteTle',['as'=>'Project.deleteTle','uses'=>'TLEController@deleteTle']);

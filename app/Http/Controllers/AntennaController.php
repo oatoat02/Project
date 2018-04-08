@@ -98,7 +98,7 @@ class AntennaController extends Controller
     public function logCollection()
     {
         if(Auth::check()){
-            $listControl = control::where('status','Y')->orderBy('timestamp', 'asc')->get();
+            $listControl = control::orderBy('timestamp', 'asc')->get();
             // dd($listControl);
             return view('Project.logCollection')->with('listControl',$listControl);
             
@@ -118,7 +118,7 @@ class AntennaController extends Controller
         $StartDate = date_create_from_format('d/m/Y', ($request->StartDate));   
         $EndDate = date_create_from_format('d/m/Y', ($request->EndDate));   
 
-        $listControl = control::where('status','Y')->whereBetween('Date', [$StartDate, $EndDate])->get();
+        $listControl = control::whereBetween('Date', [$StartDate, $EndDate])->get();
     // dd($StartDate);
         return view('Project.logCollection')->with('listControl',$listControl);
        

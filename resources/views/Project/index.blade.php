@@ -1,14 +1,57 @@
 @extends('layout')
 @section('content')
+<link rel="stylesheet" type="text/css" href="/css/slider.css"/>
+<link rel="stylesheet" type="text/css" href="/swiper-master/dist/css/swiper.min.css"/>
 
+<script type="text/javascript" src="/swiper-master/dist/js/swiper.min.js"></script>
 <div class="sixteen wide column box1" style="margin: 5px;">
+
   <center>
    <h1> <i class="send icon" style="width: auto;">  </i>
    Satellite</h1>
+ <br>
+<div class="" id="mapindex1"></div>
+   <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><div class="" id="mapindex1"></div>
+    </div>
+      <div class="swiper-slide"><div class="" id="mapindex1">
 
-   <div class="" id="mapindex">
+   </div></div>
+      <div class="swiper-slide">Slide 3</div>
+      <div class="swiper-slide">Slide 4</div>
+      <div class="swiper-slide">Slide 5</div>
+      <div class="swiper-slide">Slide 6</div>
+      <div class="swiper-slide">Slide 7</div>
+      <div class="swiper-slide">Slide 8</div>
+      <div class="swiper-slide">Slide 9</div>
+      <div class="swiper-slide">Slide 10</div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+ <script>
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+<!-- 
+   <div class="" id="mapindex1">
 
-   </div>
+   </div> -->
  </center>
 
  <center>
@@ -103,30 +146,14 @@
 
 
 <script type="text/javascript">
-  /*draw map*/
-  var mymap = L.map('mapindex',{
-    worldCopyJump: true,
-    inertia:false,
-  }).setView([13.11, 100.91972], 2);
-  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-    attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
-    minZoom: 2,
-    maxZoom: 5, 
-    worldCopyJump:true,
-    /*zoomSnap: 0.25,*/
-    id: 'mapbox.streets',
-    subdomains:['mt0','mt1','mt2','mt3'],
-    accessToken: 'your.mapbox.access.token'
-  }).addTo(mymap);
-var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
-  mymap.setMaxBounds(WorldWarp);
+
 
   /*----------------------------------*/
 
 // Sample TLE 
-var nameSatellite ="NOAA-15";
-var tleLine1 = '1 25338U 98030A   17319.72300734 +.00000042 +00000-0 +36583-4 0  9993',
-tleLine2 = '2 25338 098.7792 330.9179 0011414 124.0275 236.1990 14.25825800014346';
+var nameSatellite ='<?php echo $tleNOAA15->name ?>';
+var tleLine1 = '<?php echo $tleNOAA15->line1 ?>',
+tleLine2 = '<?php echo $tleNOAA15->line2 ?>';
 
 // Initialize a satellite record 
 var longitudeStrArr = new Array(),
@@ -136,6 +163,8 @@ azimuthArr  = new Array(),
 elevationArr  = new Array(),
 latlngs = new Array();
 timeArr = new Array();
+startlat=-99,
+startlngs=-99;
 var SatelliteIcon = L.layerGroup();
 var satrec = satellite.twoline2satrec(tleLine1, tleLine2);
 
@@ -190,27 +219,15 @@ for ( var i = -60*10 ;i < 2*60*60; i+=5){
   latitudeStrArr[i] =  latitudeStr;
   azimuthArr[i]=azimuth;
   elevationArr[i]=elevation;
+  if(startlat==-99 && startlngs == -99)
+  {
+    startlat=latitudeStr;
+    startlngs=longitudeStr;
+  }
 }
 
-
-
-
-
-
-L.control.scale().addTo(mymap);
-L.control.mousePosition().addTo(mymap);
-
-
-
-
-
-
-
 for(var i = -60*10 ; i < 2*60*60; i+=5){
-  arrFree  = new Array(2);
-
-  
-  
+  arrFree  = new Array(2);  
   if(longitudeStrArr[i-5]>0 && longitudeStrArr[i]>0){
 
     arrFree[0]=([ latitudeStrArr[i-5],longitudeStrArr[i-5] ]);
@@ -224,18 +241,32 @@ for(var i = -60*10 ; i < 2*60*60; i+=5){
   }
   
   
-  
-  
-  
-  
 }
+  /*draw map*/
+  var mymap1 = L.map('mapindex1',{
+    worldCopyJump: true,
+    inertia:false,
+  }).setView([startlat, startlngs], 2);
+  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
+    minZoom: 2,
+    maxZoom: 5, 
+    /*zoomSnap: 0.25,*/
+    id: 'mapbox.streets',
+    // subdomains:['mt0','mt1','mt2','mt3'],
+    accessToken: 'your.mapbox.access.token'
+  }).addTo(mymap1);
+var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
+ mymap1.setMaxBounds(WorldWarp);
+L.control.scale().addTo(mymap1);
+L.control.mousePosition().addTo(mymap1);
 
 L.polyline(latlngsArr, {
   color: 'red',
                 weight: 2,//ขนาดของเส้น
                 opacity: .50, //ความโปร่งแสง
                 
-              }).addTo(mymap);
+              }).addTo(mymap1);
 
 
 
@@ -243,11 +274,7 @@ L.polyline(latlngsArr, {
 
 /*update updateSatellite*/
 function updateSatellite(){
-  
-
   var date = new Date();
-  
-
   var positionAndVelocity = satellite.propagate(satrec, date);
 
 
@@ -308,43 +335,27 @@ function updateSatellite(){
     this._div.innerHTML = '<h4>Satellite : '+nameSatellite+'</h4>LAT : '+latitudeStr.toFixed( 2 ) +'<br>LNG : '+longitudeStr.toFixed(2)+'';
   };
 
-  info.addTo(mymap);
+  info.addTo(mymap1);
 }
   // control that shows state info on hover
   var info = L.control();
-
-  info.onAdd = function (mymap) {
+  info.onAdd = function (mymap1) {
     this._div = L.DomUtil.create('div', 'info' );
     this.update();
     return this._div;
   };
-
-  
-
-
-  SatelliteIcon.addTo(mymap);
+  SatelliteIcon.addTo(mymap1);
   /*---------------*/
-
   /*update checktime*/
-
-
   setInterval(function () {
     for(i in SatelliteIcon._layers) {
-      mymap.removeLayer(SatelliteIcon._layers[i]);
-    }
-    
-    updateSatellite();
-    
+      mymap1.removeLayer(SatelliteIcon._layers[i]);
+    } 
+    updateSatellite(); 
   }, 1000);
- /* $(function(){
-
-
-    setInterval(updateSatellite, 1000);
-  });*/
-
-
-
 </script>
+
+
 
 
 
