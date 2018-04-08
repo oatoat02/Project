@@ -34,10 +34,17 @@ class MainController extends Controller
 
             
             $yearStart = date('01/01/Y');
-            $yearEnd = date('12/31/Y');
-            $controlComplete = control::where('status','Y')->whereBetween('Date', [$yearStart, $yearEnd])->get();
+            $yearEnd = date('31/12/Y');
+            $StartDate = date_create_from_format('d/m/Y', ($yearStart));   
+            $StartDateFomat=($StartDate->format('m/d/Y'));
+            $EndDate = date_create_from_format('d/m/Y', ($yearEnd));   
+            $EndDateFomat=($EndDate->format('m/d/Y'));
+            // dd($EndDate);
+            // dd($EndDate);
+
+            $controlComplete = control::whereBetween('Date', [$StartDateFomat, $EndDateFomat])->get();
             dd($controlComplete);
-            return view('Project.dashboard')->with('listTLE',$listTLE)->with('listControl',$listControl)->with('time',$time);
+            // return view('Project.dashboard')->with('listTLE',$listTLE)->with('listControl',$listControl)->with('time',$time);
         }else{
             return redirect('/login');
         }

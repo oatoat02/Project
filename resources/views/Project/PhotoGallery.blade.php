@@ -173,7 +173,7 @@
 					<label>Date&nbsp;Acquired&nbsp;:</label>
 					<div class="ui calendar" name="DateAcquired" id="DateAcquired" style="width: 100%">
 						<div class="ui left icon input">
-							<input type="text" name="DateAcquired" value="<?php echo date('d-m-Y'); ?>">
+							<input type="text" name="DateAcquired" value="<?php echo date('d/m/Y'); ?>">
 							<i class="calendar icon"></i>
 						</div>
 					</div>
@@ -218,11 +218,14 @@
 
 
 	$(document).on('click', '.AddPhoto', function() {
+
 		$('#AddPhoto').modal({
 			onShow: function(){
 				$('#DateAcquired').calendar({
-					type: 'date',formatter: {
-						date: function(date, settings){
+					type: 'date',
+					monthFirst: false,
+					formatter:formatter: {
+						date: function (date, settings) {
 							if(!date) return '';
 							var day = ("0" + date.getDate()).slice(-2);
 							var month = ("0" + (date.getMonth() + 1)).slice(-2);

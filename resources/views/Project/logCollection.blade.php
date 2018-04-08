@@ -61,8 +61,10 @@
 					<td>
 						<center>
 							<?php 
-							$dataspilt = explode(",", $Data->timestart);
-							echo $dataspilt[0];
+							// $dataspilt = explode(",", $Data->Date);
+							$dataspilt = explode(" ",$Data->Date['date']);
+							$dataspilt2 =explode("-",$dataspilt[0]);;
+							echo $dataspilt2[2].'/'.$dataspilt2[1].'/'.$dataspilt2[0];
 							?> 
 						</center>
 					</td>

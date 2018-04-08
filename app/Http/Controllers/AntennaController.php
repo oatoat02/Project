@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\TLE;
 use Auth;
 use App\control;
+use DateTime;
 class AntennaController extends Controller
 {
     public function control()
@@ -56,21 +57,12 @@ class AntennaController extends Controller
     	$control= [];
     	$timestart="";
     	$timestop="";
-        $dd="";
-        $mm="";
-        $date="";
+ 
     	for($i = 0 ; $i < sizeof($dataspilt);$i+=4 ){
             if($timestart==""){
                 $timestart=$dataspilt[$i].' ,'.$dataspilt[$i+1];
-                $textfree= explode("/", $dataspilt[$i]);
-                // dd(($textfree[2]));
-                if(strlen($textfree[1]) == 1){
-                    $dd='0'.$textfree[1];
-                }
-                if(strlen($textfree[0]) == 1){
-                    $mm='0'.$textfree[0];
-                }
-                $date=$mm.'/'.$dd.'/'.$textfree[2];
+                
+            
                 
             }
     		$arrayfree= [];
@@ -86,8 +78,8 @@ class AntennaController extends Controller
 		$store->status = $request->status;
 		$store->timestart =	$timestart;
 		$store->timestop =	$timestop;
-        // dd($date);
-        $store->Date = $date;
+        $Date =  DateTime::createFromFormat('m/d/Y , H:i:s A', $timestart);//ตามformat
+        $store->Date = $Date;
         $store->timestamp =  $request->timestamp;
 		$store->control = $control;
 		$store->save();
@@ -106,8 +98,8 @@ class AntennaController extends Controller
     public function logCollection()
     {
         if(Auth::check()){
-            $listControl = control::orderBy('timestamp', 'asc')->get();
-
+            $listControl = control::where('status','Y')->orderBy('timestamp', 'asc')->get();
+            // dd($listControl);
             return view('Project.logCollection')->with('listControl',$listControl);
             
         }else{
@@ -124,11 +116,10 @@ class AntennaController extends Controller
     public function findControl(Request $request)
     {
         $StartDate = date_create_from_format('d/m/Y', ($request->StartDate));   
-        $StartDateFomat=($StartDate->format('m/d/Y'));
         $EndDate = date_create_from_format('d/m/Y', ($request->EndDate));   
-        $EndDateFomat=($EndDate->format('m/d/Y'));
 
-        $listControl = control::whereBetween('Date', [$StartDateFomat, $EndDateFomat])->get();
+        $listControl = control::where('status','Y')->whereBetween('Date', [$StartDate, $EndDate])->get();
+    // dd($StartDate);
         return view('Project.logCollection')->with('listControl',$listControl);
        
     }

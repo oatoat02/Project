@@ -12,27 +12,27 @@ class PhotoController extends Controller
 {
 	public function AddPhoto(Request $request){ 
 		if($request->hasFile('photo')){
-			
+			// dd($request);
 			$store = new Photo;
 			$store->SatelliteName = $request->SatelliteName;
 			$store->Enhancement =	$request->Enhancement;
 			$store->TimeAcquired = $request->TimeAcquired;
-			$store->DateAcquired = $request->DateAcquired;
-
-			$s=($request->DateAcquired).(':').$request->TimeAcquired.(':00');
-			$date = date_create_from_format('d/m/Y:H:i:s', $s);	
-
-			$store->Date = $date->format('m/d/Y');
+			$store->DateAcquired =  $request->DateAcquired; 
+			$s=($request->DateAcquired).(' ').$request->TimeAcquired.(':00');
+			$date = date_create_from_format('d/m/Y H:i:s', $s);	 //31-12-2018 
+			// dd($request->DateAcquired);
+			// $Date =  DateTime::createFromFormat('m/d/Y , H:i:s A', $timestart);//ตามformat
+			$store->Date = $date;
 
 			/*------------------save Photo to server---------------------*/
 			$photo = $request->file('photo');
 			$fileName = $request->SatelliteName.'_'.uniqid().'.'.$request->file('photo')->getClientOriginalExtension();
-		
+
 			$path =  'photo/'.$request->SatelliteName;
 			$photo->move($path, $fileName);
 			/*-----------------------------------------------------------*/
 			$store->path=$path.'/'.$fileName;
-		/*	dd($store);*/
+			/*	dd($store);*/
 			$store->save();
 			
 		}
@@ -45,6 +45,7 @@ class PhotoController extends Controller
 	{
 		$listPhoto = Photo::orderBy('Date', 'desc')->get();
 		$listTLE = TLE::get();	
+		// dd($listPhoto);
 		$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
 		
 		return view('Project.PhotoGallery')->with('listPhoto',$listPhoto)->with('listTLE',$listTLE)->with('data',$data);
@@ -52,30 +53,46 @@ class PhotoController extends Controller
 	public function findPhoto(Request $request)
 	{
 		/*Session::put('selectSatellite',$request->input('SatelliteName'));*/
-		$StartDate = date_create_from_format('d/m/Y', ($request->StartDate));	
-		$StartDateFomat=($StartDate->format('m/d/Y'));
-		$EndDate = date_create_from_format('d/m/Y', ($request->EndDate));	
-		$EndDateFomat=($EndDate->format('m/d/Y'));
+
+
 		$listTLE = TLE::get();
 		
-		if($request->Durations == 'All'){
-			$listPhoto = Photo::orderBy('Date', 'desc')->get();
-			$listTLE = TLE::get();
-			
-		}else{
-			if($request->SatelliteName != 'All' ){
-				$listPhoto = Photo::where('SatelliteName',$request->SatelliteName)
-				->whereBetween('Date', [$StartDateFomat, $EndDateFomat])->get();
-			}else{
+		// $listPhoto = Photo::whereBetween('Date',[$StartDate,$EndDate])->get();
+		// dd($listPhoto);
+		$StartDate = date_create_from_format('d/m/Y H:i:s', ($request->StartDate).' 00:00:00');
+        $EndDate = date_create_from_format('d/m/Y H:i:s', ($request->EndDate).' 23:59:00');   
+		if($request->SatelliteName == 'All')
+		{
+			if($request->Durations == 'All')
+			{
+				$listPhoto = Photo::orderBy('Date', 'desc')->orderBy('Date', 'desc')->get();
 
-				$listPhoto = Photo::whereBetween('Date', [$StartDateFomat, $EndDateFomat])->get();
+			}else
+			{
+				$listPhoto = Photo::whereBetween('Date',[$StartDate, $EndDate])->get();
+
+
+			}
+		}else if($request->SatelliteName != 'All')
+		{
+			if($request->Durations == 'All')
+			{
+				$listPhoto = Photo::where('SatelliteName',$request->SatelliteName)->orderBy('Date', 'desc')->get();
+				
+
+			}else if($request->Durations != 'All')
+			{
+				$listPhoto = Photo::where('SatelliteName',$request->SatelliteName)->whereBetween('Date', [$StartDate, $EndDate])->orderBy('Date', 'desc')->get();
+
 			}
 		}
+		
+
+
 		$data = [$request->SatelliteName ,$request->Durations ,$request->StartDate ,$request->EndDate];
 		
 		
 		
-		return view('Project.PhotoGallery')->with('listPhoto',$listPhoto)->with('listTLE',$listTLE)
-				->with('data',$data);
+		return view('Project.PhotoGallery')->with('listPhoto',$listPhoto)->with('listTLE',$listTLE)->with('data',$data);
 	}
 }

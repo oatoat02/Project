@@ -178,6 +178,17 @@
 					}
 
 				}
+				if(ArrData.length==0){
+					$.uiAlert({
+		            textHead: "ไม่มีเวลาที่สามารถรับสัญญาณได้", // header
+		            text: '', // Text
+		            bgcolor: '#DB2828', // background-color
+		            textcolor: '#fff', // color
+		            position: 'top-center',// position . top And bottom ||  left / center / right
+		            icon: 'remove circle', // icon in semantic-UI
+		            time: 3, // time
+		        })
+				}
 				
 			}
 

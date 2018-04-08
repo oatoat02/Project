@@ -61,7 +61,7 @@
 					<label>เวลาเริ่มต้น</label>
 					<div class="ui calendar" id="Startcalendar" style="width: 80% ;margin-left:5px" >
 						<div class="ui left icon input" style="width: 80%">
-							<input type="text" name="StartDate" id="StartDate" value="<?php echo date('d/m/Y'); ?>"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+							<input type="text" name="StartDate" id="StartDate" value="<?php echo date('d/m/Y'); ?>">
 							<i class="calendar icon"></i>
 						</div>
 					</div>
@@ -70,7 +70,7 @@
 					<label>เวลาสิ้นสุด</label> 
 					<div class="ui calendar" id="Endcalendar" style="width: 80% ;margin-left:5px">
 						<div class="ui left icon input"  style="width: 80%">
-							<input type="text" name="EndDate" id="EndDate" value="<?php echo date('d/m/Y'); ?>" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+							<input type="text" name="EndDate" id="EndDate" value="<?php echo date('d/m/Y'); ?>">
 							<i class="calendar icon"></i>
 						</div>
 					</div>
@@ -78,13 +78,14 @@
 				<div class="inline fields">
 					<button class="ui black button" style="width:100%">ค้นหา</button>
 				</div>
-				
+
 			</div>
 			
 		</form>
 		<script type="text/javascript">
 				$('.selectSatellite').dropdown('set selected','{{$data[0]}}');
 				$('.selectDurations').dropdown('set selected','{{$data[1]}}');
+
 				
 			</script>
 		<table class="ui celled table">
@@ -254,8 +255,10 @@
 		$('#AddSound').modal({
 			onShow: function(){
 				$('#DateAcquired').calendar({
-					type: 'date',formatter: {
-						date: function(date, settings){
+					type: 'date',
+					monthFirst: false,
+					formatter: {
+						date: function (date, settings) {
 							if(!date) return '';
 							var day = ("0" + date.getDate()).slice(-2);
 							var month = ("0" + (date.getMonth() + 1)).slice(-2);
@@ -298,6 +301,7 @@
 			return false;
 		}
 		if( document.getElementById("Sound").files.length == 0 ){
+			
 			$.uiAlert({
             textHead: "โปรดเลือกไฟล์เสียง", // header
             text: '', // Text

@@ -50,7 +50,7 @@ class UserController extends Controller
         if(Auth::attempt($data)) {
             return redirect('/dashboard'); 
         }else{
-            return redirect('/login')->with('status', '**กรุณาตรวจสอบข้อมูลให้ถูกต้อง/รอผู้ดูแลระบบอนุมติ**');
+            return redirect('/login')->with('status', '**กรุณาตรวจสอบข้อมูลให้ถูกต้อง**');
         }           	
     }
     public function logout()
