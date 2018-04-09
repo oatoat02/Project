@@ -45,13 +45,18 @@
 }
 
 #mapindex1 { 
-	height: 80vh;
+	height: 100%;
 	/*max-width: 90% ;*/
 }
 #mapindex2 { 
-	height: 80vh;
+	height: 100%;
 	/*max-width: 90% ;*/
 }
+#mapindex3 { 
+	height: 100%;
+	/*max-width: 90% ;*/
+}
+
 .ui.grid{
 	margin: 0rem !important;
 }
@@ -68,6 +73,12 @@
 /*.ui.dropdown {
 	z-index: 600 !important;
 }*/
+.ui.grid>.column:not(.row), .ui.grid>.row>.column {
+    
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+    
+}"
 .photologo2{
 	width: 150px;
 	height: 75px;

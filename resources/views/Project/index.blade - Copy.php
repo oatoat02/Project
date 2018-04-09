@@ -1,64 +1,68 @@
 @extends('layout')
 @section('content')
-<!-- <link rel="stylesheet" type="text/css" href="/css/slider.css"/>
+<link rel="stylesheet" type="text/css" href="/css/slider.css"/>
 <link rel="stylesheet" type="text/css" href="/swiper-master/dist/css/swiper.min.css"/>
 
-<script type="text/javascript" src="/swiper-master/dist/js/swiper.min.js"></script> -->
-<link rel="stylesheet" type="text/css" href="/css/csslider.default.css"/>
-<div class="sixteen wide computer sixteen wide tablet sixteen wide mobile column " box1" style="" >
-<div class="ui segment" style="margin: 20px !important">
+<script type="text/javascript" src="/swiper-master/dist/js/swiper.min.js"></script>
+<div class="sixteen wide column box1" style="margin: 5px;">
+
   <center>
-   <h1> 
-    <i class="send icon">  </i>
-    Satellite
-  </h1>
-</center>
+   <h1> <i class="send icon" style="width: auto;">  </i>
+   Satellite</h1>
+   </center>
+ <br>
+ <!-- <div class="" id="mapindex1"></div>  -->
+<div class="ui segment">
+  <center>
+<div class="csslider">
+        <input type="radio" name="slides" id="slides_1" value="test1" checked />
+        <input type="radio" name="slides" id="slides_2" value="test2"/>
+        <input type="radio" name="slides" id="slides_3" value="test3"/>
+        <ul>
+            <li><div class="" id="mapindex1"></div> </li>
+            <li><div class="" id="mapindex2"></div> </li>
+            <li><div class="" id="mapindex3"></li>
+
+        </ul>
+        <div class="arrows">
+            <label for="slides_1"></label>
+            <label for="slides_2"></label>
+            <label for="slides_3"></label>
+
+        </div>
+        <div class="navigation">
+            <div>
+                <label for="slides_1"></label>
+                <label for="slides_2"></label>
+                <label for="slides_3"></label>
+
+            </div>
+        </div>
+    </div>
+    </center>
+</div>
+<!-- 
+   <div class="" id="mapindex1">
+
+   </div> -->
+ 
+
 <br>
-<center>
- <div class="csslider">
-  <input type="radio" name="slides" id="slides_1" checked />
-  <input type="radio" name="slides" id="slides_2" />
-  <input type="radio" name="slides" id="slides_3" />
+<div class="ui form box3">
+  <div class="fields">
 
-  <ul>
-    <li><div class="" id="mapindex1"></div></li>
-    <li><div class="" id="mapindex2"></div></li>
-    <li><div class="" id="mapindex3"></div></li>
-
-  </ul>
-  <div class="arrows">
-    <label for="slides_1"></label>
-    <label for="slides_2"></label>
-    <label for="slides_3"></label>
-
-  </div>
-  <div class="navigation">
-    <div>
-      <label for="slides_1"></label>
-      <label for="slides_2"></label>
-      <label for="slides_3"></label>
-
+    <div class="eight wide field">
+      <h3><i class="big file  icon"></i>ตรวจสอบตำแหน่งของดาวเทียม</h3>
+      <b>ตรวจสอบตำแหน่งของดาวเทียม</b>
+      <p>ตรวจสอบตำแหน่งของดาวเทียม จะระบบุตำแหน่งของดาวเทียมบยโลกโดยจะแสดงตำแหน่งของดาวเทียมและดสเนขแองดาวเทียมที่จะเคลื่อนที่ไป</p>
+    </div> 
+    <div class="eight wide field">
+      <h3><i class="big calendar icon"></i>ตรวจสอบตารางเวลาการรับสัญญาณ</h3>
+      <b>ตรวจสอบตารางเวลาการรับสัญญาณ</b>
+      <p>ตรวจสอบตารางเวลาการรับสัญญาณ ของดาวเทียมแต่ละดวงโดยแสดงตามวันที่ต้องการค้นหา  ทั้งวันที่ในอดีตและในปัจจุบัน</p>
     </div>
   </div>
 </div>
-</center>
-</div>
-
-   <div class="ui form segment box3" style="margin: 20px!important;">
-    <div class="fields">
-
-      <div class="eight wide field">
-        <h3><i class="big file  icon"></i>ตรวจสอบตำแหน่งของดาวเทียม</h3>
-        <label>ตรวจสอบตำแหน่งของดาวเทียม</label>
-        <p>ตรวจสอบตำแหน่งของดาวเทียม จะระบบุตำแหน่งของดาวเทียมบนโลกโดยจะแสดงตำแหน่งของดาวเทียมและแสดงเส้นทางของดาวเทียมที่จะเคลื่อนที่ไป</p>
-      </div> 
-      <div class="eight wide field">
-        <h3><i class="big calendar icon"></i>ตรวจสอบตารางเวลาการรับสัญญาณ</h3>
-        <b>ตรวจสอบตารางเวลาการรับสัญญาณ</b>
-        <p>ตรวจสอบตารางเวลาการรับสัญญาณ ของดาวเทียมแต่ละดวงโดยแสดงตามวันที่ต้องการค้นหา  ทั้งวันที่ในอดีตและในปัจจุบัน</p>
-      </div>
-    </div>
-  </div>
 </div>
 
 </div>
@@ -110,20 +114,9 @@
 
 <script type="text/javascript">
 
-var mymap1 = L.map('mapindex1',{
-  worldCopyJump: true,
-  inertia:false,
-}).setView([99, 99], 2);
-var mymap2 = L.map('mapindex2',{
-  worldCopyJump: true,
-  inertia:false,
-}).setView([99, 99], 2);
-var mymap3 = L.map('mapindex3',{
-  worldCopyJump: true,
-  inertia:false,
-}).setView([99, 99], 2);
+
   /*----------------------------------*/
-  function test1(){
+function test1(){
 // Sample TLE 
 var nameSatellite ='<?php echo $tleNOAA15->name ?>';
 var tleLine1 = '<?php echo $tleNOAA15->line1 ?>',
@@ -215,22 +208,22 @@ for(var i = -60*10 ; i < 2*60*60; i+=5){
   
   
 }
-/*draw map*/
-var mymap1 = L.map('mapindex1',{
-  worldCopyJump: true,
-  inertia:false,
-}).setView([99, 99], 2);
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-  attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
-  minZoom: 2,
-  maxZoom: 5, 
-  /*zoomSnap: 0.25,*/
-  id: 'mapbox.streets',
+  /*draw map*/
+  var mymap1 = L.map('mapindex1',{
+    worldCopyJump: true,
+    inertia:false,
+  }).setView([startlat1, startlngs1], 2);
+  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
+    minZoom: 2,
+    maxZoom: 5, 
+    /*zoomSnap: 0.25,*/
+    id: 'mapbox.streets',
     // subdomains:['mt0','mt1','mt2','mt3'],
     accessToken: 'your.mapbox.access.token'
   }).addTo(mymap1);
 var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
-mymap1.setMaxBounds(WorldWarp);
+ mymap1.setMaxBounds(WorldWarp);
 L.control.scale().addTo(mymap1);
 
 
@@ -247,7 +240,6 @@ L.polyline(latlngsArr1, {
 
 /*update updateSatellite*/
 function updateSatellite(){
-  
   var date = new Date();
   var positionAndVelocity = satellite.propagate(satrec, date);
 
@@ -296,7 +288,7 @@ function updateSatellite(){
 
     iconSize:     [50, 50], // size of the icon
 
-    /* iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location*/
+   /* iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location*/
 
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
   });
@@ -333,7 +325,7 @@ function updateSatellite(){
 
 
 
-/*----------------------------------*/
+  /*----------------------------------*/
 function test2(){
 // Sample TLE 
 var nameSatellite ='<?php echo $tleNOAA18->name ?>';
@@ -427,22 +419,22 @@ for(var i = -60*10 ; i < 2*60*60; i+=5){
   
   
 }
-/*draw map*/
-var mymap2 = L.map('mapindex2',{
-  worldCopyJump: true,
-  inertia:false,
-}).setView([startlat, startlngs], 2);
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-  attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
-  minZoom: 2,
-  maxZoom: 5, 
-  /*zoomSnap: 0.25,*/
-  id: 'mapbox.streets',
+  /*draw map*/
+  var mymap2 = L.map('mapindex2',{
+    worldCopyJump: true,
+    inertia:false,
+  }).setView([startlat, startlngs], 2);
+  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
+    minZoom: 2,
+    maxZoom: 5, 
+    /*zoomSnap: 0.25,*/
+    id: 'mapbox.streets',
     // subdomains:['mt0','mt1','mt2','mt3'],
     accessToken: 'your.mapbox.access.token'
   }).addTo(mymap2);
 var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
-mymap2.setMaxBounds(WorldWarp);
+ mymap2.setMaxBounds(WorldWarp);
 L.control.scale().addTo(mymap2);
 
 
@@ -507,7 +499,7 @@ function updateSatellite(){
 
     iconSize:     [50, 50], // size of the icon
 
-    /* iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location*/
+   /* iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location*/
 
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
   });
@@ -531,18 +523,18 @@ function updateSatellite(){
   };
   SatelliteIcon2.addTo(mymap2);
    // console.log(SatelliteIcon2);
-   /*---------------*/
-   /*update checktime*/
-   setInterval(function () {
+  /*---------------*/
+  /*update checktime*/
+  setInterval(function () {
     // console.log(SatelliteIcon2);
     for(i in SatelliteIcon2._layers) {
       mymap2.removeLayer(SatelliteIcon2._layers[i]);
     } 
     updateSatellite(); 
   }, 1000);
- }
+}
 
- function test3(){
+function test3(){
 // Sample TLE 
 var nameSatellite ='<?php echo $tleNOAA20->name ?>';
 var tleLine1 = '<?php echo $tleNOAA20->line1 ?>',
@@ -635,22 +627,22 @@ for(var i = -60*10 ; i < 2*60*60; i+=5){
   
   
 }
-/*draw map*/
-var mymap3 = L.map('mapindex3',{
-  worldCopyJump: true,
-  inertia:false,
-}).setView([startlat, startlngs], 2);
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-  attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
-  minZoom: 2,
-  maxZoom: 5, 
-  /*zoomSnap: 0.25,*/
-  id: 'mapbox.streets',
+  /*draw map*/
+  var mymap3 = L.map('mapindex3',{
+    worldCopyJump: true,
+    inertia:false,
+  }).setView([startlat, startlngs], 2);
+  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
+    minZoom: 2,
+    maxZoom: 5, 
+    /*zoomSnap: 0.25,*/
+    id: 'mapbox.streets',
     // subdomains:['mt0','mt1','mt2','mt3'],
     accessToken: 'your.mapbox.access.token'
   }).addTo(mymap3);
 var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
-mymap3.setMaxBounds(WorldWarp);
+ mymap3.setMaxBounds(WorldWarp);
 L.control.scale().addTo(mymap3);
 
 
@@ -667,7 +659,6 @@ L.polyline(latlngsArr, {
 
 /*update updateSatellite*/
 function updateSatellite(){
-
   var date = new Date();
   var positionAndVelocity = satellite.propagate(satrec, date);
 
@@ -716,7 +707,7 @@ function updateSatellite(){
 
     iconSize:     [50, 50], // size of the icon
 
-    /* iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location*/
+   /* iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location*/
 
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
   });
@@ -740,25 +731,22 @@ function updateSatellite(){
   };
   SatelliteIcon3.addTo(mymap3);
    // console.log(SatelliteIcon3);
-   /*---------------*/
-   /*update checktime*/
-   setInterval(function () {
+  /*---------------*/
+  /*update checktime*/
+  setInterval(function () {
     // console.log(SatelliteIcon3);
     for(i in SatelliteIcon3._layers) {
       mymap3.removeLayer(SatelliteIcon3._layers[i]);
     } 
     updateSatellite(); 
   }, 1000);
- }
+}
 
- setInterval(function () {
-  mymap1.remove();
-  test1();
-  mymap2.remove();
-  test2();
-  mymap3.remove();
-  test3();
-}, 1000);
+setInterval(function () {
+    test1();
+    test2();
+    test3();
+  }, 1000);
 </script>
 
 
