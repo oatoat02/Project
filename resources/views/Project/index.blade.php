@@ -6,59 +6,59 @@
 <script type="text/javascript" src="/swiper-master/dist/js/swiper.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="/css/csslider.default.css"/>
 <div class="sixteen wide computer sixteen wide tablet sixteen wide mobile column " box1" style="" >
-<div class="ui segment" style="margin: 20px !important">
+  <div class="ui segment" style="margin: 20px !important">
+    <center>
+     <h1> 
+      <i class="send icon">  </i>
+      Satellite
+    </h1>
+  </center>
+  <br>
   <center>
-   <h1> 
-    <i class="send icon">  </i>
-    Satellite
-  </h1>
-</center>
-<br>
-<center>
- <div class="csslider">
-  <input type="radio" name="slides" id="slides_1" checked />
-  <input type="radio" name="slides" id="slides_2" />
-  <input type="radio" name="slides" id="slides_3" />
+   <div class="csslider">
+    <input type="radio" name="slides" id="slides_1" checked />
+    <input type="radio" name="slides" id="slides_2" />
+    <input type="radio" name="slides" id="slides_3" />
 
-  <ul>
-    <li><div class="" id="mapindex1"></div></li>
-    <li><div class="" id="mapindex2"></div></li>
-    <li><div class="" id="mapindex3"></div></li>
+    <ul>
+      <li><div class="" id="mapindex1"></div></li>
+      <li><div class="" id="mapindex2"></div></li>
+      <li><div class="" id="mapindex3"></div></li>
 
-  </ul>
-  <div class="arrows">
-    <label for="slides_1"></label>
-    <label for="slides_2"></label>
-    <label for="slides_3"></label>
-
-  </div>
-  <div class="navigation">
-    <div>
+    </ul>
+    <div class="arrows">
       <label for="slides_1"></label>
       <label for="slides_2"></label>
       <label for="slides_3"></label>
 
     </div>
-  </div>
-</div>
-</center>
-</div>
+    <div class="navigation">
+      <div>
+        <label for="slides_1"></label>
+        <label for="slides_2"></label>
+        <label for="slides_3"></label>
 
-   <div class="ui form segment box3" style="margin: 20px!important;">
-    <div class="fields">
-
-      <div class="eight wide field">
-        <h3><i class="big file  icon"></i>ตรวจสอบตำแหน่งของดาวเทียม</h3>
-        <label>ตรวจสอบตำแหน่งของดาวเทียม</label>
-        <p>ตรวจสอบตำแหน่งของดาวเทียม จะระบบุตำแหน่งของดาวเทียมบนโลกโดยจะแสดงตำแหน่งของดาวเทียมและแสดงเส้นทางของดาวเทียมที่จะเคลื่อนที่ไป</p>
-      </div> 
-      <div class="eight wide field">
-        <h3><i class="big calendar icon"></i>ตรวจสอบตารางเวลาการรับสัญญาณ</h3>
-        <b>ตรวจสอบตารางเวลาการรับสัญญาณ</b>
-        <p>ตรวจสอบตารางเวลาการรับสัญญาณ ของดาวเทียมแต่ละดวงโดยแสดงตามวันที่ต้องการค้นหา  ทั้งวันที่ในอดีตและในปัจจุบัน</p>
       </div>
     </div>
   </div>
+</center>
+</div>
+
+<div class="ui form segment box3" style="margin: 20px!important;">
+  <div class="fields">
+
+    <div class="eight wide field">
+      <h3><i class="big file  icon"></i>ตรวจสอบตำแหน่งของดาวเทียม</h3>
+      <label>ตรวจสอบตำแหน่งของดาวเทียม</label>
+      <p>ตรวจสอบตำแหน่งของดาวเทียม จะระบบุตำแหน่งของดาวเทียมบนโลกโดยจะแสดงตำแหน่งของดาวเทียมและแสดงเส้นทางของดาวเทียมที่จะเคลื่อนที่ไป</p>
+    </div> 
+    <div class="eight wide field">
+      <h3><i class="big calendar icon"></i>ตรวจสอบตารางเวลาการรับสัญญาณ</h3>
+      <b>ตรวจสอบตารางเวลาการรับสัญญาณ</b>
+      <p>ตรวจสอบตารางเวลาการรับสัญญาณ ของดาวเทียมแต่ละดวงโดยแสดงตามวันที่ต้องการค้นหา  ทั้งวันที่ในอดีตและในปัจจุบัน</p>
+    </div>
+  </div>
+</div>
 </div>
 
 </div>
@@ -110,18 +110,7 @@
 
 <script type="text/javascript">
 
-var mymap1 = L.map('mapindex1',{
-  worldCopyJump: true,
-  inertia:false,
-}).setView([99, 99], 2);
-var mymap2 = L.map('mapindex2',{
-  worldCopyJump: true,
-  inertia:false,
-}).setView([99, 99], 2);
-var mymap3 = L.map('mapindex3',{
-  worldCopyJump: true,
-  inertia:false,
-}).setView([99, 99], 2);
+
   /*----------------------------------*/
   function test1(){
 // Sample TLE 
@@ -219,7 +208,7 @@ for(var i = -60*10 ; i < 2*60*60; i+=5){
 var mymap1 = L.map('mapindex1',{
   worldCopyJump: true,
   inertia:false,
-}).setView([99, 99], 2);
+}).setView([startlat1, startlngs1], 2);
 L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
   attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
   minZoom: 2,
@@ -247,7 +236,6 @@ L.polyline(latlngsArr1, {
 
 /*update updateSatellite*/
 function updateSatellite(){
-  
   var date = new Date();
   var positionAndVelocity = satellite.propagate(satrec, date);
 
@@ -667,7 +655,6 @@ L.polyline(latlngsArr, {
 
 /*update updateSatellite*/
 function updateSatellite(){
-
   var date = new Date();
   var positionAndVelocity = satellite.propagate(satrec, date);
 
@@ -752,11 +739,8 @@ function updateSatellite(){
  }
 
  setInterval(function () {
-  mymap1.remove();
   test1();
-  mymap2.remove();
   test2();
-  mymap3.remove();
   test3();
 }, 1000);
 </script>
