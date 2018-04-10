@@ -257,75 +257,105 @@
 	<script type="text/javascript" src="/js/date.js"></script>
 	<script type="text/javascript" src="/js/dashboard.js"></script>
 	<script type="text/javascript">
-		Highcharts.chart('highcharts', {
-			chart: {
-				plotBackgroundColor: null,
-				plotBorderWidth: null,
-				plotShadow: false,
-				type: 'pie'
-			},
-			title: {
-				text: 'ประวัติการรับสัญญาณ ประจำปี 2017'
-			},
-			tooltip: {
-				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-			},
-			plotOptions: {
-				pie: {
-					allowPointSelect: true,
-					cursor: 'pointer',
-					dataLabels: {
-						enabled: true,
-						format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-						style: {
-							color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-						}
-					}
-				}
-			},
-			series: [{
-				name: 'เปอร์เซ็นการรับ',
-				colorByPoint: true,
-				data: [{
-					name: 'มกราคม',
-					y: 14
-				}, {
-					name: 'กุมภาพันธ์',
-					y: 24.03,
-				}, {
-					name: 'มีนาคม',
-					y: 10.38
-				}, {
-					name: 'เมษายน',
-					y: 4.77
-				}, {
-					name: 'พฤษภาคม',
-					y: 6
-				}, {
-					name: 'มิถุนายน',
-					y: 2
-				}, {
-					name: 'กรกฎาคม',
-					y: 12
-				}, {
-					name: 'สิงหาคม',
-					y: 20
-				}, {
-					name: 'กันยายน',
-					y:13
-				}, {
-					name: 'ตุลาคม',
-					y: 14.2
-				}, {
-					name: 'พฤศจิกายน',
-					y: 5
-				}, {
-					name: 'ธันวาคม',
-					y: 3
-				}]
-			}]
-		});
+		// Highcharts.chart('highcharts', {
+		// 	chart: {
+		// 		plotBackgroundColor: null,
+		// 		plotBorderWidth: null,
+		// 		plotShadow: false,
+		// 		type: 'pie'
+		// 	},
+		// 	title: {
+		// 		text: 'ประวัติการรับสัญญาณ ประจำปี {{$year}}'
+		// 	},
+		// 	tooltip: {
+		// 		pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		// 	},
+		// 	plotOptions: {
+		// 		pie: {
+		// 			allowPointSelect: true,
+		// 			cursor: 'pointer',
+		// 			dataLabels: {
+		// 				enabled: true,
+		// 				format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		// 				style: {
+		// 					color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		// 				}
+		// 			}
+		// 		}
+		// 	},
+		// 	series: [{
+		// 		name: 'เปอร์เซ็นการรับ',
+		// 		colorByPoint: true,
+		// 		data: [{
+		// 			name: 'มกราคม',
+		// 			y:  {{ $month[0]}}
+		// 		}, {
+		// 			name: 'กุมภาพันธ์',
+		// 			y:  {{ $month[1]}}
+		// 		}, {
+		// 			name: 'มีนาคม',
+		// 			y:  {{ $month[2]}}
+		// 		}, {
+		// 			name: 'เมษายน',
+		// 			y:  {{ $month[3]}}
+		// 		}, {
+		// 			name: 'พฤษภาคม',
+		// 			y:  {{ $month[4]}}
+		// 		}, {
+		// 			name: 'มิถุนายน',
+		// 			y:  {{ $month[5]}}
+		// 		}, {
+		// 			name: 'กรกฎาคม',
+		// 			y:  {{ $month[6]}}
+		// 		}, {
+		// 			name: 'สิงหาคม',
+		// 			y:  {{ $month[7]}}
+		// 		}, {
+		// 			name: 'กันยายน',
+		// 			y: {{ $month[8]}}
+		// 		}, {
+		// 			name: 'ตุลาคม',
+		// 			y:  {{ $month[9]}}
+		// 		}, {
+		// 			name: 'พฤศจิกายน',
+		// 			y:  {{ $month[10]}}
+		// 		}, {
+		// 			name: 'ธันวาคม',
+		// 			y:  {{ $month[11]}}
+		// 		}]
+		// 	}]
+		// });
+Highcharts.chart('highcharts', {
 
+    title: {
+        text: 'ประวัติการรับสัญญาณ ประจำปี {{$year}}'
+    },
+
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+
+    series: [{
+        type: 'pie',
+        allowPointSelect: true,
+        keys: ['name', 'y', 'selected', 'sliced'],
+        data: [
+            ['Jan', {{ $month[0]}}, false],
+            ['Feb', {{ $month[1]}}, false],
+            ['Mar', {{ $month[2]}}, false],
+            ['Apr', {{ $month[3]}}, false],
+            ['May', {{ $month[4]}}, false],
+            ['Jun', {{ $month[5]}}, false],
+            ['Jul', {{ $month[6]}}, false],
+            ['Aug', {{ $month[7]}}, false],
+            ['Sep', {{ $month[8]}}, false],
+            ['oct', {{ $month[9]}}, true, true],
+            ['Nov', {{ $month[10]}}, false],
+            ['Dec', {{ $month[11]}}, false]
+        ],
+        showInLegend: true
+    }]
+});
 	</script>
 
 

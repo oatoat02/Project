@@ -35,16 +35,59 @@ class MainController extends Controller
             
             $yearStart = date('01/01/Y');
             $yearEnd = date('31/12/Y');
-            $StartDate = date_create_from_format('d/m/Y', ($yearStart));   
-            $StartDateFomat=($StartDate->format('m/d/Y'));
-            $EndDate = date_create_from_format('d/m/Y', ($yearEnd));   
-            $EndDateFomat=($EndDate->format('m/d/Y'));
-            // dd($EndDate);
-            // dd($EndDate);
-
-            $controlComplete = control::whereBetween('Date', [$StartDateFomat, $EndDateFomat])->get();
-            dd($controlComplete);
-            // return view('Project.dashboard')->with('listTLE',$listTLE)->with('listControl',$listControl)->with('time',$time);
+            $StartDate = date_create_from_format('d/m/Y H:i:s', ($yearStart).' 00:00:00');   
+            $EndDate = date_create_from_format('d/m/Y H:i:s', ($yearEnd).' 23:59:00');   
+            $month = [0,0,0,0,0,0,0,0,0,0,0,0];
+            $controlComplete = control::whereBetween('Date', [$StartDate, $EndDate])->get();
+             // dd( $EndDate);
+             
+            for($i = 0 ; $i < sizeof($controlComplete);$i++){
+                $string1 = $controlComplete[$i]['timestart'];
+                $dataspilt = explode(",", $string1);
+                $dataspilt2= explode("/", $dataspilt[0]);
+                // dd($dataspilt2);
+                if($dataspilt2[0] == "1")
+                {
+                    $month[0]=$month[0]+1;
+                }else if($dataspilt2[0] == "2")
+                {
+                    $month[1]=$month[1]+1;
+                }else if($dataspilt2[0] == "3")
+                {
+                    $month[2]=$month[2]+1;
+                }else if($dataspilt2[0] == "4")
+                {
+                    $month[3]=$month[3]+1;
+                }else if($dataspilt2[0] == "5")
+                {
+                    $month[4]=$month[4]+1;
+                }else if($dataspilt2[0] == "6")
+                {
+                    $month[5]=$month[5]+1;
+                }else if($dataspilt2[0] == "7")
+                {
+                    $month[6]=$month[6]+1;
+                }else if($dataspilt2[0] == "8")
+                {
+                    $month[7]=$month[7]+1;
+                }else if($dataspilt2[0] == "9")
+                {
+                    $month[8]=$month[8]+1;
+                }else if($dataspilt2[0] == "10")
+                {
+                    $month[9]=$month[9]+1;
+                }else if($dataspilt2[0] == "11")
+                {
+                    $month[10]=$month[10]+1;
+                }else if($dataspilt2[0] == "12")
+                {
+                    $month[11]=$month[11]+1;
+                }
+                
+            }
+           $year = date("Y");
+            // dd($year);
+            return view('Project.dashboard')->with('listTLE',$listTLE)->with('listControl',$listControl)->with('time',$time)->with('month',$month)->with('year',$year);
         }else{
             return redirect('/login');
         }
@@ -54,14 +97,14 @@ class MainController extends Controller
     {
         $listTLE = TLE::get();
         
-    	return view('Project.checksatellite')->with('listTLE',$listTLE);
+        return view('Project.checksatellite')->with('listTLE',$listTLE);
     }
     public function index()
     {
         $tleNOAA15 =TLE::where('name', 'NOAA-15')->first();
         $tleNOAA18 =TLE::where('name', 'NOAA-18')->first();
         $tleNOAA20 =TLE::where('name', 'NOAA-20')->first();
-    	return view('Project.index')->with('tleNOAA15',$tleNOAA15)->with('tleNOAA18',$tleNOAA18)->with('tleNOAA20',$tleNOAA20);
+        return view('Project.index')->with('tleNOAA15',$tleNOAA15)->with('tleNOAA18',$tleNOAA18)->with('tleNOAA20',$tleNOAA20);
     }
     public function checktle()
     {
@@ -73,7 +116,7 @@ class MainController extends Controller
     }
     public function testupload(Request $request)
     {
-       
+
         return redirect()->back();
     }
     
