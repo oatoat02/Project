@@ -111,8 +111,9 @@ class MainController extends Controller
         return view('Project.checktle');
     }
     public function test()
-    {
-        return view('Project.test');
+    {   
+        $data=control::first();
+        return view('Project.test')->with('data',$data);
     }
     public function testupload(Request $request)
     {

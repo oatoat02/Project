@@ -73,23 +73,23 @@
 
         <h2>Satellite</h2>
 
-        <a class="item" href="#"><i class="file icon "></i> ตำแหน่งของดาวเทียม</a>
-        <a class="item" href="#"><i class="calendar  icon"></i> ตารางเวลาการรับสัญญาณ</a>
+        <a class="item" href="{{ route('Project.position') }}"><i class="file icon "></i> ตำแหน่งของดาวเทียม</a>
+        <a class="item" href="{{ route('Project.checksatellite') }}"><i class="calendar  icon"></i> ตารางเวลาการรับสัญญาณ</a>
       </center>
 
     </div>
     <div class="column">
       <center>
         <h2>Member</h2>
-        <a class="item" href="#"><i class="sign in icon "></i> เข้าสู่ระบบ</a>
-        <a class="item" href="#"><i class="add user icon "></i> สมัครสมาชิก</a>
+        <a class="item" href="{{ route('Project.login') }}"><i class="sign in icon "></i> เข้าสู่ระบบ</a>
+       
       </center>
     </div>
     <div class="column">
       <center>
         <h2>Social Network</h2>
-        <a class="item" href="#"><i class="icon facebook"></i> Facebook</a>
-
+        <a class="item" href="https://www.facebook.com/gistda/"><i class="icon facebook"></i> GISTDA</a>
+        <a class="item" href="https://www.facebook.com/engineeringSRC/"><i class="icon facebook"></i> Faculty of Engineering at Sriracha</a>
       </center>
     </div>
     <div class="column">
