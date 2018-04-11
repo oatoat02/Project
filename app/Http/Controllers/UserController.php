@@ -10,7 +10,11 @@ class UserController extends Controller
 {
     public function register()
     {
-        return view('Project.register');
+        if(Auth::check()){
+            return view('Project.register');
+        }else{
+            return redirect('/login');
+        }
     }
     public function createuser(Request $request)
     {
@@ -29,10 +33,10 @@ class UserController extends Controller
         $store->username = $request->input('username');
         $store->email = $request->input('email');
         $store->password = Hash::make($request->input('password'));
-        $store->type = 'user';
+        $store->type = 'admin';
         $store->save();
 
-        return redirect('/login')->with('status', '**สมัครสมาชิกสำเร็จ รอผู้ดูแลอนุมัติ**');
+        return redirect('/member');
     }
 
     public function login()

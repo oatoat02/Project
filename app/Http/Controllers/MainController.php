@@ -102,6 +102,7 @@ class MainController extends Controller
     public function index()
     {
         $tleNOAA15 =TLE::where('name', 'NOAA-15')->first();
+        // dd($tleNOAA15);
         $tleNOAA18 =TLE::where('name', 'NOAA-18')->first();
         $tleNOAA20 =TLE::where('name', 'NOAA-20')->first();
         return view('Project.index')->with('tleNOAA15',$tleNOAA15)->with('tleNOAA18',$tleNOAA18)->with('tleNOAA20',$tleNOAA20);

@@ -24,7 +24,6 @@
           <th>Username</th>
           <th>E-mail</th>
           <th>เบอร์โทรศัพท์</th>
-          <th>อนุมัติโดย</th>
           @if( ( Auth::user()->status=='superadmin' ) )
           <th>รายละเอียด</th>
           @endif
@@ -39,7 +38,6 @@
           <td> {{$user->username}} </td>
           <td> {{$user->email }}</td>
           <td> {{$user->PhoneNumber}}</td>
-          <td> {{$user->Approver}}</td>
           @if( ( Auth::user()->status=='superadmin' ) )
           <td style="width: 275px;">
             <div class="ui buttons" style="font-size: 10px !important; ">
