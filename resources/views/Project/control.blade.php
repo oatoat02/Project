@@ -84,35 +84,39 @@
 		<div class="ui grey inverted segment ">
 			<h2>มุมองศาของเสาอากาศ</h2>
 		</div>
-		<div class="ui form" style="padding-top: 10px" >
+		<form action="{{ route('Project.configAZEL') }}"  method="post" class="ui form" style="padding-top: 10px" >
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input type="hidden" name="id" value=" {{ $configAZEL->id }} ">
 			<div class="two fields">
 				<div class="field" style="display: inline-block;">
 					<label>Azimuth (ปัจจุบัน)</label>
-					<input type="number"  value="14" disabled >
+					
+					<input type="number" id="AzOld" name="AzOld" value="{{ $configAZEL->azimuth }}" disabled >
 				</div>
 				<div class="field" style="display: inline-block;">
 					<label>Azimuth </label>
-					<input type="number" min="0" max="360"  placeholder="ค่าระหว่าง 0-360"  name="azimuthnew" value=""  >
+					<input type="number" id="AzNew" name="AzNew" min="0" max="360"  placeholder="ค่ามุมองษาระหว่าง 0-360"  name="azimuthnew" value=""  oninvalid="this.setCustomValidity('ค่ามุมองษาระหว่าง 0-360')" oninput="setCustomValidity('')" >
 				</div>
 			</div>
 			<div class="two fields">
 				<div class="field" style="display: inline-block;">
 					<label>Elevation (ปัจจุบัน)</label>
-					<input type="number" value="120" disabled >
+					<input type="number" id="ElOld" name="ElOld" value="{{ $configAZEL->elevation }}" disabled >
 				</div>
 				<div class="field" style="display: inline-block;">
 					<label>Elevation </label>
-					<input type="number" min="0" max="180" placeholder="ค่าระหว่าง 0-180"  name="azimuthnew" value=""  >
+					<input type="number" id="ElNew" name="ElNew" min="0" max="180" placeholder="ค่ามุมองษาระหว่าง 0-180"  name="azimuthnew" value=""  oninvalid="this.setCustomValidity('ค่ามุมองษาระหว่าง 0-180')" oninput="setCustomValidity('')"  >
 				</div>
 			</div>
 
-
-
-		</div>
+			<center>
+				<button class="ui black button submitConfig" type='submit'>ปรับมุมองศา</button>
+			</center>
+		</form>
 
 		<center>
-			<button class="ui black button">ปรับมุมองศา</button>
-			<button class="ui red button" onclick="testclick()">ทดสอบ</button>
+			
+			
 		</center>
 
 		
@@ -146,8 +150,9 @@
 				<td> 
 					<center>
 						<?php 
-						$dataspilt = explode(",", $Data->timestart);
+						$dataspilt = explode(" ", $Data->timestart);
 						echo $dataspilt[0];
+
 						?> 
 					</center>
 				</td>
@@ -157,16 +162,18 @@
 				<td> 
 					<center>
 						<?php 
-						$dataspilt = explode(",", $Data->timestart);
+						$dataspilt = explode(" ", $Data->timestart);
 						echo $dataspilt[1];
+						echo ' ' .$dataspilt[2];
 						?> 
 					</center>
 				</td>
 				<td> 
 					<center>
 						<?php 
-						$dataspilt = explode(",", $Data->timestop);
+						$dataspilt = explode(" ", $Data->timestop);
 						echo $dataspilt[1];
+						echo ' '.$dataspilt[2];
 						?> 
 					</center>
 				</td>
@@ -206,7 +213,6 @@
 <script type="text/javascript" src="/js/date.js"></script>
 <script type="text/javascript">
 	
-
 	circle = L.circle([13.12036, 100.91972], 2000000);
 	var tleLine1 = '',
 	tleLine2 = '',
@@ -566,7 +572,7 @@
 			}
 			//console.log(text);
 			$('#tableshow').append("<tr class='item' id="+ArrData[i][5]+"> <td>"+ArrData[i][0].getDate()+"/"+(ArrData[i][0].getMonth()+1)+"/"+ArrData[i][0].getFullYear()+"</td><td>"+ArrData[i][0].toLocaleTimeString()+"</td><td>"+ArrData[i][1].toLocaleTimeString()+"</td>"+
-				"<td class=ui compact striped> <form action='{{ route('Project.showtimecontrol') }}' method='post'>"+
+				"<td class=ui compact striped> <form action='{{ route('Project.showtimecontrol') }}'  method='post'>"+
 				"<input type='hidden' name='_token' value='{{ csrf_token() }}'>"+
 				"<input type='number' name='timestamp' value="+ArrData[i][6]+" style=display:none;>" +
 				"<input type='hidden' name='control' value='"+text+"'>"+
@@ -600,7 +606,22 @@ $( document ).ready(function() {
 	});
 });
 
+setInterval(function(){
+    $.ajax({
+      type: 'get',
+      url: '/getAZEL',
+      data: {
+      },
+      success: function(data) {
+      	// var obj = JSON.parse(data);
+      	console.log(data);
+      	$("#AzOld").val(data.azimuth);
+     	$("#ElOld").val(data.elevation);
+      },
+      
 
+    })
+}, 1000);
 
 </script>
 

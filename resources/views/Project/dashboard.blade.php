@@ -25,10 +25,6 @@
 				<th><center>Start<br> Azimuth</center></th>
 				<th><center>Start<br> Elevation</center></th>
 
-
-
-
-
 			</thead>
 			<tbody>
 				@foreach($listControl as $Data)
@@ -36,7 +32,7 @@
 					<td> 
 						<center>
 							<?php 
-							$dataspilt = explode(",", $Data->timestart);
+							$dataspilt = explode(" ", $Data->timestart);
 							echo $dataspilt[0];
 							?> 
 						</center>
@@ -47,16 +43,18 @@
 					<td> 
 						<center>
 							<?php 
-							$dataspilt = explode(",", $Data->timestart);
+							$dataspilt = explode(" ", $Data->timestart);
 							echo $dataspilt[1];
+							echo ' '.$dataspilt[2];
 							?> 
 						</center>
 					</td>
 					<td> 
 						<center>
 							<?php 
-							$dataspilt = explode(",", $Data->timestop);
+							$dataspilt = explode(" ", $Data->timestop);
 							echo $dataspilt[1];
+							echo ' '.$dataspilt[2];
 							?> 
 						</center>
 					</td>
@@ -349,7 +347,7 @@ Highcharts.chart('highcharts', {
             ['Jul', {{ $month[6]}}, false],
             ['Aug', {{ $month[7]}}, false],
             ['Sep', {{ $month[8]}}, false],
-            ['oct', {{ $month[9]}}, true, true],
+            ['oct', {{ $month[9]}}, false],
             ['Nov', {{ $month[10]}}, false],
             ['Dec', {{ $month[11]}}, false]
         ],

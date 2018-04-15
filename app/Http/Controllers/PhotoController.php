@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Photo;
 use App\TLE;
 use Session;
-
+use DateTime;
 
 class PhotoController extends Controller
 {
@@ -22,7 +22,7 @@ class PhotoController extends Controller
 			$date = date_create_from_format('d/m/Y H:i:s', $s);	 //31-12-2018 
 			// dd($request->DateAcquired);
 			// $Date =  DateTime::createFromFormat('m/d/Y , H:i:s A', $timestart);//ตามformat
-			$store->Date = $date;
+			$store->Date = $date->format('Y-m-d H:i:s');
 
 			/*------------------save Photo to server---------------------*/
 			$photo = $request->file('photo');
@@ -60,7 +60,11 @@ class PhotoController extends Controller
 		// $listPhoto = Photo::whereBetween('Date',[$StartDate,$EndDate])->get();
 		// dd($listPhoto);
 		$StartDate = date_create_from_format('d/m/Y H:i:s', ($request->StartDate).' 00:00:00');
-        $EndDate = date_create_from_format('d/m/Y H:i:s', ($request->EndDate).' 23:59:00');   
+        $EndDate = date_create_from_format('d/m/Y H:i:s', ($request->EndDate).' 23:59:00'); 
+        $StartDate=  DateTime::createFromFormat('d/m/Y H:i:s', ($request->StartDate).' 00:00:00');
+      
+        // dd($cc);
+      
 		if($request->SatelliteName == 'All')
 		{
 			if($request->Durations == 'All')
@@ -69,10 +73,11 @@ class PhotoController extends Controller
 
 			}else
 			{
-				$listPhoto = Photo::whereBetween('Date',[$StartDate, $EndDate])->get();
+				$listPhoto = Photo::whereBetween('Date',[ $StartDate->format('Y-m-d H:i:s'), $EndDate->format('Y-m-d H:i:s')])->get();
 
 
 			}
+			// dd($listPhoto);
 		}else if($request->SatelliteName != 'All')
 		{
 			if($request->Durations == 'All')
@@ -82,7 +87,7 @@ class PhotoController extends Controller
 
 			}else if($request->Durations != 'All')
 			{
-				$listPhoto = Photo::where('SatelliteName',$request->SatelliteName)->whereBetween('Date', [$StartDate, $EndDate])->orderBy('Date', 'desc')->get();
+				$listPhoto = Photo::where('SatelliteName',$request->SatelliteName)->whereBetween('Date', [$StartDate->format('Y-m-d H:i:s'), $EndDate->format('Y-m-d H:i:s')])->orderBy('Date', 'desc')->get();
 
 			}
 		}

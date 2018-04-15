@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\TLE;
 use Auth;
 use App\control;
+use App\ControlTime;
+use App\configAZEL;
 use DateTime;
 class AntennaController extends Controller
 {
@@ -15,7 +17,34 @@ class AntennaController extends Controller
 
             $listTLE = TLE::get();
             $listControl = control::where('status','N')->orderBy('timestamp', 'asc')->get();
-            return view('Project.control')->with('listTLE',$listTLE)->with('listControl',$listControl);
+            // dd($listControl);
+            // dd( $listControlNext);
+            $deletelist = ControlTime::get();
+
+            for ($i = 0 ; $i < sizeof($deletelist); $i++){
+                $data = ControlTime::find($deletelist[$i]->id);
+                $data->delete();
+            }
+            $listControlNext=control::where('status','N')->orderBy('timestamp', 'asc')->get();
+            // dd($listControlNext);
+            for ($i = 0 ; $i < sizeof($listControlNext); $i++){
+                $store = new ControlTime;
+                $store->idControl=$listControlNext[$i]->_id;
+                $store->status=$listControlNext[$i]->status;
+                $store->timestart=$listControlNext[$i]->timestart;
+                $store->timestop=$listControlNext[$i]->timestop;
+                $store->timestamp=$listControlNext[$i]->timestamp;
+                $store->Date=$listControlNext[$i]->Date;
+                $store->control=$listControlNext[$i]->control;
+                $store->created_at=$listControlNext[$i]->created_at;
+                $store->updated_at=$listControlNext[$i]->updated_at;
+                $store->save();
+                // dd($store);
+            }
+
+            $configAZEL = configAZEL::first();
+            
+            return view('Project.control')->with('listTLE',$listTLE)->with('listControl',$listControl)->with('configAZEL',$configAZEL);
         }else{
           return redirect('/login');
       }
@@ -27,23 +56,23 @@ class AntennaController extends Controller
     	$namesatellite = $request->namesatellite;
     	$data= $request->control;
     	$dataspilt = explode(",", $data);
-        // dd($dataspilt);
+        // dd(($dataspilt));
     	// dd(sizeof($dataspilt));
     	$arraylist= array();
     	$timestart="";
     	for($i = 0 ; $i < sizeof($dataspilt);$i+=4 ){
     		if($timestart==''){
-                $timestart=$dataspilt[$i].' ,'.$dataspilt[$i+1];
+                $timestart=$dataspilt[$i].$dataspilt[$i+1];
                 
             }
-         
+           
     		$arrayfree= array();
     
             array_push($arrayfree,$dataspilt[$i],$dataspilt[$i+1],$dataspilt[$i+2],$dataspilt[$i+3]);
     		array_push($arraylist,$arrayfree);
             // dd($arrayfree);
     	}
-    	// dd($timestart);
+    	// dd($arraylist);
     	$listTLE = TLE::get();
         return view('Project.showtimecontrol')->with('arraylist',$arraylist)->with('namesatellite',$namesatellite)->with('timestart',$timestart)->with('data',$data)->with('timestamp',$request->timestamp);
     }
@@ -60,29 +89,38 @@ class AntennaController extends Controller
  
     	for($i = 0 ; $i < sizeof($dataspilt);$i+=4 ){
             if($timestart==""){
-                $timestart=$dataspilt[$i].' ,'.$dataspilt[$i+1];
+                $timestart=$dataspilt[$i].$dataspilt[$i+1];
                 
             
                 
             }
     		$arrayfree= [];
-    		$arrayfree['time'] = $dataspilt[$i].' ,'.$dataspilt[$i+1];
+    		$arrayfree['time'] = $dataspilt[$i].$dataspilt[$i+1];
     		$arrayfree['azimuth'] = $dataspilt[$i+2];
     		$arrayfree['elevation'] = $dataspilt[$i+3];
     		array_push($control,$arrayfree);
-    		$timestop=$dataspilt[$i].' ,'.$dataspilt[$i+1];
-
+    		$timestop=$dataspilt[$i].$dataspilt[$i+1];
     	}
+        // dd($control);
     	$store = new control;
 		$store->namesatellite = $request->namesatellite;
 		$store->status = $request->status;
 		$store->timestart =	$timestart;
 		$store->timestop =	$timestop;
-        $Date =  DateTime::createFromFormat('m/d/Y , H:i:s A', $timestart);//ตามformat
-        $store->Date = $Date;
-        $store->timestamp =  $request->timestamp;
+        $Date =  DateTime::createFromFormat('m/d/Y H:i:s A', $timestart);//ตามformat
+       //d($Date->format('Y-m-d H:i:s'));
+        $store->Date = $Date->format('Y-m-d H:i:s');
+        // $test=date_format($Date, 'U');
+        dd($Date);
+        $store->timestamp =  date_format($Date, 'U');
 		$store->control = $control;
+        // dd($store);
 		$store->save();
+
+        
+        
+
+
     	
     	$listTLE = TLE::get();
         return redirect('/control')->with('listTLE',$listTLE);
@@ -118,9 +156,43 @@ class AntennaController extends Controller
         $StartDate = date_create_from_format('d/m/Y', ($request->StartDate));   
         $EndDate = date_create_from_format('d/m/Y', ($request->EndDate));   
 
-        $listControl = control::whereBetween('Date', [$StartDate, $EndDate])->get();
+        $listControl = control::whereBetween('Date', [ $StartDate->format('Y-m-d H:i:s'), $EndDate->format('Y-m-d H:i:s')])->get();
     // dd($StartDate);
         return view('Project.logCollection')->with('listControl',$listControl);
        
+    }
+    public function configAZEL(Request $request)
+    {
+
+
+        $now = new  DateTime();
+        $timestamp =  date_format($now, 'U');
+
+        $data = configAZEL::find($request->id);
+        // dd($request);
+        if($request->AzNew == null){
+            $data->azimuth=$data->azimuth;
+        }else{
+            $data->azimuth=$request->AzNew;
+        }
+
+        if($request->ElNew == null){
+            $data->elevation=$data->elevation;
+
+        }else{
+            $data->elevation=$request->ElNew;
+        }
+
+        $data->timestamp=$timestamp;
+        $data->save();
+
+      
+
+        return redirect()->back();
+    }
+    public function getAZEL(){
+        $data = configAZEL::first();
+      
+        return response()->json($data);
     }
 }

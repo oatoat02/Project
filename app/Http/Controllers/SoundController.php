@@ -32,8 +32,8 @@ class SoundController extends Controller
 			$s=($request->DateAcquired).(' ').$request->TimeAcquired.(':00');
 			$date = date_create_from_format('d/m/Y H:i:s', $s);	 //31-12-2018 
 
-			$store->Date = $date;
-
+			//$store->Date = $date;
+			$store->Date = $date->format('Y-m-d H:i:s');
 			/*------------------save Sound to server---------------------*/
 			$sound = $request->file('Sound');
 			$fileName = $request->SatelliteName.'_'.uniqid().'.'.$request->file('Sound')->getClientOriginalExtension();
@@ -76,7 +76,7 @@ class SoundController extends Controller
 
 			}else
 			{
-				$listSound = Sound::whereBetween('Date',[$StartDate, $EndDate])->get();
+				$listSound = Sound::whereBetween('Date',[ $StartDate->format('Y-m-d H:i:s'), $EndDate->format('Y-m-d H:i:s')])->get();
 
 
 			}
@@ -89,7 +89,7 @@ class SoundController extends Controller
 
 			}else if($request->Durations != 'All')
 			{
-				$listSound = Sound::where('SatelliteName',$request->SatelliteName)->whereBetween('Date', [$StartDate, $EndDate])->orderBy('Date', 'desc')->get();
+				$listSound = Sound::where('SatelliteName',$request->SatelliteName)->whereBetween('Date', [ $StartDate->format('Y-m-d H:i:s'), $EndDate->format('Y-m-d H:i:s')])->orderBy('Date', 'desc')->get();
 
 			}
 		}

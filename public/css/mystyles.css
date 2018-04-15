@@ -225,9 +225,6 @@ body{
 
 /* Mobile */
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-
-	
-
 	.computer.only {
 		display: none !important;
 	}
@@ -239,7 +236,6 @@ body{
 	.mobile.only {
 		display: block !important;
 	}
-
 	
 }
 

@@ -6,7 +6,7 @@
 <script type="text/javascript" src="/swiper-master/dist/js/swiper.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="/css/csslider.default.css"/>
 <div class="sixteen wide computer sixteen wide tablet sixteen wide mobile column " box1" style="" >
-  <div class="ui segment" >
+  <div class="ui segment">
     <center>
      <h1> 
       <i class="send icon">  </i>

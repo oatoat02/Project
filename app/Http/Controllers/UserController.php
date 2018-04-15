@@ -35,7 +35,6 @@ class UserController extends Controller
         $store->password = Hash::make($request->input('password'));
         $store->type = 'admin';
         $store->save();
-
         return redirect('/member');
     }
 

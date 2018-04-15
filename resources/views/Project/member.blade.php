@@ -45,7 +45,6 @@
               <div class="or"></div>
               <button class="ui yellow button editClick" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"  data-email="{{$user->email}}" style="font-size: 12px !important;">เปลี่ยนPassword</button>
             </div>
-          
           </td>
             @endif
 

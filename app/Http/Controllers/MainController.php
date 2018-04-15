@@ -26,7 +26,6 @@ class MainController extends Controller
                     $timestart=$listControl[$i]['timestart'];
                 }
                 $timestop=$listControl[$i]['timestop'];
-
             }
             $time=[];
             array_push($time,$timestart);
@@ -38,14 +37,14 @@ class MainController extends Controller
             $StartDate = date_create_from_format('d/m/Y H:i:s', ($yearStart).' 00:00:00');   
             $EndDate = date_create_from_format('d/m/Y H:i:s', ($yearEnd).' 23:59:00');   
             $month = [0,0,0,0,0,0,0,0,0,0,0,0];
-            $controlComplete = control::whereBetween('Date', [$StartDate, $EndDate])->get();
-             // dd( $EndDate);
+            $controlComplete = control::whereBetween('Date', [$StartDate->format('Y-m-d H:i:s'), $EndDate->format('Y-m-d H:i:s')])->get();
+            
              
             for($i = 0 ; $i < sizeof($controlComplete);$i++){
                 $string1 = $controlComplete[$i]['timestart'];
-                $dataspilt = explode(",", $string1);
+                $dataspilt = explode(" ", $string1);
                 $dataspilt2= explode("/", $dataspilt[0]);
-                // dd($dataspilt2);
+                
                 if($dataspilt2[0] == "1")
                 {
                     $month[0]=$month[0]+1;
@@ -86,7 +85,7 @@ class MainController extends Controller
                 
             }
            $year = date("Y");
-            // dd($year);
+            
             return view('Project.dashboard')->with('listTLE',$listTLE)->with('listControl',$listControl)->with('time',$time)->with('month',$month)->with('year',$year);
         }else{
             return redirect('/login');

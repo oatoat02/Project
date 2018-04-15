@@ -69,3 +69,5 @@ Route::post('/deleteTimeControl',['as'=>'Project.deleteTimeControl','uses'=>'Ant
 Route::post('/schedulecontrol',['as'=>'Project.schedulecontrol','uses'=>'AntennaController@schedulecontrol']);
 
 Route::post('/deleteTle',['as'=>'Project.deleteTle','uses'=>'TLEController@deleteTle']);
+Route::post('/configAZEL',['as'=>'Project.configAZEL','uses'=>'AntennaController@configAZEL']);
+Route::get('/getAZEL',['as'=>'Project.getAZEL','uses'=>'AntennaController@getAZEL']);
