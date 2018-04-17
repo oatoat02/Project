@@ -61,10 +61,10 @@
 					<td>
 						<center>
 							<?php 
-							// $dataspilt = explode(",", $Data->Date);
-							$dataspilt = explode(" ",$Data->Date['date']);
-							$dataspilt2 =explode("-",$dataspilt[0]);;
-							echo $dataspilt2[2].'/'.$dataspilt2[1].'/'.$dataspilt2[0];
+								$dataspilt = explode(" ", $Data->timestart);
+								$dataspilt2 = explode("/",$dataspilt[0]);
+							//$dataspilt2 =explode("-",$dataspilt[0]);;
+							echo $dataspilt2[1].'/'.$dataspilt2[0].'/'.$dataspilt2[2];
 							?> 
 						</center>
 					</td>
@@ -74,16 +74,17 @@
 					<td>
 						<center>
 							<?php 
-							$dataspilt = explode(",", $Data->timestart);
-							echo $dataspilt[1];
+							$dataspilt = explode(" ", $Data->timestart);
+
+							echo $dataspilt[1].' '.$dataspilt[2];
 							?> 
 						</center>
 					</td>
 					<td>
 						<center>
 							<?php 
-							$dataspilt = explode(",", $Data->timestop);
-							echo $dataspilt[1];
+							$dataspilt = explode(" ", $Data->timestop);
+							echo $dataspilt[1].' '.$dataspilt[2];
 							?> 
 						</center>
 					</td>
