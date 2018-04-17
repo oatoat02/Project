@@ -26,6 +26,7 @@
     <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="/js/date.js"></script>
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
     <script src="https://cdn.rawgit.com/hayeswise/Leaflet.PointInPolygon/v1.0.0/wise-leaflet-pip.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/Aitthi-semanticUiAlert/Semantic-UI-Alert.css">
@@ -42,13 +43,13 @@
 
           <a href="{{ route('Project.dashboard') }}" >
             <div class="navbar-header">
-              <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
+              <img src="{{ asset('photo/gistdalogoMain.png') }}" class="photologo">
             </div>
           </a>
           @else
           <a href="{{ route('Project.index') }}" >
             <div class="navbar-header">
-              <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
+              <img src="{{ asset('photo/gistdalogoMain.png') }}" class="photologo">
             </div>
           </a>
           @endif
@@ -136,19 +137,19 @@
 
          <a href="{{ route('Project.dashboard') }}" >
           <div class="navbar-header">
-            <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
+            <img src="{{ asset('photo/gistdalogoMain.png') }}" class="photologo">
           </div>
         </a>
         @else
         <a href="{{ route('Project.index') }}" >
           <div class="navbar-header">
-            <img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo">
+            <img src="{{ asset('photo/gistdalogoMain.png') }}" class="photologo">
           </div>
         </a>
         @endif
-        <div class="right menu ">
+        <div class="right menu open ">
           <a  class="menu item" id="menubar">
-            <i class="sidebar icon"></i>
+            <i class="sidebar large icon" ></i>
           </a>
         </div>
       </div>
@@ -157,7 +158,7 @@
         <div class="ui inverted labeled  vertical sidebar menu">
           <a href="{{ route('Project.dashboard') }}" >
             <div class="navbar-header">
-              <center><img src="{{ asset('photo/gistdalogo3.png') }}" class="photologo2"></center>
+              <center><img src="{{ asset('photo/gistdalogoMain.png') }}" class="photologo2"></center>
             </div>
           </a>
           
@@ -176,6 +177,7 @@
             </div>
 
           </div>
+          
           <div class="ui item ">
             <div class="text " id="hideShowphoto"><i class="large archive icon"></i>คลังข้อมูล</div>
             <div class="menu">
@@ -234,7 +236,11 @@
               <a class="item" href="{{ route('Project.logout') }}"><i class="sign out icon"></i>ออกจากระบบ</a>
             </div>
           </div>
+
         </div>
+        <br>
+          <br>
+          <br>
         @endif
         @if(Auth::check()==false)
         <a class="ui item" href="{{ route('Project.login') }}">

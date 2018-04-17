@@ -418,7 +418,9 @@
 								azimuthEnd=azimuthArr[i];
 								timeStop=timeArr[i];
 
-								arrFree[0] = timeArr[i].toLocaleString();
+								var temp =  moment(timeArr[i]); 
+								var date = temp.format("M/D/YYYY, h:mm:ss A");
+								arrFree[0] = date;
 								arrFree[1] = azimuthArr[i];
 								arrFree[2] = elevationArr[i];
 								arrControl.push(arrFree);
@@ -469,7 +471,9 @@
 								azimuthEnd=azimuthArr[i];
 								timeStop=timeArr[i];
 
-								arrFree[0] = timeArr[i].toLocaleString();
+								var temp =  moment(timeArr[i]); 
+								var date = temp.format("M/D/YYYY, h:mm:ss A");
+								arrFree[0] = date;
 								arrFree[1] = azimuthArr[i];
 								arrFree[2] = elevationArr[i]
 								arrControl.push(arrFree);
@@ -516,7 +520,10 @@
 							jumlongStop=longitudeStrArr[i];
 							azimuthEnd=azimuthArr[i];
 							timeStop=timeArr[i];
-							arrFree[0] = timeArr[i].toLocaleString();
+							var temp =  moment(timeArr[i]); 
+							var date = temp.format("M/D/YYYY, h:mm:ss A");
+							console.log(date);
+							arrFree[0] = date;;
 							arrFree[1] = azimuthArr[i];
 							arrFree[2] = elevationArr[i]
 							arrControl.push(arrFree);
@@ -538,6 +545,7 @@
 							arrControl = new Array();
 						}
 					}
+
 				}
 				if(ArrData.length==0){
 					$.uiAlert({
@@ -553,6 +561,7 @@
 			}
 
 		}
+		//console.log(ArrDataControl);
 		$("#tableshow tr").remove();	
 		var tostring = ArrDataControl.toString();
 		// console.log(ArrDataControl);
@@ -570,8 +579,14 @@
 					text =text+ String(ArrDataControl[i][j][0])+','+String(ArrDataControl[i][j][1])+','+String(ArrDataControl[i][j][2])+',';
 				}
 			}
-			//console.log(text);
-			$('#tableshow').append("<tr class='item' id="+ArrData[i][5]+"> <td>"+ArrData[i][0].getDate()+"/"+(ArrData[i][0].getMonth()+1)+"/"+ArrData[i][0].getFullYear()+"</td><td>"+ArrData[i][0].toLocaleTimeString()+"</td><td>"+ArrData[i][1].toLocaleTimeString()+"</td>"+
+			
+			var temp =  moment(ArrData[i][0]); 
+			var date = temp.format("D/M/YYYY");
+			var StartTimeTemp = temp.format("h:mm:ss A");
+
+			var temp2 =  moment(ArrData[i][1]); 
+			var EndTimeTemp = temp2.format("h:mm:ss A");
+			$('#tableshow').append("<tr class='item' id="+ArrData[i][5]+"> <td>"+date+"</td><td>"+StartTimeTemp+"</td><td>"+EndTimeTemp+"</td>"+
 				"<td class=ui compact striped> <form action='{{ route('Project.showtimecontrol') }}'  method='post'>"+
 				"<input type='hidden' name='_token' value='{{ csrf_token() }}'>"+
 				"<input type='number' name='timestamp' value="+ArrData[i][6]+" style=display:none;>" +
@@ -614,7 +629,7 @@ setInterval(function(){
       },
       success: function(data) {
       	// var obj = JSON.parse(data);
-      	console.log(data);
+      	//console.log(data);
       	$("#AzOld").val(data.azimuth);
      	$("#ElOld").val(data.elevation);
       },

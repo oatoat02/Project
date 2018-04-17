@@ -220,17 +220,21 @@
 
 			$("#tableshow tr").remove();
 			for (var i = 0; i < ArrData.length ; i++) { 
-				
+				var temp =  moment(ArrData[i][0]); 
+				var date = temp.format("D/M/YYYY");
+				var StartTimeTemp = temp.format("h:mm:ss A");
+
+				var temp2 =  moment(ArrData[i][1]); 
+				var EndTimeTemp = temp2.format("h:mm:ss A");
+				//console.log(date);
 				$('#tableshow').append(
 					"<tr class='item' id="+ArrData[i][5]+">"+
-					"<td>"+ArrData[i][0].getDate()+
-					"/"+(ArrData[i][0].getMonth()+1)+
-					"/"+ArrData[i][0].getFullYear()+"</td>"+
-					"<td>"+ArrData[i][0].toLocaleTimeString()+"</td>"+
+					"<td>"+date+"</td>"+
+					"<td>"+StartTimeTemp+"</td>"+
 					"<td>"+ArrData[i][2]+"</td>"+
 					"<td>"+ArrData[i][3]+"</td>"+
 					"<td>"+ArrData[i][4]+"</td>"+
-					"<td>"+ArrData[i][1].toLocaleTimeString()+"</tr>");
+					"<td>"+EndTimeTemp+"</tr>");
 
 			}
 		});

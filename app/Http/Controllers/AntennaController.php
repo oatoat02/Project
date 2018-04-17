@@ -41,7 +41,7 @@ class AntennaController extends Controller
                 $store->save();
                 // dd($store);
             }
-
+            // dd($listControl);
             $configAZEL = configAZEL::first();
             
             return view('Project.control')->with('listTLE',$listTLE)->with('listControl',$listControl)->with('configAZEL',$configAZEL);
@@ -72,7 +72,7 @@ class AntennaController extends Controller
     		array_push($arraylist,$arrayfree);
             // dd($arrayfree);
     	}
-    	// dd($arraylist);
+    	 //dd($arraylist);
     	$listTLE = TLE::get();
         return view('Project.showtimecontrol')->with('arraylist',$arraylist)->with('namesatellite',$namesatellite)->with('timestart',$timestart)->with('data',$data)->with('timestamp',$request->timestamp);
     }
@@ -111,7 +111,7 @@ class AntennaController extends Controller
        //d($Date->format('Y-m-d H:i:s'));
         $store->Date = $Date->format('Y-m-d H:i:s');
         // $test=date_format($Date, 'U');
-        dd($Date);
+        //dd($Date);
         $store->timestamp =  date_format($Date, 'U');
 		$store->control = $control;
         // dd($store);

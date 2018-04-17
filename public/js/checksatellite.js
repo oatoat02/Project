@@ -21,7 +21,7 @@ circle = L.circle([13.12036, 100.91972], 2000000, {
 L.control.scale().addTo(mymap);
 L.control.mousePosition().addTo(mymap);
 var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
- mymap.setMaxBounds(WorldWarp);
+mymap.setMaxBounds(WorldWarp);
 
 		/*// define rectangle geographical bounds
 		var Rectangle = [[31.10, 82.4331], [-5,119.4]];
@@ -200,7 +200,7 @@ var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
 					{
 						if( (timeArr[i].getHours()) >= 6  && (timeArr[i].getHours())<18 )
 						{
-						
+
 							if(longitudeStrArr[i-30] > 43 && longitudeStrArr[i] < 150 && latitudeStrArr[i-30] > -29 && latitudeStrArr[i] < 45 )
 							{
 
@@ -306,67 +306,67 @@ var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
 					else if(($('#SelectTime').text()) == "ทั้งหมด")
 					{
 						
-							if(longitudeStrArr[i-30] > 43 && longitudeStrArr[i] < 150 && latitudeStrArr[i-30] > -29 && latitudeStrArr[i] < 45 )
+						if(longitudeStrArr[i-30] > 43 && longitudeStrArr[i] < 150 && latitudeStrArr[i-30] > -29 && latitudeStrArr[i] < 45 )
+						{
+
+							arrFree[0]=([ latitudeStrArr[i-30],longitudeStrArr[i-30] ]);
+							arrFree[1]=([ latitudeStrArr[i],longitudeStrArr[i] ]);
+							latlngsArr.push(arrFree);
+
+
+							var nameSattellite = $('#selectSatellite')[0].innerHTML;
+							PolygonArr =(	[[latitudeStrArr[i], longitudeStrArr[i]-3] , [ latitudeStrArr[i], longitudeStrArr[i]+3],
+								[latitudeStrArr[i]+1.75, longitudeStrArr[i]+3] , [ latitudeStrArr[i]+1.75, longitudeStrArr[i]-3]]);
+							layerGroup = layerGroup.addLayer([PolygonArr,timeArr[i],azimuthArr[i],elevationArr[i],nameSattellite]);
+						}
+
+						if( (circle.getLatLng().distanceTo([latitudeStrArr[i],longitudeStrArr[i]])) <= circle.getRadius() )
+						{
+							if(jumlatStart==-999 && jumlongStart==-999)
 							{
-
-								arrFree[0]=([ latitudeStrArr[i-30],longitudeStrArr[i-30] ]);
-								arrFree[1]=([ latitudeStrArr[i],longitudeStrArr[i] ]);
-								latlngsArr.push(arrFree);
-
-
-								var nameSattellite = $('#selectSatellite')[0].innerHTML;
-								PolygonArr =(	[[latitudeStrArr[i], longitudeStrArr[i]-3] , [ latitudeStrArr[i], longitudeStrArr[i]+3],
-									[latitudeStrArr[i]+1.75, longitudeStrArr[i]+3] , [ latitudeStrArr[i]+1.75, longitudeStrArr[i]-3]]);
-								layerGroup = layerGroup.addLayer([PolygonArr,timeArr[i],azimuthArr[i],elevationArr[i],nameSattellite]);
+								jumlatStart=latitudeStrArr[i];
+								jumlongStart=longitudeStrArr[i];
+								azimuthStart=azimuthArr[i];
+								timeStart=timeArr[i];
 							}
-
-							if( (circle.getLatLng().distanceTo([latitudeStrArr[i],longitudeStrArr[i]])) <= circle.getRadius() )
+							if(Maxelevation<elevationArr[i])
 							{
-								if(jumlatStart==-999 && jumlongStart==-999)
-								{
-									jumlatStart=latitudeStrArr[i];
-									jumlongStart=longitudeStrArr[i];
-									azimuthStart=azimuthArr[i];
-									timeStart=timeArr[i];
-								}
-								if(Maxelevation<elevationArr[i])
-								{
-									Maxelevation=elevationArr[i];
-								}
-								jumlatStop=latitudeStrArr[i];
-								jumlongStop=longitudeStrArr[i];
-								azimuthEnd=azimuthArr[i];
-								timeStop=timeArr[i];
+								Maxelevation=elevationArr[i];
 							}
-							else if(jumlatStart != -999)
-							{
-								/*ArrTT.push([ [jumlatStart,jumlongStart], [jumlatStop,jumlongStop]]);*/
-								ArrData.push([timeStart,timeStop,azimuthStart,azimuthEnd,Maxelevation,_id]);
+							jumlatStop=latitudeStrArr[i];
+							jumlongStop=longitudeStrArr[i];
+							azimuthEnd=azimuthArr[i];
+							timeStop=timeArr[i];
+						}
+						else if(jumlatStart != -999)
+						{
+							/*ArrTT.push([ [jumlatStart,jumlongStart], [jumlatStop,jumlongStop]]);*/
+							ArrData.push([timeStart,timeStop,azimuthStart,azimuthEnd,Maxelevation,_id]);
 
-								jumlatStart = -999;
-								jumlongStart = -999;
-								jumlatStop = -999;
-								jumlongStop = -999;
-								azimuthEnd=-999;
-								azimuthStart=-999;
-								Maxelevation=-999;
-								timeStop=-999;
-								timeStop=-999;
-							}
+							jumlatStart = -999;
+							jumlongStart = -999;
+							jumlatStop = -999;
+							jumlongStop = -999;
+							azimuthEnd=-999;
+							azimuthStart=-999;
+							Maxelevation=-999;
+							timeStop=-999;
+							timeStop=-999;
+						}
 						
 					}
 				}
 
-		L.polyline(latlngsArr, {
-			color: 'green',
+				L.polyline(latlngsArr, {
+					color: 'green',
 					            weight: 2,//ขนาดของเส้น
 					            opacity: .50, //ความโปร่งแสง
 					            dashArray: '5,15', //ความถี่มากสุดต่ำสุด
 					        }).addTo(mymap);
-	}
+			}
 
-	if( StartDateTemp > EndDateTemp){
-		$.uiAlert({
+			if( StartDateTemp > EndDateTemp){
+				$.uiAlert({
             textHead: "กรุณากรอกเวลาให้ถูกต้อง", // header
             text: '', // Text
             bgcolor: '#DB2828', // background-color
@@ -374,11 +374,11 @@ var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
             position: 'top-center',// position . top And bottom ||  left / center / right
             icon: 'remove circle', // icon in semantic-UI
             time: 3, // time
-          })
-		
-	}
-	if( ($('#selectSatellite')[0].innerHTML == 'ดาวเทียม')){
-		$.uiAlert({
+        })
+
+			}
+			if( ($('#selectSatellite')[0].innerHTML == 'ดาวเทียม')){
+				$.uiAlert({
             textHead: "กรุณาเลือกดาวเทียม", // header
             text: '', // Text
             bgcolor: '#DB2828', // background-color
@@ -386,18 +386,24 @@ var WorldWarp=[[85,-180], [85, 232], [-85,232], [-85,-180]];
             position: 'top-center',// position . top And bottom ||  left / center / right
             icon: 'remove circle', // icon in semantic-UI
             time: 3, // time
-          })
+        })
 
-	
-	}
 
-	$("#tableshow tr").remove();
-	for (var i = 0; i < ArrData.length ; i++) { 
+			}
 
-		$('#tableshow').append("<tr class='item' id="+ArrData[i][5]+"> <td>"+ArrData[i][0].getDate()+"/"+(ArrData[i][0].getMonth()+1)+"/"+ArrData[i][0].getFullYear()+"</td><td>"+ArrData[i][0].toLocaleTimeString()+"</td><td>"+ArrData[i][2]+"</td><td>"+ArrData[i][3]+"</td><td>"+ArrData[i][4]+"</td><td>"+ArrData[i][1].toLocaleTimeString()+"</tr>");
+			$("#tableshow tr").remove();
 
-	}
-});
+			for (var i = 0; i < ArrData.length ; i++) { 
+				var temp =  moment(ArrData[i][0]); 
+
+				var dateShow = temp.format("D/M/YYYY");
+				var TimeShowStart = temp.format("h:mm:ss A");
+				var TimeShowEnd = moment(ArrData[i][1]).format("h:mm:ss A");
+
+				$('#tableshow').append("<tr class='item' id="+ArrData[i][5]+"> <td>"+dateShow+"</td><td>"+TimeShowStart+"</td><td>"+ArrData[i][2]+"</td><td>"+ArrData[i][3]+"</td><td>"+ArrData[i][4]+"</td><td>"+TimeShowEnd+"</tr>");
+
+			}
+		});
 
 
 $(document).on('click', '.removeLayerALL', function() {

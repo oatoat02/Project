@@ -24,8 +24,9 @@
 					<td> 
 						<center>
 							<?php 
-							$dataspilt = explode(",", $data['time']);
-							echo $dataspilt[0];
+							$dataspilt = explode(" ", $data['time']);
+							$dataspilt2 = explode("/", $dataspilt[0]);
+							echo $dataspilt2[1].'/'.$dataspilt2[0].'/'.$dataspilt2[2];
 							?> 
 
 						</center>
@@ -33,8 +34,8 @@
 					<td> 
 						<center>
 							<?php 
-							$dataspilt = explode(",", $data['time']);
-							echo $dataspilt[1];
+							$dataspilt = explode(" ", $data['time']);
+							echo $dataspilt[1].' '.$dataspilt[2];
 							?> 
 							
 						</center>

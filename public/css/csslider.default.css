@@ -109,10 +109,10 @@
 }
 
 
-@media only screen and (min-width: 471px) and (max-width: 768px) and (orientation: portrait) {
+@media only screen and (min-width: 415px) and (max-width: 768px) and (orientation: portrait) {
   .csslider > ul {
     position: relative;
-    width: 471px;
+    width: 275px;
     height: 420px;
     z-index: 1;
     font-size: 0;
