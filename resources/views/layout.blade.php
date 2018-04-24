@@ -77,7 +77,8 @@
                 @if(Auth::check())
                 
                 <a class="item" href="{{ route('Project.logCollection') }}"><i class="list layout icon"></i>ประวัติการรับสัญาณ</a>
-                
+                <a class="item" href="{{ route('Project.listphoto') }}"><i class="file image outline icon"></i>จัดการรูปภาพ</a>
+                <a class="item" href="{{ route('Project.listsound') }}"><i class="file audio outline icon"></i>จัดการเสียง</a>
                 @endif
               </div>
             </div>
