@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\TLE;
 use App\Sound;
-
+use Auth;
 class SoundController extends Controller
 {
     //
@@ -105,13 +105,17 @@ class SoundController extends Controller
 
 	public function listsound()
 	{
-		$listSound = Sound::orderBy('Date', 'desc')->get();
-		$listTLE = TLE::get();	
-		
-		$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
-		// dd($listSound);
+		if(Auth::check()){
+			$listSound = Sound::orderBy('Date', 'desc')->get();
+			$listTLE = TLE::get();	
+			
+			$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
+			// dd($listSound);
 
-		return view('Project.listsound')->with('listSound',$listSound)->with('listTLE',$listTLE)->with('data',$data);
+			return view('Project.listsound')->with('listSound',$listSound)->with('listTLE',$listTLE)->with('data',$data);
+		}else{
+			return redirect('/login');
+		}
 	}
 	public function deletesound(Request $request)
 	{

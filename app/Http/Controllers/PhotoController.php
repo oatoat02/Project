@@ -7,7 +7,7 @@ use App\Photo;
 use App\TLE;
 use Session;
 use DateTime;
-
+use Auth;
 class PhotoController extends Controller
 {
 	public function AddPhoto(Request $request){ 
@@ -102,12 +102,16 @@ class PhotoController extends Controller
 	}
 	public function listphoto()
 	{
-		$listPhoto = Photo::orderBy('Date', 'desc')->get();
-		$listTLE = TLE::get();	
-		//dd($listPhoto);
-		$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
-		
-		return view('Project.listphoto')->with('listPhoto',$listPhoto)->with('listTLE',$listTLE)->with('data',$data);
+		if(Auth::check()){
+			$listPhoto = Photo::orderBy('Date', 'desc')->get();
+			$listTLE = TLE::get();	
+			//dd($listPhoto);
+			$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
+			
+			return view('Project.listphoto')->with('listPhoto',$listPhoto)->with('listTLE',$listTLE)->with('data',$data);
+		}else{
+			return redirect('/login');
+		}
 	}
 	public function listfindPhoto(Request $request)
 	{
