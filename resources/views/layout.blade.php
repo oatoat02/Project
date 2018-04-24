@@ -31,9 +31,9 @@
 
     <link rel="stylesheet" type="text/css" href="/Aitthi-semanticUiAlert/Semantic-UI-Alert.css">
     <script type="text/javascript" src="/Aitthi-semanticUiAlert/Semantic-UI-Alert.js"></script>
-
-
-    <title>Project</title>
+    
+    <link rel="shortcut icon" href="{{ asset('photo/logo.png') }}">
+    <title>Monitoring and Antenna Control Web Application</title>
   </head>
   <body>
     <div class="ui grid">

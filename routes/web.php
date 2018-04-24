@@ -25,10 +25,14 @@ Route::get('/test',['as'=>'Project.test','uses'=>'MainController@test']);
 Route::get('/PhotoGallery',['as'=>'Project.PhotoGallery','uses'=>'PhotoController@PhotoGallery']);
 Route::post('/PhotoGallery',['as'=>'Project.findPhoto','uses'=>'PhotoController@findPhoto']);
 Route::post('/AddPhoto',['as'=>'Project.AddPhoto','uses'=>'PhotoController@AddPhoto']);
+Route::get('/listphoto',['as'=>'Project.listphoto','uses'=>'PhotoController@listphoto']);
+Route::post('/deletephoto',['as'=>'Project.deletephoto','uses'=>'PhotoController@deletephoto']);
 
 Route::get('/SoundArchive',['as'=>'Project.SoundArchive','uses'=>'SoundController@SoundArchive']);
 Route::post('/SoundArchive',['as'=>'Project.findSound','uses'=>'SoundController@findSound']);
 Route::post('/AddSound',['as'=>'Project.AddSound','uses'=>'SoundController@AddSound']);
+Route::get('/listsound',['as'=>'Project.listsound','uses'=>'SoundController@listsound']);
+Route::post('/deletesound',['as'=>'Project.deletesound','uses'=>'SoundController@deletesound']);
 
 Route::get('/logCollection',['as'=>'Project.logCollection','uses'=>'AntennaController@logCollection']);
 Route::post('/logCollection',['as'=>'Project.findControl','uses'=>'AntennaController@findControl']);
@@ -44,6 +48,7 @@ Route::get('/checktle',['as'=>'Project.checktle','uses'=>'MainController@checktl
 
 Route::get('/register',['as'=>'Project.register','uses'=>'UserController@register']);
 Route::post('/createuser',['as'=>'Project.createuser','uses'=>'UserController@createuser']);
+Route::post('/deleteuser',['as'=>'Project.deleteuser','uses'=>'UserController@deleteuser']);
 Route::get('/tle',['as'=>'Project.tle','uses'=>'TLEController@showtle']);
 Route::post('/addTLE',['as'=>'Project.addTLE','uses'=>'TLEController@addTLE']);
 Route::post('/updateTLE',['as'=>'Project.updateTLE','uses'=>'TLEController@updateTLE']);
@@ -71,3 +76,4 @@ Route::post('/schedulecontrol',['as'=>'Project.schedulecontrol','uses'=>'Antenna
 Route::post('/deleteTle',['as'=>'Project.deleteTle','uses'=>'TLEController@deleteTle']);
 Route::post('/configAZEL',['as'=>'Project.configAZEL','uses'=>'AntennaController@configAZEL']);
 Route::get('/getAZEL',['as'=>'Project.getAZEL','uses'=>'AntennaController@getAZEL']);
+Route::get('/listphoto',['as'=>'Project.listphoto','uses'=>'PhotoController@listphoto']);

@@ -15,8 +15,12 @@ class AntennaController extends Controller
     {
         if(Auth::check()){
 
+            $now = new  DateTime();
+            $timestamp =  date_format($now, 'U');
+            $formatted_date = $now->format('Y-m-d h:i:s A');
+            // dd( ($timestamp));
             $listTLE = TLE::get();
-            $listControl = control::where('status','N')->orderBy('timestamp', 'asc')->get();
+            $listControl = control::where('status','N')->orderBy('timestamp', 'asc') -> where('timestamp', '>',$timestamp)->get();
             // dd($listControl);
             // dd( $listControlNext);
             $deletelist = ControlTime::get();
@@ -25,11 +29,15 @@ class AntennaController extends Controller
                 $data = ControlTime::find($deletelist[$i]->id);
                 $data->delete();
             }
-            $listControlNext=control::where('status','N')->orderBy('timestamp', 'asc')->get();
-            // dd($listControlNext);
+             $now = new  DateTime();
+            $timestamp =  date_format($now, 'U');
+           // $formatted_date = $now->format('Y-m-d h:i:s A');
+            $listControlNext=control::where('status','N') -> where('timestamp', '>',$timestamp)->orderBy('timestamp', 'asc')->get();
+              // dd($listControlNext);
             for ($i = 0 ; $i < sizeof($listControlNext); $i++){
                 $store = new ControlTime;
                 $store->idControl=$listControlNext[$i]->_id;
+                $store->namesatellite=$listControlNext[$i]->namesatellite;
                 $store->status=$listControlNext[$i]->status;
                 $store->timestart=$listControlNext[$i]->timestart;
                 $store->timestop=$listControlNext[$i]->timestop;
@@ -107,9 +115,9 @@ class AntennaController extends Controller
 		$store->status = $request->status;
 		$store->timestart =	$timestart;
 		$store->timestop =	$timestop;
-        $Date =  DateTime::createFromFormat('m/d/Y H:i:s A', $timestart);//ตามformat
-       //d($Date->format('Y-m-d H:i:s'));
-        $store->Date = $Date->format('Y-m-d H:i:s');
+        $Date =  DateTime::createFromFormat('m/d/Y h:i:s A', $timestart);//ตามformat
+       //d($Date->format('Y-m-d h:i:s'));
+        $store->Date = $Date->format('Y-m-d h:i:s');
         // $test=date_format($Date, 'U');
         //dd($Date);
         $store->timestamp =  date_format($Date, 'U');
@@ -156,7 +164,7 @@ class AntennaController extends Controller
         $StartDate = date_create_from_format('d/m/Y', ($request->StartDate));   
         $EndDate = date_create_from_format('d/m/Y', ($request->EndDate));   
 
-        $listControl = control::whereBetween('Date', [ $StartDate->format('Y-m-d H:i:s'), $EndDate->format('Y-m-d H:i:s')])->get();
+        $listControl = control::whereBetween('Date', [ $StartDate->format('Y-m-d h:i:s'), $EndDate->format('Y-m-d h:i:s')])->get();
     // dd($StartDate);
         return view('Project.logCollection')->with('listControl',$listControl);
        

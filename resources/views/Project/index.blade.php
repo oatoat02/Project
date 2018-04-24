@@ -81,17 +81,18 @@
           <h2>Satellite</h2>
 
           <a class="item" href="{{ route('Project.position') }}">
-            <i class="file icon "></i> ตำแหน่งของดาวเทียม</a>
-            <a class="item" href="{{ route('Project.checksatellite') }}">
-              <i class="calendar  icon"></i> ตารางเวลาการรับสัญญาณ</a>
-            </center>
+            <i class="file icon "></i> ตำแหน่งของดาวเทียม
+          </a>
+          <a class="item" href="{{ route('Project.checksatellite') }}">
+            <i class="calendar  icon"></i> ตารางเวลาการรับสัญญาณ</a>
+          </center>
 
           </div>
           <div class="column">
             <center>
-              <h2>Member</h2>
-              <a class="item" href="{{ route('Project.login') }}">
-                <i class="sign in icon "></i> เข้าสู่ระบบ</a>
+              <h2>คลังข้อมูล</h2>
+              <a class="item" href="{{ route('Project.PhotoGallery') }}"><i class="photo icon"></i>คลังรูปภาพ</a>
+                <a class="item" href="{{ route('Project.SoundArchive') }}"><i class="signal icon"></i>คลังเสียง</a>
 
               </center>
             </div>

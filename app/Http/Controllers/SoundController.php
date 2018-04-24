@@ -102,4 +102,27 @@ class SoundController extends Controller
 		return view('Project.SoundArchive')->with('listSound',$listSound)->with('listTLE',$listTLE)
 		->with('data',$data);
 	}
+
+	public function listsound()
+	{
+		$listSound = Sound::orderBy('Date', 'desc')->get();
+		$listTLE = TLE::get();	
+		
+		$data = ['All','All',date("Y/m/d"),date("Y/m/d")];
+		// dd($listSound);
+
+		return view('Project.listsound')->with('listSound',$listSound)->with('listTLE',$listTLE)->with('data',$data);
+	}
+	public function deletesound(Request $request)
+	{
+		 //dd($request);
+		$data = Sound::find($request->id);
+		$filepath=$data->path;
+		// dd($filepath);
+		unlink($filepath);
+		$data->delete();
+		//dd($data);
+		return redirect()->back();
+		
+	}
 }

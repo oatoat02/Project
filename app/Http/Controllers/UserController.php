@@ -112,4 +112,13 @@ class UserController extends Controller
 
         return response()->json($request);
     }
+    public function deleteuser(Request $request)
+    {
+        //dd($request);
+        $data = Users::find($request->id);
+        //dd($data);
+        $data->delete();
+       
+        return redirect()->back();
+    }
 }

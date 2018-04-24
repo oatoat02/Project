@@ -1,22 +1,21 @@
-@extends('layout')
-@section('content')
+@extends('layout') @section('content')
 
 
-<div class="sixteen wide computer sixteen wide tablet sixteen wide mobile column" >
+<div class="sixteen wide computer sixteen wide tablet sixteen wide mobile column">
   <div class="ui segment">
     <div class="ui clearing grey inverted segment">
-      @if(Auth::check())
-      @if(Auth::user()->status=='superadmin' ) 
-      <a class="ui right floated  inverted grey button" style="padding: .5em 1.5em .5em;"" href="{{ route('Project.register') }}">เพิ่มผู้ดูแลระบบ</a>
-      @endif
-      @endif
-      <div class="ui left"><h2>สมาชิกในระบบ</h2></div>
+      @if(Auth::check()) @if(Auth::user()->status=='superadmin' )
+      <a class="ui right floated  inverted grey button" style="padding: .5em 1.5em .5em;" href="{{ route('Project.register') }}">เพิ่มผู้ดูแลระบบ</a>
+      @endif @endif
+      <div class="ui left">
+        <h2>สมาชิกในระบบ</h2>
+      </div>
 
 
     </div>
-      
+
     <br>
-    <table class="ui celled table  " >
+    <table class="ui celled table  ">
       <thead>
         <tr>
           <th>#</th>
@@ -25,13 +24,13 @@
           <th>E-mail</th>
           <th>เบอร์โทรศัพท์</th>
           @if( ( Auth::user()->status=='superadmin' ) )
-          <th>รายละเอียด</th>
+          <th><center>รายละเอียด</center></th>
+          <th><center>ลบ</center></th>
           @endif
         </tr>
       </thead>
       <tbody>
-        <?php $count=1 ?>
-        @foreach($listuser as $user)
+        <?php $count=1 ?> @foreach($listuser as $user)
         <tr>
           <td> {{$count}}</td>
           <td> {{$user->name}}</td>
@@ -41,26 +40,34 @@
           @if( ( Auth::user()->status=='superadmin' ) )
           <td style="width: 275px;">
             <div class="ui buttons" style="font-size: 10px !important; ">
-              <button class="ui green button editProfile" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"  data-email="{{$user->email}}" style="font-size: 12px !important;">แก้ไขข้อมูล</button>
+              <button class="ui green button editProfile" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"
+                data-email="{{$user->email}}" style="font-size: 12px !important;">แก้ไขข้อมูล</button>
               <div class="or"></div>
-              <button class="ui yellow button editClick" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"  data-email="{{$user->email}}" style="font-size: 12px !important;">เปลี่ยนPassword</button>
+              <button class="ui yellow button editClick" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"
+                data-email="{{$user->email}}" style="font-size: 12px !important;">เปลี่ยนPassword</button>
             </div>
           </td>
-            @endif
+          <td>
+            <form action="{{ route('Project.deleteuser') }}" method='post'>
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="id" value="{{ $user->id }}">
+              <button class='ui red button' style="width: 100%" type='submit'>ลบ</button>
+            </form>
+          </td>
+          @endif
 
         </tr>
-        <?php $count++ ?>
-        @endforeach
+        <?php $count++ ?> @endforeach
 
 
       </tbody>
     </table>
-   
 
-  <div class="ui negative message">
-          <p>หากต้องการเพิ่มผู้ดูแลระบบกรุณาติดตอบสอบถามหัวหน้า</p>
-      </div> 
-  </div> 
+
+    <div class="ui negative message">
+      <p>หากต้องการเพิ่มผู้ดูแลระบบกรุณาติดตอบสอบถามหัวหน้า</p>
+    </div>
+  </div>
 
   <br>
   <br>
@@ -70,15 +77,15 @@
       แก้ไขข้อมูล
     </div>
     <div class="content">
-      <div class="ui form" >
+      <div class="ui form">
         <div class="inline fields container">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <input type="hidden" id="iduserEdit" value="" >
+          <input type="hidden" id="iduserEdit" value="">
           <div class="two wide field">
             <label>ชื่อ-นามสกุล&nbsp;&nbsp;:</label>
           </div>
           <div class="fourteen wide field">
-            <input type="text"  id="name" required>
+            <input type="text" id="name" required>
           </div>
         </div>
         <div class="inline fields container">
@@ -86,7 +93,7 @@
             <label>Email&nbsp;&nbsp;:</label>
           </div>
           <div class="fourteen wide field">
-            <input type="email"  id="email" required>
+            <input type="email" id="email" required>
           </div>
         </div>
         <div class="inline fields container">
@@ -94,14 +101,14 @@
             <label>เบอร์โทรศัพท์&nbsp;&nbsp;:</label>
           </div>
           <div class="fourteen wide field">
-            <input type="text"  id="PhoneNumber" maxlength="15" required>
+            <input type="text" id="PhoneNumber" maxlength="15" required>
           </div>
         </div>
 
       </div>
     </div>
     <div class="actions">
-      <div class="ui black deny button" >
+      <div class="ui black deny button">
         ยกเลิก
       </div>
 
@@ -115,19 +122,19 @@
   <div class="ui modal" id="editPasswordUser">
     <i class="close icon"></i>
     <div class="header">
-      แก้ไขรหัสผ่าน   
+      แก้ไขรหัสผ่าน
       <div class="nameUser"></div>
     </div>
     <div class="content">
-      <div class="ui form" >
+      <div class="ui form">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="hidden" id="iduserPassword" value="" >
+        <input type="hidden" id="iduserPassword" value="">
         <div class="inline fields container">
           <div class="two wide field">
             <label>รหัสผ่านใหม่&nbsp;&nbsp;:</label>
           </div>
           <div class="fourteen wide field">
-            <input type="password"  id="passwordNew">
+            <input type="password" id="passwordNew">
           </div>
         </div>
         <div class="inline fields container">
@@ -135,14 +142,14 @@
             <label>ยืนยันรหัสผ่าน&nbsp;&nbsp;:</label>
           </div>
           <div class="fourteen wide field">
-            <input type="password"  id="passwordAgain">
+            <input type="password" id="passwordAgain">
           </div>
         </div>
-        
+
       </div>
     </div>
     <div class="actions">
-      <div class="ui black deny button" >
+      <div class="ui black deny button">
         ยกเลิก
       </div>
 
@@ -156,25 +163,25 @@
 </div>
 
 
-</div> 
-<div class="ui basic modal" id="finishPasswordedit" >
-    <i class="close icon"></i>
-    <div class="ui icon header">
-      <i class="checkmark box icon"></i>
-      เปลี่ยนรหัสผ่าน user สำเร็จ
-    </div>
-
+</div>
+<div class="ui basic modal" id="finishPasswordedit">
+  <i class="close icon"></i>
+  <div class="ui icon header">
+    <i class="checkmark box icon"></i>
+    เปลี่ยนรหัสผ่าน user สำเร็จ
   </div>
-  <div class="ui basic modal" id="finisheditProfile" >
-    <i class="close icon"></i>
-    <div class="ui icon header">
-      <i class="checkmark box icon"></i>
-      แก้ไขข้อมูล user สำเร็จ
-    </div>
 
+</div>
+<div class="ui basic modal" id="finisheditProfile">
+  <i class="close icon"></i>
+  <div class="ui icon header">
+    <i class="checkmark box icon"></i>
+    แก้ไขข้อมูล user สำเร็จ
   </div>
+
+</div>
 <script type="text/javascript">
-  $(document).on('click', '.editProfile', function() {
+  $(document).on('click', '.editProfile', function () {
 
 
     $('#iduserEdit').val($(this).data('id'));
@@ -184,129 +191,122 @@
     $('#editProfile').modal('show');
   });
 
-  $('.actions').on('click', '#confirm', function() {
+  $('.actions').on('click', '#confirm', function () {
 
-     if ( $('#email').val() == '' ) {
+    if ($('#email').val() == '') {
 
-        $.uiAlert({
-            textHead: "email ไม่ถูกต้อง", // header
-            text: ' กรุณาระบุ email ให้ถูกต้อง', // Text
-            bgcolor: '#DB2828', // background-color
-            textcolor: '#fff', // color
-            position: 'top-center',// position . top And bottom ||  left / center / right
-            icon: 'remove circle', // icon in semantic-UI
-            time: 3, // time
-          })
-        return false;
-      }
-      if( $('#name').val() == '' ){
-        $.uiAlert({
-            textHead: "ชื่อ-นามสกุล ไม่ถูกต้อง", // header
-            text: ' กรุณาระบุ ชื่อ-นามสกุล', // Text
-            bgcolor: '#DB2828', // background-color
-            textcolor: '#fff', // color
-            position: 'top-center',// position . top And bottom ||  left / center / right
-            icon: 'remove circle', // icon in semantic-UI
-            time: 3, // time
-          })
-        return false;
-
-      } 
-      if( $('#PhoneNumber').val() == '' ){
-        $.uiAlert({
-              textHead: "เบอร์โทรศัพท์ไม่ถูกต้อง", // header
-              text: ' กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง', // Text
-              bgcolor: '#DB2828', // background-color
-              textcolor: '#fff', // color
-              position: 'top-center',// position . top And bottom ||  left / center / right
-              icon: 'remove circle', // icon in semantic-UI
-              time: 3, // time
-            })
-        return false;
-
-      }
-    
-      $.ajax({
-        type: 'post',
-        url: '/editProfile',
-        data: {
-          '_token': $('input[name=_token]').val(),
-          'id': $('#iduserEdit').val(),
-          'name': $('#name').val(),
-          'email': $('#email').val(),
-          'PhoneNumber': $('#PhoneNumber').val()
-
-        },
-        success: function(data) {
-          $('#finisheditProfile').modal({
-                  onHide: function(){
-                      location.reload();
-
-                  },
-                  onShow: function(){
-                      console.log('shown');
-                  }
-      
-              }).modal('show');
-              
-
-        }
+      $.uiAlert({
+        textHead: "email ไม่ถูกต้อง", // header
+        text: ' กรุณาระบุ email ให้ถูกต้อง', // Text
+        bgcolor: '#DB2828', // background-color
+        textcolor: '#fff', // color
+        position: 'top-center', // position . top And bottom ||  left / center / right
+        icon: 'remove circle', // icon in semantic-UI
+        time: 3, // time
       })
-    
+      return false;
+    }
+    if ($('#name').val() == '') {
+      $.uiAlert({
+        textHead: "ชื่อ-นามสกุล ไม่ถูกต้อง", // header
+        text: ' กรุณาระบุ ชื่อ-นามสกุล', // Text
+        bgcolor: '#DB2828', // background-color
+        textcolor: '#fff', // color
+        position: 'top-center', // position . top And bottom ||  left / center / right
+        icon: 'remove circle', // icon in semantic-UI
+        time: 3, // time
+      })
+      return false;
+
+    }
+    if ($('#PhoneNumber').val() == '') {
+      $.uiAlert({
+        textHead: "เบอร์โทรศัพท์ไม่ถูกต้อง", // header
+        text: ' กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง', // Text
+        bgcolor: '#DB2828', // background-color
+        textcolor: '#fff', // color
+        position: 'top-center', // position . top And bottom ||  left / center / right
+        icon: 'remove circle', // icon in semantic-UI
+        time: 3, // time
+      })
+      return false;
+
+    }
+
+    $.ajax({
+      type: 'post',
+      url: '/editProfile',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'id': $('#iduserEdit').val(),
+        'name': $('#name').val(),
+        'email': $('#email').val(),
+        'PhoneNumber': $('#PhoneNumber').val()
+
+      },
+      success: function (data) {
+        $('#finisheditProfile').modal({
+          onHide: function () {
+            location.reload();
+
+          },
+          onShow: function () {
+            console.log('shown');
+          }
+
+        }).modal('show');
+
+
+      }
+    })
+
   });
-  $(document).on('click', '.editClick', function() {
+  $(document).on('click', '.editClick', function () {
     $('#iduserPassword').val($(this).data('id'));
     $('#editPasswordUser').modal('show');
   });
 
-  $('.actions').on('click', '#testSubmit', function() {
-    if( ($('#passwordNew').val()!= $('#passwordAgain').val() )|| ($('#passwordNew').val()=='')||($('#passwordAgain').val()=='') ){
+  $('.actions').on('click', '#testSubmit', function () {
+    if (($('#passwordNew').val() != $('#passwordAgain').val()) || ($('#passwordNew').val() == '') || ($(
+        '#passwordAgain').val() == '')) {
       $.uiAlert({
-            textHead: "รหัสผ่านไม่ถูกต้อง", // header
-            text: ' กรุณาระบุรหัสผ่านให้เหมือนกันทั้ง2ช่อง', // Text
-            bgcolor: '#DB2828', // background-color
-            textcolor: '#fff', // color
-            position: 'top-center',// position . top And bottom ||  left / center / right
-            icon: 'remove circle', // icon in semantic-UI
-            time: 3, // time
-          })
-        return false;
-    }
-    else{
+        textHead: "รหัสผ่านไม่ถูกต้อง", // header
+        text: ' กรุณาระบุรหัสผ่านให้เหมือนกันทั้ง2ช่อง', // Text
+        bgcolor: '#DB2828', // background-color
+        textcolor: '#fff', // color
+        position: 'top-center', // position . top And bottom ||  left / center / right
+        icon: 'remove circle', // icon in semantic-UI
+        time: 3, // time
+      })
+      return false;
+    } else {
       $.ajax({
         type: 'post',
         url: '/editPasswordUser',
         data: {
           '_token': $('input[name=_token]').val(),
-          'password' : $('#passwordNew').val(),
-          'id' : $('#iduserPassword').val(),
+          'password': $('#passwordNew').val(),
+          'id': $('#iduserPassword').val(),
 
 
         },
-        success: function(data) {
+        success: function (data) {
           $('#finishPasswordedit').modal({
-                  onHide: function(){
-                      location.reload();
+            onHide: function () {
+              location.reload();
 
-                  },
-                  onShow: function(){
-                      console.log('shown');
-                  }
-      
-              }).modal('show');
-              
+            },
+            onShow: function () {
+              console.log('shown');
+            }
+
+          }).modal('show');
+
 
         }
       })
     }
-  
+
   });
-
-
-
-
-
-
 </script>
 @stop
-
