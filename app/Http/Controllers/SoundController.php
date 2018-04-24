@@ -125,4 +125,48 @@ class SoundController extends Controller
 		return redirect()->back();
 		
 	}
+	public function listfindSound(Request $request)
+	{
+	
+		/*Session::put('selectSatellite',$request->input('SatelliteName'));*/
+		$StartDate = date_create_from_format('d/m/Y H:i:s', ($request->StartDate).' 00:00:00');
+        $EndDate = date_create_from_format('d/m/Y H:i:s', ($request->EndDate).' 23:59:00');  
+		$listTLE = TLE::get();
+
+
+		if($request->SatelliteName == 'All')
+		{
+			if($request->Durations == 'All')
+			{
+				$listSound = Sound::orderBy('Date', 'desc')->orderBy('Date', 'desc')->get();
+
+			}else
+			{
+				$listSound = Sound::whereBetween('Date',[ $StartDate->format('Y-m-d H:i:s'), $EndDate->format('Y-m-d H:i:s')])->get();
+
+
+			}
+		}else if($request->SatelliteName != 'All')
+		{
+			if($request->Durations == 'All')
+			{
+				$listSound = Sound::where('SatelliteName',$request->SatelliteName)->orderBy('Date', 'desc')->get();
+				
+
+			}else if($request->Durations != 'All')
+			{
+				$listSound = Sound::where('SatelliteName',$request->SatelliteName)->whereBetween('Date', [ $StartDate->format('Y-m-d H:i:s'), $EndDate->format('Y-m-d H:i:s')])->orderBy('Date', 'desc')->get();
+
+			}
+		}
+
+
+		$data = [$request->SatelliteName ,$request->Durations ,$request->StartDate ,$request->EndDate];
+		
+		
+		
+		return view('Project.listsound')->with('listSound',$listSound)->with('listTLE',$listTLE)
+		->with('data',$data);
+	}
+
 }

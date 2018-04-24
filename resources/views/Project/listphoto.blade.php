@@ -14,7 +14,7 @@
 		</div>
 		<br>
 
-		<form action="{{ route('Project.findPhoto') }}" method="post" class="ui form segment">
+		<form action="{{ route('Project.listfindPhoto') }}" method="post" class="ui form segment">
 
 			<h4 class="ui dividing header">ค้นหารูปภาพ</h4>
 

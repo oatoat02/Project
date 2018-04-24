@@ -12,7 +12,7 @@
         </div>
         <br>
 
-        <form action="{{ route('Project.findSound') }}" method="post" class="ui form segment">
+        <form action="{{ route('Project.listfindSound') }}" method="post" class="ui form segment">
 
             <h4 class="ui dividing header">ค้นหาข้อมูลเสียง</h4>
 

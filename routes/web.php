@@ -27,12 +27,14 @@ Route::post('/PhotoGallery',['as'=>'Project.findPhoto','uses'=>'PhotoController@
 Route::post('/AddPhoto',['as'=>'Project.AddPhoto','uses'=>'PhotoController@AddPhoto']);
 Route::get('/listphoto',['as'=>'Project.listphoto','uses'=>'PhotoController@listphoto']);
 Route::post('/deletephoto',['as'=>'Project.deletephoto','uses'=>'PhotoController@deletephoto']);
+Route::post('/listfindPhoto',['as'=>'Project.listfindPhoto','uses'=>'PhotoController@listfindPhoto']);
 
 Route::get('/SoundArchive',['as'=>'Project.SoundArchive','uses'=>'SoundController@SoundArchive']);
 Route::post('/SoundArchive',['as'=>'Project.findSound','uses'=>'SoundController@findSound']);
 Route::post('/AddSound',['as'=>'Project.AddSound','uses'=>'SoundController@AddSound']);
 Route::get('/listsound',['as'=>'Project.listsound','uses'=>'SoundController@listsound']);
 Route::post('/deletesound',['as'=>'Project.deletesound','uses'=>'SoundController@deletesound']);
+Route::post('/listfindSound',['as'=>'Project.listfindSound','uses'=>'SoundController@listfindSound']);
 
 Route::get('/logCollection',['as'=>'Project.logCollection','uses'=>'AntennaController@logCollection']);
 Route::post('/logCollection',['as'=>'Project.findControl','uses'=>'AntennaController@findControl']);
@@ -76,4 +78,3 @@ Route::post('/schedulecontrol',['as'=>'Project.schedulecontrol','uses'=>'Antenna
 Route::post('/deleteTle',['as'=>'Project.deleteTle','uses'=>'TLEController@deleteTle']);
 Route::post('/configAZEL',['as'=>'Project.configAZEL','uses'=>'AntennaController@configAZEL']);
 Route::get('/getAZEL',['as'=>'Project.getAZEL','uses'=>'AntennaController@getAZEL']);
-Route::get('/listphoto',['as'=>'Project.listphoto','uses'=>'PhotoController@listphoto']);
