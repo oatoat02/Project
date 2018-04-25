@@ -1,4 +1,7 @@
 @extends('layout') @section('content')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
 <div class="sixteen wide computer sixteen wide tablet sixteen wide mobile column">
     <div class="ui segment">
         <div class="ui clearing grey inverted segment">
@@ -83,38 +86,40 @@
             $('.selectSatellite').dropdown('set selected', '{{$data[0]}}');
             $('.selectDurations').dropdown('set selected', '{{$data[1]}}');
         </script>
-        <table class="ui celled table">
+       
+        <table class="ui celled table" id="example">
+        
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Satellite</th>
-                    <th>Download</th>
-                    <th>ลบ</th>
+                    <th><center>Date</center></th>
+                    <th><center>Time</center></th>
+                    <th><center>Satellite</center></th>
+                    <th><center>Download</center></th>
+                    <th><center>ลบ</center></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($listSound as $Item)
 
                 <tr>
-                    <td>
+                    <td><center>
                         {{ $Item->DateAcquired }}
-                    </td>
-                    <td>
+                    </center></td>
+                    <td><center>
                         {{ $Item->TimeAcquired }}
-                    </td>
-                    <td>{{ $Item->SatelliteName }}</td>
-                    <td>
+                    </center></td>
+                    <td><center>{{ $Item->SatelliteName }}</center></td>
+                    <td><center>
                         <a href="{{ $Item->path }}" download>
                             <i class="download icon"></i>Download</a>
-                    </td>
-                    <td>
+                    </center></td>
+                    <td><center>
                         <form action="{{ route('Project.deletesound') }}" method='post'>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="id" value="{{ $Item->id }}">
-                            <button class='ui red button' style="width: 95%" type='submit'>ลบ</button>
+                            <button class='ui red button' style="width: 70%" type='submit'>ลบ</button>
                         </form>
-                    </td>
+                    </center></td>
 
                 </tr>
 
@@ -123,6 +128,7 @@
             </tbody>
 
         </table>
+        <br>
     </div>
 
 </div>
@@ -226,6 +232,7 @@
 </div>
 
 <script type="text/javascript">
+	$('#example').DataTable();
     $(function () {
 
         var bar = $('.bar');

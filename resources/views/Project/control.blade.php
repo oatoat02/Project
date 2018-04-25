@@ -210,7 +210,39 @@
 
 
 
-<script type="text/javascript" src="/js/date.js"></script>
+<script type="text/javascript" >
+var today = new Date();
+$('#Startcalendar').calendar({
+	type: 'date',
+	
+	endCalendar: $('#Endcalendar'),
+	monthFirst: false,
+	formatter: {
+		date: function (date, settings) {
+			
+			if(!date) return '';
+			var day = ("0" + date.getDate()).slice(-2);
+			var month = ("0" + (date.getMonth() + 1)).slice(-2);
+			var year = date.getFullYear();
+			return day + '/' + month + '/' + year;
+		}
+	}
+});
+$('#Endcalendar').calendar({
+	type: 'date',
+	startCalendar: $('#Startcalendar'),
+	monthFirst: false,
+	formatter: {
+		date: function (date, settings) {
+			if(!date) return '';
+			var day = ("0" + date.getDate()).slice(-2);
+			var month = ("0" + (date.getMonth() + 1)).slice(-2);
+			var year = date.getFullYear();
+			return day + '/' + month + '/' + year;
+		}
+	}
+});
+</script>
 <script type="text/javascript">
 	
 	circle = L.circle([13.12036, 100.91972], 2000000);
@@ -522,7 +554,7 @@
 							timeStop=timeArr[i];
 							var temp =  moment(timeArr[i]); 
 							var date = temp.format("M/D/YYYY, h:mm:ss A");
-							console.log(date);
+							//console.log(date);
 							arrFree[0] = date;;
 							arrFree[1] = azimuthArr[i];
 							arrFree[2] = elevationArr[i]

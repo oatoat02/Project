@@ -238,4 +238,12 @@ body{
 	}
 	
 }
-
+#example_length{
+	padding: 10px;
+}
+#example_filter{
+	padding: 10px;
+}
+#example_paginate{
+	padding: 10px;
+}

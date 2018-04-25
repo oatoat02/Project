@@ -1,5 +1,7 @@
 @extends('layout') @section('content')
-
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
 <div class="sixteen wide computer sixteen wide tablet sixteen wide mobile column">
 	<div class="ui segment">
 		<div class="ui clearing grey inverted segment">
@@ -85,9 +87,9 @@
 		$('.selectSatellite').dropdown('set selected', '{{$data[0]}}');
 		$('.selectDurations').dropdown('set selected', '{{$data[1]}}');
 	</script>
-	<br>
 
-	<table class="ui celled table">
+
+	<table class="ui celled table" id="example">
 
 
 		<thead>
@@ -130,25 +132,28 @@
 				</td>
 				<td>
 					<center>
-						<button class='ui green button ShowPhoto' id="photopath" data-PathValue="{{ $Data->path }}" style="width: 95%" type='submit'>ดูรูปภาพ</button>
+						<button class='ui green button ShowPhoto' id="photopath" data-PathValue="{{ $Data->path }}" style="width: 70%" type='submit'>ดูรูปภาพ</button>
 					</center>
 				</td>
 				<td>
-					<form action="{{ route('Project.deletephoto') }}" method='post'>
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="hidden" name="id" value="{{ $Data->id }}">
-						<button class='ui red button' style="width: 95%" type='submit'>ลบ</button>
-					</form>
+					<center>
+						<form action="{{ route('Project.deletephoto') }}" method='post'>
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<input type="hidden" name="id" value="{{ $Data->id }}">
+							<button class='ui red button' style="width: 70%" type='submit'>ลบ</button>
+						</form>
+					</center>
 				</td>
 
 			</tr>
 			@endforeach
 		</tbody>
 	</table>
-</div>
-
 
 </div>
+
+</div>
+
 
 
 
@@ -243,70 +248,73 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="/js/date.js"></script><script type="text/javascript">
-$(document).on('click', '.AddPhoto', function () {
+<script type="text/javascript" src="/js/date.js"></script>
+<script type="text/javascript">
+	$('#example').DataTable();
 
-	$('#AddPhoto').modal({
-		onShow: function () {
-			$('#DateAcquired').calendar({
-				type: 'date',
-				monthFirst: false,
-				formatter: {
-					date: function (date, settings) {
-						if (!date) return '';
-						var day = ("0" + date.getDate()).slice(-2);
-						var month = ("0" + (date.getMonth() + 1)).slice(-2);
-						var year = date.getFullYear();
-						return day + '/' + month + '/' + year;
+	$(document).on('click', '.AddPhoto', function () {
+
+		$('#AddPhoto').modal({
+			onShow: function () {
+				$('#DateAcquired').calendar({
+					type: 'date',
+					monthFirst: false,
+					formatter: {
+						date: function (date, settings) {
+							if (!date) return '';
+							var day = ("0" + date.getDate()).slice(-2);
+							var month = ("0" + (date.getMonth() + 1)).slice(-2);
+							var year = date.getFullYear();
+							return day + '/' + month + '/' + year;
+						}
 					}
-				}
-			});
-		},
-		onApprove: function () {
-			return false; //block the modal here
+				});
+			},
+			onApprove: function () {
+				return false; //block the modal here
+			}
+
+		}).modal('show');
+	});
+	$(document).on('click', '.ShowPhoto', function () {
+		console.log('sss');
+		var path = ($(this).data('pathvalue'));
+
+
+		$("#fullImage").attr("src", path);
+		$('#ShowPhoto').modal('show');
+	});
+
+
+	$('.actions').on('click', '#SubmitAddPhoto', function () {
+
+
+		console.log($('#SatelliteNameAdd').val());
+		if ($('#SatelliteNameAdd').val() == '-') {
+
+			$.uiAlert({
+				textHead: "ชื่อดาวเทียม ไม่ถูกต้อง", // header
+				text: '', // Text
+				bgcolor: '#DB2828', // background-color
+				textcolor: '#fff', // color
+				position: 'top-center', // position . top And bottom ||  left / center / right
+				icon: 'remove circle', // icon in semantic-UI
+				time: 3, // time
+			})
+			return false;
 		}
-
-	}).modal('show');
-});
-$(document).on('click', '.ShowPhoto', function () {
-	console.log('sss');
-	var path = ($(this).data('pathvalue'));
-
-
-	$("#fullImage").attr("src", path);
-	$('#ShowPhoto').modal('show');
-});
-
-
-$('.actions').on('click', '#SubmitAddPhoto', function () {
-
-
-	console.log($('#SatelliteNameAdd').val());
-	if ($('#SatelliteNameAdd').val() == '-') {
-
-		$.uiAlert({
-			textHead: "ชื่อดาวเทียม ไม่ถูกต้อง", // header
-			text: '', // Text
-			bgcolor: '#DB2828', // background-color
-			textcolor: '#fff', // color
-			position: 'top-center', // position . top And bottom ||  left / center / right
-			icon: 'remove circle', // icon in semantic-UI
-			time: 3, // time
-		})
-		return false;
-	}
-	if (document.getElementById("photo").files.length == 0) {
-		$.uiAlert({
-			textHead: "โปรดเลือกรูปภาพ", // header
-			text: '', // Text
-			bgcolor: '#DB2828', // background-color
-			textcolor: '#fff', // color
-			position: 'top-center', // position . top And bottom ||  left / center / right
-			icon: 'remove circle', // icon in semantic-UI
-			time: 3, // time
-		})
-		return false;
-	}
-});
+		if (document.getElementById("photo").files.length == 0) {
+			$.uiAlert({
+				textHead: "โปรดเลือกรูปภาพ", // header
+				text: '', // Text
+				bgcolor: '#DB2828', // background-color
+				textcolor: '#fff', // color
+				position: 'top-center', // position . top And bottom ||  left / center / right
+				icon: 'remove circle', // icon in semantic-UI
+				time: 3, // time
+			})
+			return false;
+		}
+	});
 </script>
 @stop

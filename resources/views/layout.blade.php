@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <link rel="stylesheet" href="/semantic-ui-calendar/dist/calendar.css" />
     <link rel="stylesheet" type="text/css" href="/pace-1.0.2/themes/blue/pace-theme-loading-bar.css">
-
+    
     <script type="text/javascript" src="/pace-1.0.2/pace.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/semantic-ui-calendar/dist/calendar.js"></script>

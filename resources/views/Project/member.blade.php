@@ -1,5 +1,8 @@
 @extends('layout') @section('content')
 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
 
 <div class="sixteen wide computer sixteen wide tablet sixteen wide mobile column">
   <div class="ui segment">
@@ -15,44 +18,77 @@
     </div>
 
     <br>
-    <table class="ui celled table  ">
+    <table class="ui celled table " id="example">
       <thead>
         <tr>
-          <th>#</th>
-          <th>ชื่อ-นามสกุล</th>
-          <th>Username</th>
-          <th>E-mail</th>
-          <th>เบอร์โทรศัพท์</th>
+          <th>
+            <center>#</center>
+          </th>
+          <th>
+            <center>ชื่อ-นามสกุล</center>
+          </th>
+          <th>
+            <center>Username</center>
+          </th>
+          <th>
+            <center>E-mail</center>
+          </th>
+          <th>
+            <center>เบอร์โทรศัพท์</center>
+          </th>
           @if( ( Auth::user()->status=='superadmin' ) )
-          <th><center>รายละเอียด</center></th>
-          <th><center>ลบ</center></th>
+          <th style="width: 20%;">
+            <center>รายละเอียด</center>
+          </th>
+          <th>
+            <center>ลบ</center>
+          </th>
           @endif
         </tr>
       </thead>
       <tbody>
         <?php $count=1 ?> @foreach($listuser as $user)
         <tr>
-          <td> {{$count}}</td>
-          <td> {{$user->name}}</td>
-          <td> {{$user->username}} </td>
-          <td> {{$user->email }}</td>
-          <td> {{$user->PhoneNumber}}</td>
-          @if( ( Auth::user()->status=='superadmin' ) )
-          <td style="width: 275px;">
-            <div class="ui buttons" style="font-size: 10px !important; ">
-              <button class="ui green button editProfile" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"
-                data-email="{{$user->email}}" style="font-size: 12px !important;">แก้ไขข้อมูล</button>
-              <div class="or"></div>
-              <button class="ui yellow button editClick" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"
-                data-email="{{$user->email}}" style="font-size: 12px !important;">เปลี่ยนPassword</button>
-            </div>
+          <td>
+            <center> {{$count}}
+              <center>
           </td>
           <td>
-            <form action="{{ route('Project.deleteuser') }}" method='post'>
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" name="id" value="{{ $user->id }}">
-              <button class='ui red button' style="width: 100%" type='submit'>ลบ</button>
-            </form>
+            <center> {{$user->name}}
+              <center>
+          </td>
+          <td>
+            <center> {{$user->username}}
+              <center>
+          </td>
+          <td>
+            <center> {{$user->email }}
+              <center>
+          </td>
+          <td>
+            <center> {{$user->PhoneNumber}}
+              <center>
+          </td>
+          @if( ( Auth::user()->status=='superadmin' ) )
+          <td>
+            <center>
+              <div class="ui buttons" style="font-size: 10px !important; ">
+                <button class="ui green button editProfile" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"
+                  data-email="{{$user->email}}" style="font-size: 12px !important;">แก้ไขข้อมูล</button>
+                <div class="or"></div>
+                <button class="ui yellow button editClick" data-id="{{$user->id}}" data-name="{{$user->name}}" data-phonenumber="{{$user->PhoneNumber}}"
+                  data-email="{{$user->email}}" style="font-size: 12px !important;">เปลี่ยนPassword</button>
+              </div>
+              <center>
+          </td>
+          <td>
+            <center>
+              <form action="{{ route('Project.deleteuser') }}" method='post'>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="id" value="{{ $user->id }}">
+                <button class='ui red button' style="width: 70%" type='submit'>ลบ</button>
+              </form>
+              <center>
           </td>
           @endif
 
@@ -181,6 +217,7 @@
 
 </div>
 <script type="text/javascript">
+  $('#example').DataTable();
   $(document).on('click', '.editProfile', function () {
 
 
