@@ -44,7 +44,7 @@ class MainController extends Controller
                 $string1 = $controlComplete[$i]['timestart'];
                 $dataspilt = explode(" ", $string1);
                 $dataspilt2= explode("/", $dataspilt[0]);
-                
+                //dd($dataspilt2);
                 if($dataspilt2[0] == "1")
                 {
                     $month[0]=$month[0]+1;

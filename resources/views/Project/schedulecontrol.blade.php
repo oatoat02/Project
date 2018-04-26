@@ -7,7 +7,7 @@
 	<div class="ui segment">
 
 		<div class="ui grey inverted segment">
-			<h2>เวลาการรับสัญญาณดาวเทียม {{ $listdata->namesatellite }} </h2>
+			<h2>เวลาการขับเคลื่อนเสาอากาศ : {{ $listdata->namesatellite }} </h2>
 		</div>
 		<table class="ui celled structured table " id="example">
 

@@ -107,7 +107,7 @@
 			</th>
 
 			<th>
-				<center>ลบ</center>
+				<center>ลบรูปภาพ</center>
 			</th>
 
 

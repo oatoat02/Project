@@ -75,7 +75,7 @@
 	<br>
 	<div class="ui segment" style="height: ">
 		<div class="ui grey inverted segment">
-			<h2>ประวัติการรับสัญญาณ</h2>
+			<h2>ประวัติการสั่งการเคลื่อนที่เสาอากาศ/h2>
 
 		</div>
 		<div id="highcharts" style=" height: 100%; width: 100%; margin: 0 auto"></div>
@@ -85,7 +85,7 @@
 <div class="eight wide computer eight wide tablet sixteen wide mobile column">
 	<div class=" ui segment">
 		<div class="ui grey inverted segment">
-			<h2>เช็คเวลารับสัญญาณ</h2>
+			<h2>เช็คเวลาการเคลื่อนที่เสาอากาศ</h2>
 		</div>
 		<div class="ui form">
 			<div class="two fields">

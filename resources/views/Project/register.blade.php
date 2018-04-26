@@ -5,7 +5,7 @@
     
     <div class="ui segment container" >
     <div class="ui grey inverted segment" style="background-color:#607d8b">
-      <center><h3>สมัครสมาชิก</h3></center>
+      <center><h3>เพิ่มผู้ดูแลระบบ</h3></center>
     </div>
       @if (session('status'))
         

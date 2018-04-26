@@ -7,7 +7,7 @@
 	<div class="ui segment">
 
 		<div class="ui grey inverted segment">
-			<h2>ประวัติการรับสัญญาณ</h2>
+			<h2>ประวัติการเคลื่อนที่เสาอากาศ</h2>
 		</div>
 		<br>
 
@@ -58,7 +58,7 @@
 					<center>เวลาสิ้นสุด</center>
 				</th>
 				<th style="width: 12.5%">
-					<center>การรับสัญญาณ</center>
+					<center>การเคลื่อนที่เสาอากาศ</center>
 				</th>
 				<th style="width: 10%">
 					<center>Start

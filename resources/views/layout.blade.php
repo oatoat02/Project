@@ -114,7 +114,7 @@
 
                 <a class="item editProfilelogin" data-id="{{ Auth::user()->id }}" data-name="{{ Auth::user()->name }}"  data-email="{{ Auth::user()->email }}"  data-phonenumber="{{ Auth::user()->PhoneNumber }}"><i class="edit icon"></i>แก้ไขข้อมูลส่วนตัว</a>
                 <a class="item" id="editpassword"><i class="settings icon"></i>เปลี่ยนPassword</a>
-                <a class="item" href="" download='guideadmin.pdf'><i class="warning sign icon"></i>คู่มือแนะนำการใช้เว็ปไซต์</a>
+                <a class="item" href="GuideManual.pdf" download><i class="warning sign icon"></i>คู่มือแนะนำการใช้เว็ปไซต์</a>
                 <a class="item" href="{{ route('Project.logout') }}"><i class="sign out icon"></i>ออกจากระบบ</a>
               </div>
             </div>
