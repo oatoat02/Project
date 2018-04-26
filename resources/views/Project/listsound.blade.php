@@ -255,7 +255,7 @@
                 });
             },
             complete: function () {
-                location.reload();
+                window.location.href="{{ route('Project.listsound') }}";
             }
 
         });
