@@ -175,7 +175,7 @@ for(var i = -60*10 ; i < 2*60*60; i+=5){
     worldCopyJump: true,
     inertia:false,
   }).setView([startlat, startlngs], 2);
-  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
     minZoom: 2,
     maxZoom: 5, 

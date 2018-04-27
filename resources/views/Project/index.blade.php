@@ -223,7 +223,7 @@
               worldCopyJump: true,
               inertia: false,
             }).setView([startlat1NOAA15, startlngs1NOAA15 ], 2);
-            L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
               attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
               minZoom: 2,
               maxZoom: 5,
@@ -351,7 +351,7 @@ var WorldWarp = [
     worldCopyJump: true,
     inertia: false,
   }).setView([startlat1NOAA18, startlngs1NOAA18], 2);
-  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
     minZoom: 2,
     maxZoom: 5,
@@ -474,7 +474,7 @@ var WorldWarp = [
               worldCopyJump: true,
               inertia: false,
             }).setView([50, 50], 2);
-            L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
               attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
               minZoom: 2,
               maxZoom: 5,

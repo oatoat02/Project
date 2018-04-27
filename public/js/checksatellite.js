@@ -3,7 +3,7 @@ var mymap = L.map('mapid',{
 	worldCopyJump: true,
 	inertia:false,
 }).setView([13.11, 100.91972], 4);
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
 	minZoom: 3,
 	maxZoom: 14,
 	/*zoomSnap: 0.25,*/
