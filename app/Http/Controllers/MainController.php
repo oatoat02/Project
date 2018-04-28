@@ -18,7 +18,9 @@ class MainController extends Controller
     {
         if(Auth::check()){
             $listTLE = TLE::get();
-            $listControl = control::where('status','N')->orderBy('timestamp', 'asc')->get();
+            $now = new  DateTime();
+            $timestamp =  date_format($now, 'U');
+            $listControl = control::where('status','N')->where('timestamp', '>',$timestamp)->orderBy('timestamp', 'asc')->get();
             $timestart='';
             $timestop='';
             for($i = 0 ; $i < sizeof($listControl);$i++ ){

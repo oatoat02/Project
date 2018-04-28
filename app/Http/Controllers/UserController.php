@@ -33,8 +33,10 @@ class UserController extends Controller
         $store->username = $request->input('username');
         $store->email = $request->input('email');
         $store->password = Hash::make($request->input('password'));
+        $store->PhoneNumber = $request->PhoneNumber;
         $store->type = 'admin';
         $store->save();
+        // dd($request);
         return redirect('/member');
     }
 
