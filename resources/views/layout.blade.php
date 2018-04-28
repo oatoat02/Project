@@ -92,7 +92,7 @@
                   <i class="large rss icon"></i>ตั้งค่าเสาอากาศล่วงหน้า
                 </a>
                 <a class="item" href="{{ route('Project.tle') }}">
-                  <i class="large rocket icon"></i>TLE
+                  <i class="large rocket icon"></i>จัดการดาวเทียม (TLE)
                 </a>
                 <a class="item" href="{{ route('Project.member') }}">
                   <i class="large users icon"></i>สมาชิก
