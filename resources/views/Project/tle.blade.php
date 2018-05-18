@@ -71,27 +71,27 @@
 		<form action="{{ route('Project.addTLE') }}" method="post" enctype="multipart/form-data">
 			<div class="ui form">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
-				<div class="ui labeled input " style="width:  91.25%;">
-					<div class="ui label ">
-						ชื่อดาวเทียม &nbsp;&nbsp;:
+				<div class="ui labeled input " style="width:  100%;">
+					<div class="ui label " style="width: 10%;">
+					<center>ชื่อดาวเทียม &nbsp;&nbsp;:</center>
 					</div>
-					<input type="text" name="name" required oninvalid="this.setCustomValidity('โปรดระบุชื่อดาวเทียม')" oninput="setCustomValidity('')">
+					<input type="text"  style="width: 90%;" name="name" required oninvalid="this.setCustomValidity('โปรดระบุชื่อดาวเทียม')" oninput="setCustomValidity('')">
 				</div>
 				<br>
 				<br>
-				<div class="ui labeled input " style="width: 95%;">
-					<div class="ui label">
-						Line 1:
+				<div class="ui labeled input " style="width:100%;">
+					<div class="ui label" style="width:10%;">
+					<center>Line 1:</center>
 					</div>
-					<input type="text" placeholder="1 33591U 09005A   17318.89666673 +.00000092 +00000-0 +75275-4 0  9997" name="line1" required oninvalid="this.setCustomValidity('โปรดระบุ Line 1:')" oninput="setCustomValidity('')">
+					<input type="text" style="width:90%;" placeholder="1 33591U 09005A   17318.89666673 +.00000092 +00000-0 +75275-4 0  9997" name="line1" required oninvalid="this.setCustomValidity('โปรดระบุ Line 1:')" oninput="setCustomValidity('')">
 				</div>
 				<br>
 				<br>
-				<div class="ui labeled input " style="width: 95%;">
-					<div class="ui label">
-						Line 2:
+				<div class="ui labeled input " style="width: 100%;">
+					<div class="ui label" style="width:10%;">
+					<center>Line 2:</center>
 					</div>
-					<input type="text" name="line2" placeholder="2 33591 099.1135 288.0102 0013457 205.4152 154.6359 14.12228622451666" required="" oninvalid="this.setCustomValidity('โปรดระบุ Line 2:')" oninput="setCustomValidity('')">
+					<input type="text" style="width:90%;" name="line2" placeholder="2 33591 099.1135 288.0102 0013457 205.4152 154.6359 14.12228622451666" required="" oninvalid="this.setCustomValidity('โปรดระบุ Line 2:')" oninput="setCustomValidity('')">
 				</div>
 				<br>
 				<br>

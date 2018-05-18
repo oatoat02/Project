@@ -151,7 +151,9 @@
 					<center>
 						<?php 
 						$dataspilt = explode(" ", $Data->timestart);
-						echo $dataspilt[0];
+						$dataspilt2 = explode("/",$dataspilt[0]);
+					//$dataspilt2 =explode("-",$dataspilt[0]);;
+					echo $dataspilt2[1].'/'.$dataspilt2[0].'/'.$dataspilt2[2];
 
 						?> 
 					</center>

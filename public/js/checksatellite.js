@@ -162,12 +162,12 @@ mymap.setMaxBounds(WorldWarp);
 					var azimuth   = lookAngles.azimuth,
 					elevation = lookAngles.elevation,
 					rangeSat  = lookAngles.rangeSat;
-
+					console.log("rangeSat: "+rangeSat);
 					// Geodetic coords are accessed via `longitude`, `latitude`, `height`.
 					var longitude = positionGd.longitude,
 					latitude  = positionGd.latitude,
 					height    = positionGd.height;
-
+					console.log("height: "+height);
 					//  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W", etc).
 					var longitudeStr = satellite.degreesLong(longitude),
 					latitudeStr  = satellite.degreesLat(latitude);

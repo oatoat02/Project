@@ -171,19 +171,20 @@ class AntennaController extends Controller
     }
     public function configAZEL(Request $request)
     {
-
+        // dd($request);
 
         $now = new  DateTime();
         $timestamp =  date_format($now, 'U');
 
         $data = configAZEL::find($request->id);
         // dd($request);
+        $checkAZ=intval($request->AzNew);
         if($request->AzNew == null){
             $data->azimuth=$data->azimuth;
         }else{
             $data->azimuth=$request->AzNew;
         }
-
+        $checkEL=intval($request->ElNew);
         if($request->ElNew == null){
             $data->elevation=$data->elevation;
 

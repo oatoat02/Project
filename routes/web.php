@@ -78,3 +78,4 @@ Route::post('/schedulecontrol',['as'=>'Project.schedulecontrol','uses'=>'Antenna
 Route::post('/deleteTle',['as'=>'Project.deleteTle','uses'=>'TLEController@deleteTle']);
 Route::post('/configAZEL',['as'=>'Project.configAZEL','uses'=>'AntennaController@configAZEL']);
 Route::get('/getAZEL',['as'=>'Project.getAZEL','uses'=>'AntennaController@getAZEL']);
+//Route::post('/callback',['as'=>'Project.callback','uses'=>'LineController@callback']);

@@ -55,93 +55,112 @@
       <div class="eight wide field">
         <h3>
           <i class="big file  icon"></i>ตรวจสอบตำแหน่งของดาวเทียม</h3>
-          <label>ตรวจสอบตำแหน่งของดาวเทียม</label>
-          <p>ตรวจสอบตำแหน่งของดาวเทียม จะระบบุตำแหน่งของดาวเทียมบนโลกโดยจะแสดงตำแหน่งของดาวเทียมและแสดงเส้นทางของดาวเทียมที่จะเคลื่อนที่ไป</p>
-        </div>
-        <div class="eight wide field">
-          <h3>
-            <i class="big calendar icon"></i>ตรวจสอบตารางเวลาการรับสัญญาณ</h3>
-            <b>ตรวจสอบตารางเวลาการรับสัญญาณ</b>
-            <p>ตรวจสอบตารางเวลาการรับสัญญาณ ของดาวเทียมแต่ละดวงโดยแสดงตามวันที่ต้องการค้นหา ทั้งวันที่ในอดีตและในปัจจุบัน</p>
-          </div>
-        </div>
+        <label>ตรวจสอบตำแหน่งของดาวเทียม</label>
+        <p>ตรวจสอบตำแหน่งของดาวเทียม จะระบบุตำแหน่งของดาวเทียมบนโลกโดยจะแสดงตำแหน่งของดาวเทียมและแสดงเส้นทางของดาวเทียมที่จะเคลื่อนที่ไป</p>
       </div>
+      <div class="eight wide field">
+        <h3>
+          <i class="big calendar icon"></i>ตรวจสอบตารางเวลาการรับสัญญาณ</h3>
+        <b>ตรวจสอบการเข้าถึงของดาวเทียม</b>
+        <p>ตรวจสอบการเข้าถึงของดาวเทียม ของดาวเทียมแต่ละดวงโดยแสดงตามวันที่ต้องการค้นหา ทั้งวันที่ในอดีตและในปัจจุบัน</p>
+      </div>
+    </div>
+  </div>
+  <div class="ui form segment box3" style="margin: 20px!important;">
+    <div class="fields">
+
+      <div class="eight wide field">
+        <h3>
+          <i class="big photo  icon"></i>คลังรูปภาพ</h3>
+        <label>คลังรูปภาพ</label>
+        <p>คลังรูปภาพ แสดงข้อมูลรูปภาพที่ประมวลผลแล้วที่มีอยู่ในคลังข้อมูลนำไปใช้ประโยชน์ </p>
+      </div>
+      <div class="eight wide field">
+        <h3>
+          <i class="big signal icon"></i>คลังเสียง</h3>
+        <b>คลังเสียง</b>
+        <p>คลังเสียง แสดงข้อเสียงที่มีอยู่ในคลังข้อมูลเพื่อนำไปใช้ประโยชน์</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+
+<div class="ui inverted menu ">
+  <div class="ui four column doubling stackable grid container" style="color: white;">
+    <div class="column">
+      <center>
+
+        <h2>Satellite</h2>
+
+        <a class="item" href="{{ route('Project.position') }}">
+          <i class="file icon "></i> ตำแหน่งของดาวเทียม
+        </a>
+        <a class="item" href="{{ route('Project.checksatellite') }}">
+          <i class="calendar  icon"></i> ตารางเวลาการรับสัญญาณ</a>
+      </center>
+
+    </div>
+    <div class="column">
+      <center>
+        <h2>คลังข้อมูล</h2>
+        <a class="item" href="{{ route('Project.PhotoGallery') }}">
+          <i class="photo icon"></i>คลังรูปภาพ</a>
+        <a class="item" href="{{ route('Project.SoundArchive') }}">
+          <i class="signal icon"></i>คลังเสียง</a>
+
+      </center>
+    </div>
+    <div class="column">
+      <center>
+        <h2>Social Network</h2>
+        <a class="item" href="https://www.facebook.com/gistda/">
+          <i class="icon facebook"></i> GISTDA</a>
+        <a class="item" href="https://www.facebook.com/engineeringSRC/">
+          <i class="icon facebook"></i> Faculty of Engineering at Sriracha</a>
+      </center>
+    </div>
+    <div class="column">
+      <center>
+        <h2>About Us</h2>
+        <p>Department of Computer Engineering</p>
+        <p>Faculty of Engineering at Sriracha,</p>
+        <p>Kasetsart University Sriracha Campus</p>
+      </center>
     </div>
 
   </div>
+  </center>
+</div>
 
 
 
 
-  <div class="ui inverted menu ">
-    <div class="ui four column doubling stackable grid container" style="color: white;">
-      <div class="column">
-        <center>
+<script type="text/javascript">
+  var imgIcon = "Satellite.png"
 
-          <h2>Satellite</h2>
+  /* ----------------------------NOAA15-----------------------------------------------*/
 
-          <a class="item" href="{{ route('Project.position') }}">
-            <i class="file icon "></i> ตำแหน่งของดาวเทียม
-          </a>
-          <a class="item" href="{{ route('Project.checksatellite') }}">
-            <i class="calendar  icon"></i> ตารางเวลาการรับสัญญาณ</a>
-          </center>
-
-          </div>
-          <div class="column">
-            <center>
-              <h2>คลังข้อมูล</h2>
-              <a class="item" href="{{ route('Project.PhotoGallery') }}"><i class="photo icon"></i>คลังรูปภาพ</a>
-                <a class="item" href="{{ route('Project.SoundArchive') }}"><i class="signal icon"></i>คลังเสียง</a>
-
-              </center>
-            </div>
-            <div class="column">
-              <center>
-                <h2>Social Network</h2>
-                <a class="item" href="https://www.facebook.com/gistda/">
-                  <i class="icon facebook"></i> GISTDA</a>
-                  <a class="item" href="https://www.facebook.com/engineeringSRC/">
-                    <i class="icon facebook"></i> Faculty of Engineering at Sriracha</a>
-                  </center>
-                </div>
-                <div class="column">
-                  <center>
-                    <h2>About Us</h2>
-                    <p>Department of Computer Engineering</p>
-                    <p>Faculty of Engineering at Sriracha,</p>
-                    <p>Kasetsart University Sriracha Campus</p>
-                  </center>
-                </div>
-
-              </div>
-            </center>
-          </div>
-
-
-
-
-          <script type="text/javascript">
-            var imgIcon = "Satellite.png"
-           
-            /* ----------------------------NOAA15-----------------------------------------------*/
-            
 
 
   // Sample TLE 
   var nameSatelliteNOAA15 = '<?php echo $tleNOAA15->name ?>';
   var tleLine1NOAA15 = '<?php echo $tleNOAA15->line1 ?>',
-  tleLine2NOAA15 = '<?php echo $tleNOAA15->line2 ?>';
+    tleLine2NOAA15 = '<?php echo $tleNOAA15->line2 ?>';
 
   // Initialize a satellite record 
   var longitudeStrArr1NOAA15 = new Array(),
-  latitudeStrArr1NOAA15 = new Array(),
-  latlngsArr1NOAA15 = new Array(),
-  azimuthArr1NOAA15 = new Array(),
-  elevationArr1NOAA15 = new Array(),
-  timeArr1NOAA15 = new Array();
+    latitudeStrArr1NOAA15 = new Array(),
+    latlngsArr1NOAA15 = new Array(),
+    azimuthArr1NOAA15 = new Array(),
+    elevationArr1NOAA15 = new Array(),
+    timeArr1NOAA15 = new Array();
   startlat1NOAA15 = -99,
-  startlngs1NOAA15 = -99;
+    startlngs1NOAA15 = -99;
   var SatelliteIcon1NOAA15 = L.layerGroup();
   var satrecNOAA15 = satellite.twoline2satrec(tleLine1NOAA15, tleLine2NOAA15);
 
@@ -156,7 +175,7 @@
 
 
     var positionEciNOAA15 = positionAndVelocityNOAA15.position,
-    velocityEciNOAA15 = positionAndVelocityNOAA15.velocity;
+      velocityEciNOAA15 = positionAndVelocityNOAA15.velocity;
 
     // Set the Observer at 122.03 West by 36.96 North, in RADIANS 
     var observerGdNOAA15 = {
@@ -168,30 +187,30 @@
 
     // You can get ECF, Geodetic, Look Angles, and Doppler Factor. 
     var positionEcfNOAA15 = satellite.eciToEcf(positionEciNOAA15, gmstNOAA15),
-    observerEcfNOAA15 = satellite.geodeticToEcf(observerGdNOAA15),
-    positionGdNOAA15 = satellite.eciToGeodetic(positionEciNOAA15, gmstNOAA15),
-    lookAnglesNOAA15 = satellite.ecfToLookAngles(observerGdNOAA15, positionEcfNOAA15);
+      observerEcfNOAA15 = satellite.geodeticToEcf(observerGdNOAA15),
+      positionGdNOAA15 = satellite.eciToGeodetic(positionEciNOAA15, gmstNOAA15),
+      lookAnglesNOAA15 = satellite.ecfToLookAngles(observerGdNOAA15, positionEcfNOAA15);
 
 
     // The coordinates are all stored in key-value pairs. 
     // ECI and ECF are accessed by `x`, `y`, `z` properties. 
     var satelliteXNOAA15 = positionEciNOAA15.x,
-    satelliteYNOAA15 = positionEciNOAA15.y,
-    satelliteZNOAA15 = positionEciNOAA15.z;
+      satelliteYNOAA15 = positionEciNOAA15.y,
+      satelliteZNOAA15 = positionEciNOAA15.z;
 
     // Look Angles may be accessed by `azimuth`, `elevation`, `range_sat` properties. 
     var azimuthNOAA15 = lookAnglesNOAA15.azimuth,
-    elevationNOAA15 = lookAnglesNOAA15.elevation,
-    rangeSatNOAA15 = lookAnglesNOAA15.rangeSat;
+      elevationNOAA15 = lookAnglesNOAA15.elevation,
+      rangeSatNOAA15 = lookAnglesNOAA15.rangeSat;
 
     // Geodetic coords are accessed via `longitude`, `latitude`, `height`. 
     var longitudeNOAA15 = positionGdNOAA15.longitude,
-    latitudeNOAA15 = positionGdNOAA15.latitude,
-    heightNOAA15 = positionGdNOAA15.height;
+      latitudeNOAA15 = positionGdNOAA15.latitude,
+      heightNOAA15 = positionGdNOAA15.height;
 
     //  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W", etc). 
     var longitudeStrNOAA15 = satellite.degreesLong(longitudeNOAA15),
-    latitudeStrNOAA15 = satellite.degreesLat(latitudeNOAA15);
+      latitudeStrNOAA15 = satellite.degreesLat(latitudeNOAA15);
     longitudeStrArr1NOAA15[i] = longitudeStrNOAA15;
     latitudeStrArr1NOAA15[i] = latitudeStrNOAA15;
     azimuthArr1NOAA15[i] = azimuthNOAA15;
@@ -219,27 +238,27 @@
 
   }
 
- var mymap1 = L.map('mapindex1', {
-              worldCopyJump: true,
-              inertia: false,
-            }).setView([startlat1NOAA15, startlngs1NOAA15 ], 2);
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-              attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
-              minZoom: 2,
-              maxZoom: 5,
-              /*zoomSnap: 0.25,*/
-              id: 'mapbox.streets',
+  var mymap1 = L.map('mapindex1', {
+    worldCopyJump: true,
+    inertia: false,
+  }).setView([startlat1NOAA15, startlngs1NOAA15], 2);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
+    minZoom: 2,
+    maxZoom: 5,
+    /*zoomSnap: 0.25,*/
+    id: 'mapbox.streets',
     // subdomains:['mt0','mt1','mt2','mt3'],
     accessToken: 'your.mapbox.access.token'
   }).addTo(mymap1);
-var WorldWarp = [
-      [85, -180],
-      [85, 232],
-      [-85, 232],
-      [-85, -180]
-    ];
-    mymap1.setMaxBounds(WorldWarp);
-    L.control.scale().addTo(mymap1);
+  var WorldWarp = [
+    [85, -180],
+    [85, 232],
+    [-85, 232],
+    [-85, -180]
+  ];
+  mymap1.setMaxBounds(WorldWarp);
+  L.control.scale().addTo(mymap1);
 
   L.polyline(latlngsArr1NOAA15, {
     color: 'red',
@@ -253,23 +272,23 @@ var WorldWarp = [
 
   /* ----------------------------NOAA18-----------------------------------------------*/
 
- 
- 
+
+
 
   // Sample TLE 
   var nameSatelliteNOAA18 = '<?php echo $tleNOAA18->name ?>';
   var tleLine1NOAA18 = '<?php echo $tleNOAA18->line1 ?>',
-  tleLine2NOAA18 = '<?php echo $tleNOAA18->line2 ?>';
+    tleLine2NOAA18 = '<?php echo $tleNOAA18->line2 ?>';
 
   // Initialize a satellite record 
   var longitudeStrArr1NOAA18 = new Array(),
-  latitudeStrArr1NOAA18 = new Array(),
-  latlngsArr1NOAA18 = new Array(),
-  azimuthArr1NOAA18 = new Array(),
-  elevationArr1NOAA18 = new Array(),
-  timeArr1NOAA18 = new Array();
+    latitudeStrArr1NOAA18 = new Array(),
+    latlngsArr1NOAA18 = new Array(),
+    azimuthArr1NOAA18 = new Array(),
+    elevationArr1NOAA18 = new Array(),
+    timeArr1NOAA18 = new Array();
   startlat1NOAA18 = -99,
-  startlngs1NOAA18 = -99;
+    startlngs1NOAA18 = -99;
   var SatelliteIcon1NOAA18 = L.layerGroup();
   var satrecNOAA18 = satellite.twoline2satrec(tleLine1NOAA18, tleLine2NOAA18);
 
@@ -284,7 +303,7 @@ var WorldWarp = [
 
 
     var positionEciNOAA18 = positionAndVelocityNOAA18.position,
-    velocityEciNOAA18 = positionAndVelocityNOAA18.velocity;
+      velocityEciNOAA18 = positionAndVelocityNOAA18.velocity;
 
     // Set the Observer at 122.03 West by 36.96 North, in RADIANS 
     var observerGdNOAA18 = {
@@ -296,30 +315,30 @@ var WorldWarp = [
 
     // You can get ECF, Geodetic, Look Angles, and Doppler Factor. 
     var positionEcfNOAA18 = satellite.eciToEcf(positionEciNOAA18, gmstNOAA18),
-    observerEcfNOAA18 = satellite.geodeticToEcf(observerGdNOAA18),
-    positionGdNOAA18 = satellite.eciToGeodetic(positionEciNOAA18, gmstNOAA18),
-    lookAnglesNOAA18 = satellite.ecfToLookAngles(observerGdNOAA18, positionEcfNOAA18);
+      observerEcfNOAA18 = satellite.geodeticToEcf(observerGdNOAA18),
+      positionGdNOAA18 = satellite.eciToGeodetic(positionEciNOAA18, gmstNOAA18),
+      lookAnglesNOAA18 = satellite.ecfToLookAngles(observerGdNOAA18, positionEcfNOAA18);
 
 
     // The coordinates are all stored in key-value pairs. 
     // ECI and ECF are accessed by `x`, `y`, `z` properties. 
     var satelliteXNOAA18 = positionEciNOAA18.x,
-    satelliteYNOAA18 = positionEciNOAA18.y,
-    satelliteZNOAA18 = positionEciNOAA18.z;
+      satelliteYNOAA18 = positionEciNOAA18.y,
+      satelliteZNOAA18 = positionEciNOAA18.z;
 
     // Look Angles may be accessed by `azimuth`, `elevation`, `range_sat` properties. 
     var azimuthNOAA18 = lookAnglesNOAA18.azimuth,
-    elevationNOAA18 = lookAnglesNOAA18.elevation,
-    rangeSatNOAA18 = lookAnglesNOAA18.rangeSat;
+      elevationNOAA18 = lookAnglesNOAA18.elevation,
+      rangeSatNOAA18 = lookAnglesNOAA18.rangeSat;
 
     // Geodetic coords are accessed via `longitude`, `latitude`, `height`. 
     var longitudeNOAA18 = positionGdNOAA18.longitude,
-    latitudeNOAA18 = positionGdNOAA18.latitude,
-    heightNOAA18 = positionGdNOAA18.height;
+      latitudeNOAA18 = positionGdNOAA18.latitude,
+      heightNOAA18 = positionGdNOAA18.height;
 
     //  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W", etc). 
     var longitudeStrNOAA18 = satellite.degreesLong(longitudeNOAA18),
-    latitudeStrNOAA18 = satellite.degreesLat(latitudeNOAA18);
+      latitudeStrNOAA18 = satellite.degreesLat(latitudeNOAA18);
     longitudeStrArr1NOAA18[i] = longitudeStrNOAA18;
     latitudeStrArr1NOAA18[i] = latitudeStrNOAA18;
     azimuthArr1NOAA18[i] = azimuthNOAA18;
@@ -347,7 +366,7 @@ var WorldWarp = [
 
   }
 
- var mymap2 = L.map('mapindex2', {
+  var mymap2 = L.map('mapindex2', {
     worldCopyJump: true,
     inertia: false,
   }).setView([startlat1NOAA18, startlngs1NOAA18], 2);
@@ -367,33 +386,33 @@ var WorldWarp = [
     opacity: .50, //ความโปร่งแสง
 
   }).addTo(mymap2);
-var WorldWarp = [
-      [85, -180],
-      [85, 232],
-      [-85, 232],
-      [-85, -180]
-    ];
-    mymap2.setMaxBounds(WorldWarp);
-    L.control.scale().addTo(mymap2);
+  var WorldWarp = [
+    [85, -180],
+    [85, 232],
+    [-85, 232],
+    [-85, -180]
+  ];
+  mymap2.setMaxBounds(WorldWarp);
+  L.control.scale().addTo(mymap2);
   /* ----------------------------End NOAA18-----------------------------------------------*/
 
   /* ----------------------------NOAA20-----------------------------------------------*/
-         
+
 
   // Sample TLE 
   var nameSatelliteNOAA20 = '<?php echo $tleNOAA20->name ?>';
   var tleLine1NOAA20 = '<?php echo $tleNOAA20->line1 ?>',
-  tleLine2NOAA20 = '<?php echo $tleNOAA20->line2 ?>';
+    tleLine2NOAA20 = '<?php echo $tleNOAA20->line2 ?>';
 
   // Initialize a satellite record 
   var longitudeStrArr1NOAA20 = new Array(),
-  latitudeStrArr1NOAA20 = new Array(),
-  latlngsArr1NOAA20 = new Array(),
-  azimuthArr1NOAA20 = new Array(),
-  elevationArr1NOAA20 = new Array(),
-  timeArr1NOAA20 = new Array();
+    latitudeStrArr1NOAA20 = new Array(),
+    latlngsArr1NOAA20 = new Array(),
+    azimuthArr1NOAA20 = new Array(),
+    elevationArr1NOAA20 = new Array(),
+    timeArr1NOAA20 = new Array();
   startlat1NOAA20 = -99,
-  startlngs1NOAA20 = -99;
+    startlngs1NOAA20 = -99;
   var SatelliteIcon1NOAA20 = L.layerGroup();
   var satrecNOAA20 = satellite.twoline2satrec(tleLine1NOAA20, tleLine2NOAA20);
 
@@ -408,7 +427,7 @@ var WorldWarp = [
 
 
     var positionEciNOAA20 = positionAndVelocityNOAA20.position,
-    velocityEciNOAA20 = positionAndVelocityNOAA20.velocity;
+      velocityEciNOAA20 = positionAndVelocityNOAA20.velocity;
 
     // Set the Observer at 122.03 West by 36.96 North, in RADIANS 
     var observerGdNOAA20 = {
@@ -420,30 +439,30 @@ var WorldWarp = [
 
     // You can get ECF, Geodetic, Look Angles, and Doppler Factor. 
     var positionEcfNOAA20 = satellite.eciToEcf(positionEciNOAA20, gmstNOAA20),
-    observerEcfNOAA20 = satellite.geodeticToEcf(observerGdNOAA20),
-    positionGdNOAA20 = satellite.eciToGeodetic(positionEciNOAA20, gmstNOAA20),
-    lookAnglesNOAA20 = satellite.ecfToLookAngles(observerGdNOAA20, positionEcfNOAA20);
+      observerEcfNOAA20 = satellite.geodeticToEcf(observerGdNOAA20),
+      positionGdNOAA20 = satellite.eciToGeodetic(positionEciNOAA20, gmstNOAA20),
+      lookAnglesNOAA20 = satellite.ecfToLookAngles(observerGdNOAA20, positionEcfNOAA20);
 
 
     // The coordinates are all stored in key-value pairs. 
     // ECI and ECF are accessed by `x`, `y`, `z` properties. 
     var satelliteXNOAA20 = positionEciNOAA20.x,
-    satelliteYNOAA20 = positionEciNOAA20.y,
-    satelliteZNOAA20 = positionEciNOAA20.z;
+      satelliteYNOAA20 = positionEciNOAA20.y,
+      satelliteZNOAA20 = positionEciNOAA20.z;
 
     // Look Angles may be accessed by `azimuth`, `elevation`, `range_sat` properties. 
     var azimuthNOAA20 = lookAnglesNOAA20.azimuth,
-    elevationNOAA20 = lookAnglesNOAA20.elevation,
-    rangeSatNOAA20 = lookAnglesNOAA20.rangeSat;
+      elevationNOAA20 = lookAnglesNOAA20.elevation,
+      rangeSatNOAA20 = lookAnglesNOAA20.rangeSat;
 
     // Geodetic coords are accessed via `longitude`, `latitude`, `height`. 
     var longitudeNOAA20 = positionGdNOAA20.longitude,
-    latitudeNOAA20 = positionGdNOAA20.latitude,
-    heightNOAA20 = positionGdNOAA20.height;
+      latitudeNOAA20 = positionGdNOAA20.latitude,
+      heightNOAA20 = positionGdNOAA20.height;
 
     //  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W", etc). 
     var longitudeStrNOAA20 = satellite.degreesLong(longitudeNOAA20),
-    latitudeStrNOAA20 = satellite.degreesLat(latitudeNOAA20);
+      latitudeStrNOAA20 = satellite.degreesLat(latitudeNOAA20);
     longitudeStrArr1NOAA20[i] = longitudeStrNOAA20;
     latitudeStrArr1NOAA20[i] = latitudeStrNOAA20;
     azimuthArr1NOAA20[i] = azimuthNOAA20;
@@ -470,27 +489,27 @@ var WorldWarp = [
 
 
   }
-   var mymap3 = L.map('mapindex3', {
-              worldCopyJump: true,
-              inertia: false,
-            }).setView([50, 50], 2);
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-              attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
-              minZoom: 2,
-              maxZoom: 5,
-              /*zoomSnap: 0.25,*/
-              id: 'mapbox.streets',
+  var mymap3 = L.map('mapindex3', {
+    worldCopyJump: true,
+    inertia: false,
+  }).setView([50, 50], 2);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Department of Computer Engineering,<a href="http://www.src.ku.ac.th/"> Kasetsart University Sriracha Campus </a>',
+    minZoom: 2,
+    maxZoom: 5,
+    /*zoomSnap: 0.25,*/
+    id: 'mapbox.streets',
     // subdomains:['mt0','mt1','mt2','mt3'],
     accessToken: 'your.mapbox.access.token'
   }).addTo(mymap3);
-var WorldWarp = [
-      [85, -180],
-      [85, 232],
-      [-85, 232],
-      [-85, -180]
-    ];
-    mymap3.setMaxBounds(WorldWarp);
-    L.control.scale().addTo(mymap3);
+  var WorldWarp = [
+    [85, -180],
+    [85, 232],
+    [-85, 232],
+    [-85, -180]
+  ];
+  mymap3.setMaxBounds(WorldWarp);
+  L.control.scale().addTo(mymap3);
 
   L.polyline(latlngsArr1NOAA20, {
     color: 'red',
@@ -509,7 +528,7 @@ var WorldWarp = [
 
 
     var positionEci = positionAndVelocity.position,
-    velocityEci = positionAndVelocity.velocity;
+      velocityEci = positionAndVelocity.velocity;
 
     // Set the Observer at 122.03 West by 36.96 North, in RADIANS 
     var observerGd = {
@@ -521,30 +540,30 @@ var WorldWarp = [
 
     // You can get ECF, Geodetic, Look Angles, and Doppler Factor. 
     var positionEcf = satellite.eciToEcf(positionEci, gmst),
-    observerEcf = satellite.geodeticToEcf(observerGd),
-    positionGd = satellite.eciToGeodetic(positionEci, gmst),
-    lookAngles = satellite.ecfToLookAngles(observerGd, positionEcf);
+      observerEcf = satellite.geodeticToEcf(observerGd),
+      positionGd = satellite.eciToGeodetic(positionEci, gmst),
+      lookAngles = satellite.ecfToLookAngles(observerGd, positionEcf);
 
 
     // The coordinates are all stored in key-value pairs. 
     // ECI and ECF are accessed by `x`, `y`, `z` properties. 
     var satelliteX = positionEci.x,
-    satelliteY = positionEci.y,
-    satelliteZ = positionEci.z;
+      satelliteY = positionEci.y,
+      satelliteZ = positionEci.z;
 
     // Look Angles may be accessed by `azimuth`, `elevation`, `range_sat` properties. 
     var azimuth = lookAngles.azimuth,
-    elevation = lookAngles.elevation,
-    rangeSat = lookAngles.rangeSat;
+      elevation = lookAngles.elevation,
+      rangeSat = lookAngles.rangeSat;
 
     // Geodetic coords are accessed via `longitude`, `latitude`, `height`. 
     var longitude = positionGd.longitude,
-    latitude = positionGd.latitude,
-    height = positionGd.height;
+      latitude = positionGd.latitude,
+      height = positionGd.height;
 
     //  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W", etc). 
     var longitudeStr = satellite.degreesLong(longitude),
-    latitudeStr = satellite.degreesLat(latitude);
+      latitudeStr = satellite.degreesLat(latitude);
 
     var Icon = L.icon({
       iconUrl: imgIcon,
@@ -563,7 +582,7 @@ var WorldWarp = [
 
     info1.update = function () {
       this._div.innerHTML = '<h4>Satellite : ' + nameSatelliteNOAA15 + '</h4>LAT : ' + latitudeStr.toFixed(2) +
-      '<br>LNG : ' + longitudeStr.toFixed(2) + '';
+        '<br>LNG : ' + longitudeStr.toFixed(2) + '';
     };
 
     info1.addTo(mymap1);
@@ -601,7 +620,7 @@ var WorldWarp = [
 
 
     var positionEci = positionAndVelocity.position,
-    velocityEci = positionAndVelocity.velocity;
+      velocityEci = positionAndVelocity.velocity;
 
     // Set the Observer at 122.03 West by 36.96 North, in RADIANS 
     var observerGd = {
@@ -613,30 +632,30 @@ var WorldWarp = [
 
     // You can get ECF, Geodetic, Look Angles, and Doppler Factor. 
     var positionEcf = satellite.eciToEcf(positionEci, gmst),
-    observerEcf = satellite.geodeticToEcf(observerGd),
-    positionGd = satellite.eciToGeodetic(positionEci, gmst),
-    lookAngles = satellite.ecfToLookAngles(observerGd, positionEcf);
+      observerEcf = satellite.geodeticToEcf(observerGd),
+      positionGd = satellite.eciToGeodetic(positionEci, gmst),
+      lookAngles = satellite.ecfToLookAngles(observerGd, positionEcf);
 
 
     // The coordinates are all stored in key-value pairs. 
     // ECI and ECF are accessed by `x`, `y`, `z` properties. 
     var satelliteX = positionEci.x,
-    satelliteY = positionEci.y,
-    satelliteZ = positionEci.z;
+      satelliteY = positionEci.y,
+      satelliteZ = positionEci.z;
 
     // Look Angles may be accessed by `azimuth`, `elevation`, `range_sat` properties. 
     var azimuth = lookAngles.azimuth,
-    elevation = lookAngles.elevation,
-    rangeSat = lookAngles.rangeSat;
+      elevation = lookAngles.elevation,
+      rangeSat = lookAngles.rangeSat;
 
     // Geodetic coords are accessed via `longitude`, `latitude`, `height`. 
     var longitude = positionGd.longitude,
-    latitude = positionGd.latitude,
-    height = positionGd.height;
+      latitude = positionGd.latitude,
+      height = positionGd.height;
 
     //  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W", etc). 
     var longitudeStr = satellite.degreesLong(longitude),
-    latitudeStr = satellite.degreesLat(latitude);
+      latitudeStr = satellite.degreesLat(latitude);
 
     var Icon = L.icon({
       iconUrl: imgIcon,
@@ -655,7 +674,7 @@ var WorldWarp = [
 
     info2.update = function () {
       this._div.innerHTML = '<h4>Satellite : ' + nameSatelliteNOAA18 + '</h4>LAT : ' + latitudeStr.toFixed(2) +
-      '<br>LNG : ' + longitudeStr.toFixed(2) + '';
+        '<br>LNG : ' + longitudeStr.toFixed(2) + '';
     };
 
     info2.addTo(mymap2);
@@ -680,9 +699,9 @@ var WorldWarp = [
 
   }, 1000);
 
-/*------------------------------End update updateSatelliteNOAA18-----------------------*/
+  /*------------------------------End update updateSatelliteNOAA18-----------------------*/
 
- /*------------------------------update updateSatelliteNOAA20-----------------------*/
+  /*------------------------------update updateSatelliteNOAA20-----------------------*/
 
   /*update updateSatelliteNOAA20*/
   function updateSatelliteNOAA20() {
@@ -691,7 +710,7 @@ var WorldWarp = [
 
 
     var positionEci = positionAndVelocity.position,
-    velocityEci = positionAndVelocity.velocity;
+      velocityEci = positionAndVelocity.velocity;
 
     // Set the Observer at 122.03 West by 36.96 North, in RADIANS 
     var observerGd = {
@@ -703,30 +722,30 @@ var WorldWarp = [
 
     // You can get ECF, Geodetic, Look Angles, and Doppler Factor. 
     var positionEcf = satellite.eciToEcf(positionEci, gmst),
-    observerEcf = satellite.geodeticToEcf(observerGd),
-    positionGd = satellite.eciToGeodetic(positionEci, gmst),
-    lookAngles = satellite.ecfToLookAngles(observerGd, positionEcf);
+      observerEcf = satellite.geodeticToEcf(observerGd),
+      positionGd = satellite.eciToGeodetic(positionEci, gmst),
+      lookAngles = satellite.ecfToLookAngles(observerGd, positionEcf);
 
 
     // The coordinates are all stored in key-value pairs. 
     // ECI and ECF are accessed by `x`, `y`, `z` properties. 
     var satelliteX = positionEci.x,
-    satelliteY = positionEci.y,
-    satelliteZ = positionEci.z;
+      satelliteY = positionEci.y,
+      satelliteZ = positionEci.z;
 
     // Look Angles may be accessed by `azimuth`, `elevation`, `range_sat` properties. 
     var azimuth = lookAngles.azimuth,
-    elevation = lookAngles.elevation,
-    rangeSat = lookAngles.rangeSat;
+      elevation = lookAngles.elevation,
+      rangeSat = lookAngles.rangeSat;
 
     // Geodetic coords are accessed via `longitude`, `latitude`, `height`. 
     var longitude = positionGd.longitude,
-    latitude = positionGd.latitude,
-    height = positionGd.height;
+      latitude = positionGd.latitude,
+      height = positionGd.height;
 
     //  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W", etc). 
     var longitudeStr = satellite.degreesLong(longitude),
-    latitudeStr = satellite.degreesLat(latitude);
+      latitudeStr = satellite.degreesLat(latitude);
 
     var Icon = L.icon({
       iconUrl: imgIcon,
@@ -745,7 +764,7 @@ var WorldWarp = [
 
     info3.update = function () {
       this._div.innerHTML = '<h4>Satellite : ' + nameSatelliteNOAA20 + '</h4>LAT : ' + latitudeStr.toFixed(2) +
-      '<br>LNG : ' + longitudeStr.toFixed(2) + '';
+        '<br>LNG : ' + longitudeStr.toFixed(2) + '';
     };
 
     info3.addTo(mymap3);
@@ -770,7 +789,7 @@ var WorldWarp = [
 
   }, 1000);
 
-/*------------------------------update updateSatelliteNOAA18-----------------------*/
+  /*------------------------------update updateSatelliteNOAA18-----------------------*/
 
 
   setInterval(function () {
